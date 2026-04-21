@@ -27,9 +27,15 @@ jobs:
       - name: Build
         run: dotnet build ABACUS.slnx -c Release --no-restore
 
+      - name: Compute package version
+        run: |
+          VERSION="0.0.${{ github.run_number }}-ci.${{ github.run_attempt }}"
+          echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Using package version: $VERSION"
+
       - name: Pack
         run: |
-          dotnet pack ABACUS.slnx -c Release --no-build -o ./artifacts
+          dotnet pack ABACUS.slnx -c Release --no-build -o ./artifacts /p:Version=${{ env.PACKAGE_VERSION }}
 
       - name: Push to NuGet
         run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
