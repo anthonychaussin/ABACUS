@@ -1,0 +1,21 @@
+<Solution>
+  <Project Path="ABACUS/ABACUS.csproj" />
+  <Project Path="ABACUS.Tests/ABACUS.Tests.csproj" />
+  <Project Path="ABACUS.AccountsPayable/ABACUS.AccountsPayable.csproj" />
+  <Project Path="ABACUS.AccountsReceivable/ABACUS.AccountsReceivable.csproj" />
+  <Project Path="ABACUS.AssetsLedger/ABACUS.AssetsLedger.csproj" />
+  <Project Path="ABACUS.CORE/ABACUS.Core.csproj" />
+  <Project Path="ABACUS.CRM/ABACUS.CRM.csproj" />
+  <Project Path="ABACUS.DossierFileUpload/ABACUS.DossierFileUpload.csproj" />
+  <Project Path="ABACUS.FieldInformation/ABACUS.FieldInformation.csproj" />
+  <Project Path="ABACUS.Finance/ABACUS.Finance.csproj" />
+  <Project Path="ABACUS.General/ABACUS.General.csproj" />
+  <Project Path="ABACUS.HumanResources/ABACUS.HumanResources.csproj" />
+  <Project Path="ABACUS.ProductionPlanning/ABACUS.ProductionPlanning.csproj" />
+  <Project Path="ABACUS.ProjectManagement/ABACUS.ProjectManagement.csproj" />
+  <Project Path="ABACUS.RealEstate/ABACUS.RealEstate.csproj" />
+  <Project Path="ABACUS.Salary/ABACUS.Salary.csproj" />
+  <Project Path="ABACUS.Subscription/ABACUS.Subscription.csproj" />
+  <Project Path="ABACUS.UserDependentAuth/ABACUS.UserDependentAuth.csproj" />
+  <Project Path="ABACUS.WebShop/ABACUS.WebShop.csproj" />
+</Solution>

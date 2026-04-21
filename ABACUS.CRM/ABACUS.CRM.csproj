@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>ABACUS.CRM</PackageId>
+    <Description>ABACUS CRM SDK module for .NET.</Description>
+    <AssemblyName>ABACUS.CRM</AssemblyName>
+    <RootNamespace>ABACUS.CRM</RootNamespace>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>
+

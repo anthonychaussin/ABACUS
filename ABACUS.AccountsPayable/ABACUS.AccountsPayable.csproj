@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>ABACUS.AccountsPayable</PackageId>
+    <Description>ABACUS Accounts Payable SDK module for .NET.</Description>
+    <AssemblyName>ABACUS.AccountsPayable</AssemblyName>
+    <RootNamespace>ABACUS.AccountsPayable</RootNamespace>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>
+
