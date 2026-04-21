@@ -22,8 +22,10 @@ This repository follows Semantic Versioning (SemVer): `MAJOR.MINOR.PATCH`.
 ## Branch and Release Flow
 
 1. Development occurs on regular feature branches.
-2. Release is triggered by creating a Git tag in the form `v*.*.*`.
-3. CI packs and publishes NuGet artifacts from that tag.
+2. Publishing is triggered by a push to `master`.
+3. CI reads `VersionPrefix` from `Directory.Build.props` when no release tag exists yet.
+4. After the first publish, CI computes the next stable patch version from the latest `vX.Y.Z` tag.
+5. CI publishes NuGet artifacts and then creates the matching release tag automatically.
 
 ## Required Metadata Before Public Release
 

@@ -10,11 +10,13 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -33,7 +35,17 @@ jobs:
 
       - name: Compute package version
         run: |
-          VERSION="0.0.0-ci.${{ github.run_number }}.${{ github.run_attempt }}.sha.g${GITHUB_SHA::8}"
+          BASE_VERSION="$(grep -oPm1 '(?<=<VersionPrefix>)[^<]+' Directory.Build.props)"
+          LAST_TAG="$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-version:refname | head -n 1)"
+
+          if [ -n "$LAST_TAG" ]; then
+            VERSION="${LAST_TAG#v}"
+            IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+            VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+          else
+            VERSION="$BASE_VERSION"
+          fi
+
           echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "PACK_DIR=./artifacts/${{ github.run_id }}.${{ github.run_attempt }}" >> "$GITHUB_ENV"
           echo "Using package version: $VERSION"
@@ -75,4 +87,22 @@ jobs:
                 attempt=$((attempt + 1))
               done
             done
+          fi
+
+      - name: Tag release
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if [ -n "$NUGET_API_KEY" ]; then
+            TAG="v${{ env.PACKAGE_VERSION }}"
+
+            if git rev-parse "$TAG" >/dev/null 2>&1; then
+              echo "Tag $TAG already exists"
+              exit 0
+            fi
+
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag "$TAG"
+            git push origin "$TAG"
           fi

@@ -5,15 +5,15 @@
     <AssemblyName>ABACUS.Salary</AssemblyName>
     <RootNamespace>ABACUS.Salary</RootNamespace>
     <IsPackable>true</IsPackable>
+    <PackageIcon>lohn.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="lohn.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
-
-

@@ -5,15 +5,15 @@
     <AssemblyName>ABACUS.AccountsPayable</AssemblyName>
     <RootNamespace>ABACUS.AccountsPayable</RootNamespace>
     <IsPackable>true</IsPackable>
+    <PackageIcon>kred.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="kred.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
-
-

@@ -5,15 +5,15 @@
     <AssemblyName>ABACUS.HumanResources</AssemblyName>
     <RootNamespace>ABACUS.HumanResources</RootNamespace>
     <IsPackable>true</IsPackable>
+    <PackageIcon>hrms.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="hrms.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
-
-

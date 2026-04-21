@@ -5,15 +5,15 @@
     <AssemblyName>ABACUS.Finance</AssemblyName>
     <RootNamespace>ABACUS.Finance</RootNamespace>
     <IsPackable>true</IsPackable>
+    <PackageIcon>fibu.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="fibu.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
-
-

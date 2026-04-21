@@ -5,15 +5,15 @@
     <AssemblyName>ABACUS.AssetsLedger</AssemblyName>
     <RootNamespace>ABACUS.AssetsLedger</RootNamespace>
     <IsPackable>true</IsPackable>
+    <PackageIcon>inve.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="inve.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
-
-

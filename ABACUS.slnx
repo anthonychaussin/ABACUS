@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="ABACUS.Tests/ABACUS.Tests.csproj" />
   <Project Path="ABACUS.AccountsPayable/ABACUS.AccountsPayable.csproj" />
   <Project Path="ABACUS.AccountsReceivable/ABACUS.AccountsReceivable.csproj" />
   <Project Path="ABACUS.AssetsLedger/ABACUS.AssetsLedger.csproj" />
@@ -15,6 +14,7 @@
   <Project Path="ABACUS.RealEstate/ABACUS.RealEstate.csproj" />
   <Project Path="ABACUS.Salary/ABACUS.Salary.csproj" />
   <Project Path="ABACUS.Subscription/ABACUS.Subscription.csproj" />
+  <Project Path="ABACUS.Tests/ABACUS.Tests.csproj" />
   <Project Path="ABACUS.UserDependentAuth/ABACUS.UserDependentAuth.csproj" />
   <Project Path="ABACUS.WebShop/ABACUS.WebShop.csproj" />
 </Solution>

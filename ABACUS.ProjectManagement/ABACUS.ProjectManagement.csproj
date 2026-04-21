@@ -5,15 +5,15 @@
     <AssemblyName>ABACUS.ProjectManagement</AssemblyName>
     <RootNamespace>ABACUS.ProjectManagement</RootNamespace>
     <IsPackable>true</IsPackable>
+    <PackageIcon>proj.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="proj.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
-
-

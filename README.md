@@ -1,68 +1,30 @@
-# ABACUS .NET SDK
+# ABACUS
 
-SDK .NET modulaire pour ABACUS, avec publication NuGet par module.
+Ce depot contient un SDK .NET decoupe par domaines fonctionnels ABACUS.
 
-## Architecture
+L'idee est simple : un projet par module metier. Chaque dossier a maintenant son propre `README.md` qui explique ce que couvre le module, sans rentrer dans le detail du workflow du repo.
 
-- `ABACUS.Core`: options client, auth, HTTP client factory, erreurs unifiees.
-- `ABACUS.<Module>`: wrappers par module avec:
-  - interface publique documentee
-  - implementation wrapper
-  - client OpenAPI genere versionne dans `Generated/*.g.cs`
+## Modules
 
-## Installation par module
+- `ABACUS.CORE` : base commune du SDK.
+- `ABACUS.AccountsPayable` : comptabilite fournisseurs.
+- `ABACUS.AccountsReceivable` : comptabilite clients.
+- `ABACUS.AssetsLedger` : gestion des immobilisations.
+- `ABACUS.CRM` : tiers, adresses, contacts et relations.
+- `ABACUS.DossierFileUpload` : depot de fichiers dans les dossiers ABACUS.
+- `ABACUS.FieldInformation` : informations de champs et metadonnees metier.
+- `ABACUS.Finance` : comptes, centres de charges et ecritures.
+- `ABACUS.General` : referentiels communs.
+- `ABACUS.HumanResources` : RH, organisation, formation et recrutement.
+- `ABACUS.ProductionPlanning` : ressources et suivi de production.
+- `ABACUS.ProjectManagement` : projets, planification, tarifs et imputations.
+- `ABACUS.RealEstate` : gestion immobiliere.
+- `ABACUS.Salary` : paie et donnees salariales.
+- `ABACUS.Subscription` : abonnements aux changements et consommation d'evenements.
+- `ABACUS.Tests` : verification minimale du SDK.
+- `ABACUS.UserDependentAuth` : autorisations liees a l'utilisateur.
+- `ABACUS.WebShop` : comptes acheteurs et flux webshop.
 
-Installation unitaire selon besoin:
+## Lecture
 
-```bash
-dotnet add package ABACUS.Core --version 0.0.1
-dotnet add package ABACUS.CRM --version 0.0.1
-dotnet add package ABACUS.Finance --version 0.0.1
-```
-
-Version actuelle de preproduction: `0.0.x`.
-
-## Utilisation rapide (mode modulaire)
-
-```csharp
-using ABACUS.AccountsPayable;
-using ABACUS.Core;
-
-var options = new AbacusClientOptions
-{
-    BaseUri = new Uri("https://api.abacus.ch"),
-    UserAgent = "MyApp/1.0"
-};
-
-var auth = new BearerTokenAuthenticationProvider(_ => ValueTask.FromResult("<token>"));
-using var httpClient = AbacusHttpClientFactory.Create(options, auth);
-
-var accountsPayable = new AccountsPayableClient(httpClient);
-await accountsPayable.ListSuppliersAsync();
-
-// Acces brut si endpoint pas encore wrappe
-await accountsPayable.Raw.GetSuppliers11AllSuppliersAsync();
-```
-
-## Pack local
-
-```bash
-dotnet pack ABACUS.slnx -c Release
-```
-
-## Publication automatique
-
-Workflow: `.github/workflows/publish-nuget.yml`
-
-- Declenchement sur tag `v*.*.*`.
-- Publie tous les projets packables de la solution (Core + modules).
-- Necessite le secret repo GitHub: `NUGET_API_KEY`.
-
-## Avant publication
-
-Mettre a jour `Directory.Build.props`:
-
-- `RepositoryUrl`
-- `PackageProjectUrl`
-- `Authors`
-- `Company`
+Si tu veux comprendre un projet, ouvre directement le `README.md` du dossier concerne : il decrit ce que fait le module et les objets metier qu'il manipule.

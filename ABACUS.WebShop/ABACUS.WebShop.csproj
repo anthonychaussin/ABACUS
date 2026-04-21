@@ -5,15 +5,15 @@
     <AssemblyName>ABACUS.WebShop</AssemblyName>
     <RootNamespace>ABACUS.WebShop</RootNamespace>
     <IsPackable>true</IsPackable>
+    <PackageIcon>shop.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shop.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
-
-
