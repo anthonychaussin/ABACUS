@@ -1,6 +1,6 @@
 # ABACUS .NET SDK
 
-SDK .NET modulaire pour ABACUS, avec une base propre pour publication NuGet.
+SDK .NET modulaire pour ABACUS, avec publication NuGet par module.
 
 ## Architecture
 
@@ -9,12 +9,23 @@ SDK .NET modulaire pour ABACUS, avec une base propre pour publication NuGet.
   - interface publique documentee
   - implementation wrapper
   - client OpenAPI genere versionne dans `Generated/*.g.cs`
-- `ABACUS` (`ABACUS.SDK`): point d'entree unique `AbacusClient` + DI extension.
 
-## Utilisation rapide
+## Installation par module
+
+Installation unitaire selon besoin:
+
+```bash
+dotnet add package ABACUS.Core --version 0.0.1
+dotnet add package ABACUS.CRM --version 0.0.1
+dotnet add package ABACUS.Finance --version 0.0.1
+```
+
+Version actuelle de preproduction: `0.0.x`.
+
+## Utilisation rapide (mode modulaire)
 
 ```csharp
-using ABACUS;
+using ABACUS.AccountsPayable;
 using ABACUS.Core;
 
 var options = new AbacusClientOptions
@@ -24,28 +35,19 @@ var options = new AbacusClientOptions
 };
 
 var auth = new BearerTokenAuthenticationProvider(_ => ValueTask.FromResult("<token>"));
+using var httpClient = AbacusHttpClientFactory.Create(options, auth);
 
-using var client = new AbacusClient(options, auth);
-await client.AccountsPayable.ListSuppliersAsync();
+var accountsPayable = new AccountsPayableClient(httpClient);
+await accountsPayable.ListSuppliersAsync();
 
 // Acces brut si endpoint pas encore wrappe
-await client.Finance.Raw.SomeOperationAsync();
-```
-
-## Dependency Injection
-
-```csharp
-services.AddAbacusSdk(
-    new AbacusClientOptions { BaseUri = new Uri("https://api.abacus.ch") },
-    sp => new BearerTokenAuthenticationProvider(_ => ValueTask.FromResult("<token>")));
+await accountsPayable.Raw.GetSuppliers11AllSuppliersAsync();
 ```
 
 ## Pack local
 
 ```bash
-dotnet pack ABACUS.CORE/ABACUS.Core.csproj -c Release
-dotnet pack ABACUS.AccountsPayable/ABACUS.AccountsPayable.csproj -c Release
-dotnet pack ABACUS/ABACUS.csproj -c Release
+dotnet pack ABACUS.slnx -c Release
 ```
 
 ## Publication automatique
@@ -53,6 +55,7 @@ dotnet pack ABACUS/ABACUS.csproj -c Release
 Workflow: `.github/workflows/publish-nuget.yml`
 
 - Declenchement sur tag `v*.*.*`.
+- Publie tous les projets packables de la solution (Core + modules).
 - Necessite le secret repo GitHub: `NUGET_API_KEY`.
 
 ## Avant publication

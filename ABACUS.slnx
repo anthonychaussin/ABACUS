@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="ABACUS/ABACUS.csproj" />
   <Project Path="ABACUS.Tests/ABACUS.Tests.csproj" />
   <Project Path="ABACUS.AccountsPayable/ABACUS.AccountsPayable.csproj" />
   <Project Path="ABACUS.AccountsReceivable/ABACUS.AccountsReceivable.csproj" />

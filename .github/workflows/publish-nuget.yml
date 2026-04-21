@@ -29,13 +29,7 @@ jobs:
 
       - name: Pack
         run: |
-          dotnet pack ABACUS.CORE/ABACUS.Core.csproj -c Release --no-build -o ./artifacts
-          for proj in ABACUS.*/*.csproj; do
-            if [ "$proj" != "ABACUS.CORE/ABACUS.Core.csproj" ]; then
-              dotnet pack "$proj" -c Release --no-build -o ./artifacts
-            fi
-          done
-          dotnet pack ABACUS/ABACUS.csproj -c Release --no-build -o ./artifacts
+          dotnet pack ABACUS.slnx -c Release --no-build -o ./artifacts
 
       - name: Push to NuGet
         run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
