@@ -33,7 +33,7 @@ jobs:
 
       - name: Compute package version
         run: |
-          VERSION="0.0.0-sha.${GITHUB_SHA::8}"
+          VERSION="0.0.0-sha.g${GITHUB_SHA::8}"
           echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "PACK_DIR=./artifacts/${{ github.run_id }}.${{ github.run_attempt }}" >> "$GITHUB_ENV"
           echo "Using package version: $VERSION"
