@@ -32,14 +32,17 @@ jobs:
 
       - name: Compute package version
         run: |
-          SHORT_SHA="$(echo "${GITHUB_SHA}" | cut -c1-8)"
-          VERSION="0.0.${{ github.run_number }}-ci.${{ github.run_attempt }}.${SHORT_SHA}"
+          VERSION="0.0.${{ github.run_number }}"
           echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "PACK_DIR=./artifacts/${{ github.run_id }}.${{ github.run_attempt }}" >> "$GITHUB_ENV"
           echo "Using package version: $VERSION"
 
       - name: Pack
         run: |
-          dotnet pack ABACUS.slnx -c Release --no-build -o ./artifacts /p:Version=${{ env.PACKAGE_VERSION }}
+          rm -rf "${{ env.PACK_DIR }}"
+          mkdir -p "${{ env.PACK_DIR }}"
+          dotnet pack ABACUS.slnx -c Release --no-build -o "${{ env.PACK_DIR }}" /p:Version=${{ env.PACKAGE_VERSION }}
+          ls -la "${{ env.PACK_DIR }}"
 
       - name: Push to NuGet
-        run: dotnet nuget push "./artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push "${{ env.PACK_DIR }}/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate --verbosity detailed
