@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.Subscription</PackageId>
+    <PackageId>AbacusBusinessSoftware.Subscription</PackageId>
     <Description>ABACUS Subscription SDK module for .NET.</Description>
     <AssemblyName>ABACUS.Subscription</AssemblyName>
     <RootNamespace>ABACUS.Subscription</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

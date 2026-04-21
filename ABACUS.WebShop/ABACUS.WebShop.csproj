@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.WebShop</PackageId>
+    <PackageId>AbacusBusinessSoftware.WebShop</PackageId>
     <Description>ABACUS WebShop SDK module for .NET.</Description>
     <AssemblyName>ABACUS.WebShop</AssemblyName>
     <RootNamespace>ABACUS.WebShop</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

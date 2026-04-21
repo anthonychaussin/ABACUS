@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.General</PackageId>
+    <PackageId>AbacusBusinessSoftware.General</PackageId>
     <Description>ABACUS General SDK module for .NET.</Description>
     <AssemblyName>ABACUS.General</AssemblyName>
     <RootNamespace>ABACUS.General</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

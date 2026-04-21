@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.UserDependentAuth</PackageId>
+    <PackageId>AbacusBusinessSoftware.UserDependentAuth</PackageId>
     <Description>ABACUS UserDependentAuth SDK module for .NET.</Description>
     <AssemblyName>ABACUS.UserDependentAuth</AssemblyName>
     <RootNamespace>ABACUS.UserDependentAuth</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

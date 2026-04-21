@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.RealEstate</PackageId>
+    <PackageId>AbacusBusinessSoftware.RealEstate</PackageId>
     <Description>ABACUS RealEstate SDK module for .NET.</Description>
     <AssemblyName>ABACUS.RealEstate</AssemblyName>
     <RootNamespace>ABACUS.RealEstate</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

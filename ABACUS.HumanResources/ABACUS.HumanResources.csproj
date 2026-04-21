@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.HumanResources</PackageId>
+    <PackageId>AbacusBusinessSoftware.HumanResources</PackageId>
     <Description>ABACUS HumanResources SDK module for .NET.</Description>
     <AssemblyName>ABACUS.HumanResources</AssemblyName>
     <RootNamespace>ABACUS.HumanResources</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

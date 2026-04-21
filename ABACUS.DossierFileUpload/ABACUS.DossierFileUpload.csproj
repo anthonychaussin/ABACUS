@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.DossierFileUpload</PackageId>
+    <PackageId>AbacusBusinessSoftware.DossierFileUpload</PackageId>
     <Description>ABACUS DossierFileUpload SDK module for .NET.</Description>
     <AssemblyName>ABACUS.DossierFileUpload</AssemblyName>
     <RootNamespace>ABACUS.DossierFileUpload</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

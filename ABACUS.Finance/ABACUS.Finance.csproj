@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.Finance</PackageId>
+    <PackageId>AbacusBusinessSoftware.Finance</PackageId>
     <Description>ABACUS Finance SDK module for .NET.</Description>
     <AssemblyName>ABACUS.Finance</AssemblyName>
     <RootNamespace>ABACUS.Finance</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.ProjectManagement</PackageId>
+    <PackageId>AbacusBusinessSoftware.ProjectManagement</PackageId>
     <Description>ABACUS ProjectManagement SDK module for .NET.</Description>
     <AssemblyName>ABACUS.ProjectManagement</AssemblyName>
     <RootNamespace>ABACUS.ProjectManagement</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

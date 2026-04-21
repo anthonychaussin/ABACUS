@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.AccountsReceivable</PackageId>
+    <PackageId>AbacusBusinessSoftware.AccountsReceivable</PackageId>
     <Description>ABACUS AccountsReceivable SDK module for .NET.</Description>
     <AssemblyName>ABACUS.AccountsReceivable</AssemblyName>
     <RootNamespace>ABACUS.AccountsReceivable</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 

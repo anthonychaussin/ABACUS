@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>ABACUS.AssetsLedger</PackageId>
+    <PackageId>AbacusBusinessSoftware.AssetsLedger</PackageId>
     <Description>ABACUS AssetsLedger SDK module for .NET.</Description>
     <AssemblyName>ABACUS.AssetsLedger</AssemblyName>
     <RootNamespace>ABACUS.AssetsLedger</RootNamespace>
@@ -15,4 +15,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
+
 
