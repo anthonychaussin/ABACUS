@@ -2,8 +2,8 @@ name: publish-nuget
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -27,9 +27,12 @@ jobs:
       - name: Build
         run: dotnet build ABACUS.slnx -c Release --no-restore
 
+      - name: Test
+        run: dotnet test ABACUS.slnx -c Release --no-build --verbosity normal
+
       - name: Compute package version
         run: |
-          VERSION="0.0.${{ github.run_number }}-ci.${{ github.run_attempt }}"
+          VERSION="0.0.${{ github.run_number }}"
           echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "Using package version: $VERSION"
 
