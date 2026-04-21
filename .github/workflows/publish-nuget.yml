@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+          include-prerelease: true
 
       - name: Restore
         run: dotnet restore ABACUS.slnx
@@ -32,7 +33,7 @@ jobs:
 
       - name: Compute package version
         run: |
-          VERSION="0.0.${{ github.run_number }}"
+          VERSION="0.0.0-sha.${GITHUB_SHA::8}"
           echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "PACK_DIR=./artifacts/${{ github.run_id }}.${{ github.run_attempt }}" >> "$GITHUB_ENV"
           echo "Using package version: $VERSION"
@@ -41,8 +42,14 @@ jobs:
         run: |
           rm -rf "${{ env.PACK_DIR }}"
           mkdir -p "${{ env.PACK_DIR }}"
-          dotnet pack ABACUS.slnx -c Release --no-build -o "${{ env.PACK_DIR }}" /p:Version=${{ env.PACKAGE_VERSION }}
+          dotnet pack ABACUS.slnx -c Release --no-build -o "${{ env.PACK_DIR }}" /p:PackageVersion=${{ env.PACKAGE_VERSION }}
           ls -la "${{ env.PACK_DIR }}"
 
       - name: Push to NuGet
-        run: dotnet nuget push "${{ env.PACK_DIR }}/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate --verbosity detailed
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if [ -n "$NUGET_API_KEY" ]; then
+            dotnet nuget push "${{ env.PACK_DIR }}/*.nupkg" --skip-duplicate -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json
+            dotnet nuget push "${{ env.PACK_DIR }}/*.snupkg" --skip-duplicate -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json
+          fi
