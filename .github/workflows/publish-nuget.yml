@@ -50,6 +50,29 @@ jobs:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           if [ -n "$NUGET_API_KEY" ]; then
-            dotnet nuget push "${{ env.PACK_DIR }}/*.nupkg" --skip-duplicate -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json
-            dotnet nuget push "${{ env.PACK_DIR }}/*.snupkg" --skip-duplicate -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json
+            shopt -s nullglob
+
+            for package in "${{ env.PACK_DIR }}"/*.nupkg; do
+              dotnet nuget push "$package" --no-symbols --skip-duplicate -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json
+            done
+
+            for symbols_package in "${{ env.PACK_DIR }}"/*.snupkg; do
+              attempt=1
+              max_attempts=5
+
+              while true; do
+                if dotnet nuget push "$symbols_package" --skip-duplicate -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json; then
+                  break
+                fi
+
+                if [ "$attempt" -ge "$max_attempts" ]; then
+                  exit 1
+                fi
+
+                sleep_seconds=$((attempt * 15))
+                echo "Retrying symbol push for $symbols_package in ${sleep_seconds}s..."
+                sleep "$sleep_seconds"
+                attempt=$((attempt + 1))
+              done
+            done
           fi
