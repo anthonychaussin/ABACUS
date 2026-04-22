@@ -1,0 +1,446 @@
+﻿openapi: 3.0.0
+info:
+  title: CRM
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /Subjects:
+    post:
+      summary: 1.10 - Create subject with address & communication data
+      description: ''
+      operationId: post_Subjects
+      tags:
+        - 1 Subjects
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    get:
+      summary: 1.2 - Show all subjects with the name "Musterfirma AG"
+      description: ''
+      operationId: get_Subjects
+      tags:
+        - 1 Subjects
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Subjects({id})/Addresses:
+    get:
+      summary: 1.5 - Show address only (SubjectNavigation)
+      description: ''
+      operationId: get_Subjects_id_Addresses
+      tags:
+        - 1 Subjects
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Subjects({id}):
+    get:
+      summary: 1.7 - Show subject with all links
+      description: ''
+      operationId: get_Subjects_id
+      tags:
+        - 1 Subjects
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 1.14 - Delete subject
+      description: ''
+      operationId: delete_Subjects_id
+      tags:
+        - 1 Subjects
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Subjects({id}):
+    patch:
+      summary: 1.13 - Edit name to subject
+      description: ''
+      operationId: patch_Subjects_id
+      tags:
+        - 1 Subjects
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Addresses:
+    get:
+      summary: 2.1 - Show address of a subject
+      description: ''
+      operationId: get_Addresses
+      tags:
+        - 2 Addresses
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 2.2 - Create new address time axis on subject
+      description: ''
+      operationId: post_Addresses
+      tags:
+        - 2 Addresses
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Communications:
+    get:
+      summary: 3.3 - Search communication data by e-mail (filter)
+      description: ''
+      operationId: get_Communications
+      tags:
+        - 3 Communications
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 3.4 - New communication data entry on address
+      description: ''
+      operationId: post_Communications
+      tags:
+        - 3 Communications
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Links:
+    post:
+      summary: 4.3 - Create contact person on subject (new address)
+      description: ''
+      operationId: post_Links
+      tags:
+        - 4 Links
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    get:
+      summary: 4.1 - Show all links
+      description: ''
+      operationId: get_Links
+      tags:
+        - 4 Links
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Links({id}):
+    delete:
+      summary: 4.3 - Delete contact person on subject
+      description: ''
+      operationId: delete_Links_id
+      tags:
+        - 4 Links
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /LinkTypes:
+    get:
+      summary: 5.1 - Show all link types
+      description: ''
+      operationId: get_LinkTypes
+      tags:
+        - 5 LinkTypes
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /SubjectGroupings:
+    get:
+      summary: 6.1 - Show all groupings
+      description: ''
+      operationId: get_SubjectGroupings
+      tags:
+        - 6 SubjectGroupings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 6.2 - Create new grouping
+      description: ''
+      operationId: post_SubjectGroupings
+      tags:
+        - 6 SubjectGroupings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /SubjectGroupings({id}):
+    delete:
+      summary: 6.3 - Delete grouping
+      description: ''
+      operationId: delete_SubjectGroupings_id
+      tags:
+        - 6 SubjectGroupings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Salutations:
+    get:
+      summary: 8.1 - Show all salutations
+      description: ''
+      operationId: get_Salutations
+      tags:
+        - 8 Salutations
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /SubjectDuplicateCheck:
+    post:
+      summary: 9.1 - Duplicate check for new subject
+      description: ''
+      operationId: post_SubjectDuplicateCheck
+      tags:
+        - 9 SubjectDuplicateCheck
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /$batch:
+    post:
+      summary: 9.2 - Duplicate check for a list of subjects (batch request)
+      description: ''
+      operationId: post_batch
+      tags:
+        - 9 SubjectDuplicateCheck
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+  /SubjectGroupingEntries:
+    get:
+      summary: 7.2 - Show all entries of a grouping
+      description: ''
+      operationId: get_SubjectGroupingEntries
+      tags:
+        - 7 SubjectGroupingEntries
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 7.4 - New grouping entry on subject
+      description: ''
+      operationId: post_SubjectGroupingEntries
+      tags:
+        - 7 SubjectGroupingEntries
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /SubjectGroupingEntries({id}):
+    delete:
+      summary: 7.5 - Delete grouping entry on subject
+      description: ''
+      operationId: delete_SubjectGroupingEntries_id
+      tags:
+        - 7 SubjectGroupingEntries
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /SubjectDocuments:
+    get:
+      summary: 10.1 - Show dossiers of a subject
+      description: ''
+      operationId: get_SubjectDocuments
+      tags:
+        - 10 SubjectDocuments
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /LinkDocuments:
+    get:
+      summary: 11.1 - Show dossiers of a link
+      description: ''
+      operationId: get_LinkDocuments
+      tags:
+        - 11 LinkDocuments
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error

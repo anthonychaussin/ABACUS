@@ -1,0 +1,577 @@
+﻿openapi: 3.0.0
+info:
+  title: Finance
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /AccountDocuments:
+    get:
+      summary: 1.0 - AccountDocuments
+      description: ''
+      operationId: get_AccountDocuments
+      tags:
+        - 1 Account
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Accounts:
+    get:
+      summary: 1.4 - Show top 3 Accounts
+      description: ''
+      operationId: get_Accounts
+      tags:
+        - 1 Account
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 1.6 - Create Account
+      description: ''
+      operationId: post_Accounts
+      tags:
+        - 1 Account
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Accounts(EnterpriseId={enterpriseId},Id={id}):
+    get:
+      summary: 1.2 - Show Account "3090500" from Enterprise "500"
+      description: ''
+      operationId: get_Accounts_EnterpriseId_enterpriseId_Id_id
+      tags:
+        - 1 Account
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Accounts(EnterpriseId={enterpriseId},Id={id}):
+    patch:
+      summary: 1.5 - edit Account
+      description: ''
+      operationId: patch_Accounts_EnterpriseId_enterpriseId_Id_id
+      tags:
+        - 1 Account
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 1.7 - delete Account
+      description: ''
+      operationId: delete_Accounts_EnterpriseId_enterpriseId_Id_id
+      tags:
+        - 1 Account
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AccountClassificationDefinitions:
+    get:
+      summary: 2. - AccountClassificationDefinitions
+      description: ''
+      operationId: get_AccountClassificationDefinitions
+      tags:
+        - 2 AccountClassificationDefinitions
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 2.1 - create Account Classification Definition
+      description: ''
+      operationId: post_AccountClassificationDefinitions
+      tags:
+        - 2 AccountClassificationDefinitions
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /AccountClassificationDefinitions({id}):
+    get:
+      summary: 2.2 - show Account Classification Definition expand Enterprise
+      description: ''
+      operationId: get_AccountClassificationDefinitions_id
+      tags:
+        - 2 AccountClassificationDefinitions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 2.3 - delete Account Classification Definition
+      description: ''
+      operationId: delete_AccountClassificationDefinitions_id
+      tags:
+        - 2 AccountClassificationDefinitions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CostCentreDocuments:
+    get:
+      summary: 5.9 - CostCentreDocuments
+      description: ''
+      operationId: get_CostCentreDocuments
+      tags:
+        - 5 CostCentres
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CostCentres:
+    get:
+      summary: 5.6 - show CostCentres with filter and eq
+      description: ''
+      operationId: get_CostCentres
+      tags:
+        - 5 CostCentres
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 5.4 - create CostCentres
+      description: ''
+      operationId: post_CostCentres
+      tags:
+        - 5 CostCentres
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CostCentres(EnterpriseId={enterpriseId},Id={id}):
+    get:
+      summary: 5.2 - show CostCentres with expand
+      description: ''
+      operationId: get_CostCentres_EnterpriseId_enterpriseId_Id_id
+      tags:
+        - 5 CostCentres
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: '5.8 - delete CostCentres '
+      description: ''
+      operationId: delete_CostCentres_EnterpriseId_enterpriseId_Id_id
+      tags:
+        - 5 CostCentres
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CostCentres(EnterpriseId={enterpriseId},Id={id}):
+    patch:
+      summary: '5.7 - edit CostCentres '
+      description: ''
+      operationId: patch_CostCentres_EnterpriseId_enterpriseId_Id_id
+      tags:
+        - 5 CostCentres
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /GeneralLedgerEntries:
+    get:
+      summary: 6.4 - show GeneralLedgerEntries(Filter)
+      description: ''
+      operationId: get_GeneralLedgerEntries
+      tags:
+        - 6 GeneralLedgerEntries
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 6.3 - create GeneralLedgerEntries
+      description: ''
+      operationId: post_GeneralLedgerEntries
+      tags:
+        - 6 GeneralLedgerEntries
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /GeneralLedgerEntryDocuments:
+    get:
+      summary: 6.7 - show GeneralLedgerEntryDocuments
+      description: ''
+      operationId: get_GeneralLedgerEntryDocuments
+      tags:
+        - 6 GeneralLedgerEntries
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /GeneralLedgerEntries(Id={id}):
+    patch:
+      summary: 6.2 - edit GeneralLedgerEntries
+      description: ''
+      operationId: patch_GeneralLedgerEntries_Id_id
+      tags:
+        - 6 GeneralLedgerEntries
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 6.1 - delete booking
+      description: ''
+      operationId: delete_GeneralLedgerEntries_Id_id
+      tags:
+        - 6 GeneralLedgerEntries
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AccountClassificationDetails:
+    get:
+      summary: 3.1 - show Account Classification Details with filter
+      description: ''
+      operationId: get_AccountClassificationDetails
+      tags:
+        - 3 AccountClassificationDetails
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 3.3 - delete Account Classification Detail
+      description: ''
+      operationId: delete_AccountClassificationDetails
+      tags:
+        - 3 AccountClassificationDetails
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 3.5- create Account Classification Detail
+      description: ''
+      operationId: post_AccountClassificationDetails
+      tags:
+        - 3 AccountClassificationDetails
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /AccountClassificationDetails({id}):
+    patch:
+      summary: 3.2 - edit Account Classification Details
+      description: ''
+      operationId: patch_AccountClassificationDetails_id
+      tags:
+        - 3 AccountClassificationDetails
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /AccountClassificationDetails({id}):
+    get:
+      summary: 3.4 - show Account Classification Details with filter, expand
+      description: ''
+      operationId: get_AccountClassificationDetails_id
+      tags:
+        - 3 AccountClassificationDetails
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AccountClassificationElements:
+    get:
+      summary: 4.4 - Show Account Classification Elements with filter level
+      description: ''
+      operationId: get_AccountClassificationElements
+      tags:
+        - 4 AccountClassificationElements
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 4.1 - Creat Account Classification Elements
+      description: ''
+      operationId: post_AccountClassificationElements
+      tags:
+        - 4 AccountClassificationElements
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /AccountClassificationElements({id}):
+    patch:
+      summary: 4.2 - Edit Account Classification Element
+      description: ''
+      operationId: patch_AccountClassificationElements_id
+      tags:
+        - 4 AccountClassificationElements
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}

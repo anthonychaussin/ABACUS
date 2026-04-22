@@ -1,0 +1,4855 @@
+﻿openapi: 3.0.0
+info:
+  title: RealEstate
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /RealEstates({id}):
+    get:
+      summary: 3.2 - Show specific real estate
+      description: ''
+      operationId: get_RealEstates_id
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstates:
+    get:
+      summary: 3.1 - Show all real estates
+      description: ''
+      operationId: get_RealEstates
+      tags:
+        - 3. Real Estate
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 3.9 - Create a new real estate
+      description: ''
+      operationId: post_RealEstates
+      tags:
+        - 3. Real Estate
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /RealEstates({id})/Owner:
+    get:
+      summary: 3.8 - Show the main owner of a real estate
+      description: ''
+      operationId: get_RealEstates_id_Owner
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstates({id}):
+    delete:
+      summary: 3.12 - Delete real estate
+      description: ''
+      operationId: delete_RealEstates_id
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 3.11 - Update additional designation
+      description: ''
+      operationId: patch_RealEstates_id
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /RealEstates({id})/Buildings:
+    get:
+      summary: 3.3 - Show all buildings of a real estate
+      description: ''
+      operationId: get_RealEstates_id_Buildings
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstates({id})/Houses:
+    get:
+      summary: 3.4 - Show all houses of a real estate
+      description: ''
+      operationId: get_RealEstates_id_Houses
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstates({id})/ObjectContracts:
+    get:
+      summary: 3.7 - Show all object contracts of a real estate
+      description: ''
+      operationId: get_RealEstates_id_ObjectContracts
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstates({id})/Objects:
+    get:
+      summary: 3.6 - Show all objects of a real estate
+      description: ''
+      operationId: get_RealEstates_id_Objects
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstates({id})/Floors:
+    get:
+      summary: 3.5 - Show all floors of a real estate
+      description: ''
+      operationId: get_RealEstates_id_Floors
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners:
+    get:
+      summary: 1.1 - Show all owners
+      description: ''
+      operationId: get_Owners
+      tags:
+        - 1. Owner
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 1.8 - Create a new owner
+      description: ''
+      operationId: post_Owners
+      tags:
+        - 1. Owner
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Owners({id})/Subject:
+    get:
+      summary: 1.3 - Show specific owner with subject
+      description: ''
+      operationId: get_Owners_id_Subject
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners({id}):
+    get:
+      summary: 1.2 - Show specific owner whithout address
+      description: ''
+      operationId: get_Owners_id
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners({id})/Subject/Addresses:
+    get:
+      summary: 1.4 - Show specific owner with address
+      description: ''
+      operationId: get_Owners_id_Subject_Addresses
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners({id})/RealEstates:
+    get:
+      summary: 1.5 - Show all real estates of a specific owner
+      description: ''
+      operationId: get_Owners_id_RealEstates
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners({id}):
+    get:
+      summary: 1.6 - Show a nonexistent owner
+      description: ''
+      operationId: get_Owners_id_2
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners({id}):
+    delete:
+      summary: 1.11 - Delete owner
+      description: ''
+      operationId: delete_Owners_id
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners({id})/Designation:
+    put:
+      summary: 1.9 - Update an owner designation
+      description: ''
+      operationId: put_Owners_id_Designation
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 1.10 - Delete an owner designation
+      description: ''
+      operationId: delete_Owners_id_Designation
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Owners({id})/Designation:
+    get:
+      summary: 1.7 - Show the designation of an owner
+      description: ''
+      operationId: get_Owners_id_Designation
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Tenants({id}):
+    get:
+      summary: 2.2 - Show specific tenant
+      description: ''
+      operationId: get_Tenants_id
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Tenants:
+    get:
+      summary: 2.7 - Show all tenants sorted by subjectId
+      description: ''
+      operationId: get_Tenants
+      tags:
+        - 2. Tenant
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 2.9 - Create a new tenant from an existing debtor
+      description: >-
+        Im D31 einen neuen Debitor erfassen -> Debitornummer.
+
+        Diese Debitornummer in diesem Request als ID und als Addressnumber
+        mitgeben.
+
+        So wird ein neuer Mieter mit dem existierenden Debitor erstellt.
+      operationId: post_Tenants
+      tags:
+        - 2. Tenant
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Tenants({id})/Subject:
+    get:
+      summary: 2.4 - Show the subject of a tenant
+      description: ''
+      operationId: get_Tenants_id_Subject
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Tenants({id}):
+    delete:
+      summary: 2.11 - Delete tenant
+      description: ''
+      operationId: delete_Tenants_id
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 2.10 - Update informations about a tenant
+      description: ''
+      operationId: patch_Tenants_id
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Tenants({id})/Customer:
+    get:
+      summary: 2.6 - Show the customer informations of a tenant
+      description: ''
+      operationId: get_Tenants_id_Customer
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Tenants({id})/Subject/Addresses:
+    get:
+      summary: 2.5 - Show the adress of a tenant
+      description: ''
+      operationId: get_Tenants_id_Subject_Addresses
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Tenants({id})/Designation:
+    get:
+      summary: 2.3 - Show the designation of a tenant
+      description: ''
+      operationId: get_Tenants_id_Designation
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Tenants({id})/ObjectContracts:
+    get:
+      summary: 2.12 - Show contracts of a tenant
+      description: ''
+      operationId: get_Tenants_id_ObjectContracts
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Buildings(Id={id},RealEstateId={realEstateId}):
+    get:
+      summary: 4.2 - Show a specific building
+      description: ''
+      operationId: get_Buildings_Id_id_RealEstateId_realEstateId
+      tags:
+        - 4. Building
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Buildings:
+    get:
+      summary: 4.1 - Show all buildings
+      description: ''
+      operationId: get_Buildings
+      tags:
+        - 4. Building
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 4.5 - Create a new building
+      description: ''
+      operationId: post_Buildings
+      tags:
+        - 4. Building
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Buildings(Id={id},RealEstateId={realEstateId}):
+    delete:
+      summary: 4.7 - Delete building
+      description: ''
+      operationId: delete_Buildings_Id_id_RealEstateId_realEstateId
+      tags:
+        - 4. Building
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 4.6 - Update informations about a building
+      description: ''
+      operationId: patch_Buildings_Id_id_RealEstateId_realEstateId
+      tags:
+        - 4. Building
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Buildings(Id={id},RealEstateId={realEstateId})/RealEstate:
+    get:
+      summary: 4.4 - Show the real eastate of a building
+      description: ''
+      operationId: get_Buildings_Id_id_RealEstateId_realEstateId_RealEstate
+      tags:
+        - 4. Building
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Buildings(Id={id},RealEstateId={realEstateId})/Objects:
+    get:
+      summary: 4.3 - Show all objects of a building
+      description: YOS hat keinen Index mit BuildingID definiert
+      operationId: get_Buildings_Id_id_RealEstateId_realEstateId_Objects
+      tags:
+        - 4. Building
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses(Id={id},RealEstateId={realEstateId}):
+    get:
+      summary: 5.2 - Show a specific house
+      description: ''
+      operationId: get_Houses_Id_id_RealEstateId_realEstateId
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses:
+    get:
+      summary: 5.1 - Show all houses
+      description: ''
+      operationId: get_Houses
+      tags:
+        - 5. House
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 5.8 - Create a new house with OCSTAT
+      description: ''
+      operationId: post_Houses
+      tags:
+        - 5. House
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Houses(Id={id},RealEstateId={realEstateId})/RealEstate:
+    get:
+      summary: 5.6 - Show the real estate of a house
+      description: ''
+      operationId: get_Houses_Id_id_RealEstateId_realEstateId_RealEstate
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses(Id={id},RealEstateId={realEstateId}):
+    delete:
+      summary: 5.10 - Delete house
+      description: ''
+      operationId: delete_Houses_Id_id_RealEstateId_realEstateId
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 5.9 - Update informations about a house
+      description: ''
+      operationId: patch_Houses_Id_id_RealEstateId_realEstateId
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Houses(Id={id},RealEstateId={realEstateId})/Building:
+    get:
+      summary: 5.5 - Show the building of a house
+      description: ''
+      operationId: get_Houses_Id_id_RealEstateId_realEstateId_Building
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses(Id={id},RealEstateId={realEstateId})/Floors:
+    get:
+      summary: 5.4 - Show all floors of a house
+      description: ''
+      operationId: get_Houses_Id_id_RealEstateId_realEstateId_Floors
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses(Id={id},RealEstateId={realEstateId})/Objects:
+    get:
+      summary: 5.3 - Show all objects of a house
+      description: ''
+      operationId: get_Houses_Id_id_RealEstateId_realEstateId_Objects
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses(Id={id},RealEstateId={realEstateId}):
+    delete:
+      summary: 5.11 - Delete house
+      description: ''
+      operationId: delete_Houses_Id_id_RealEstateId_realEstateId_2
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Objects(Id={id},RealEstateId={realEstateId}):
+    get:
+      summary: 7.2 - Show a specific object
+      description: ''
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Objects:
+    get:
+      summary: 7.1 - Show all objects
+      description: ''
+      operationId: get_Objects
+      tags:
+        - 7. Object
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 7.8 - Create a new object
+      description: ''
+      operationId: post_Objects
+      tags:
+        - 7. Object
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Objects(Id={id},RealEstateId={realEstateId})/RealEstate:
+    get:
+      summary: 7.6 - Show the real estate of an object
+      description: ''
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId_RealEstate
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Objects(Id={id},RealEstateId={realEstateId})/Building:
+    get:
+      summary: 7.5 - Show the building of an object
+      description: ''
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId_Building
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Objects(Id={id},RealEstateId={realEstateId})/House:
+    get:
+      summary: 7.4 - Show the house of an object
+      description: ''
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId_House
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Objects(Id={id},RealEstateId={realEstateId}):
+    patch:
+      summary: 7.9 - Update informations about an object
+      description: ''
+      operationId: patch_Objects_Id_id_RealEstateId_realEstateId
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 7.10 - Delete object
+      description: ''
+      operationId: delete_Objects_Id_id_RealEstateId_realEstateId
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Objects(Id={id},RealEstateId={realEstateId})/Floor:
+    get:
+      summary: 7.3 - Show the floor of an object
+      description: ''
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId_Floor
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Objects(Id={id},RealEstateId={realEstateId})/ObjectContracts:
+    get:
+      summary: 7.7 - Show the object contracts of an object
+      description: >
+        Das funktioniert, weil im ObjectContractTableInfoSupplier der Index2 mit
+        RealestateNr und ObjectNr definiert ist
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId_ObjectContracts
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId}):
+    get:
+      summary: 6.2 - Show a specific floor
+      description: ''
+      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId
+      tags:
+        - 6. Floor
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Floors:
+    get:
+      summary: 6.3 - Show all floors of a real estate
+      description: ''
+      operationId: get_Floors
+      tags:
+        - 6. Floor
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 6.6 - Create a new floor
+      description: ''
+      operationId: post_Floors
+      tags:
+        - 6. Floor
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/House:
+    get:
+      summary: 6.5 - Show the house of a floor
+      description: ''
+      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId_House
+      tags:
+        - 6. Floor
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/RealEstate:
+    get:
+      summary: 6.4 - Show the real estate of a floor
+      description: ''
+      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId_RealEstate
+      tags:
+        - 6. Floor
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId}):
+    delete:
+      summary: 6.8 - Delete floor
+      description: ''
+      operationId: delete_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId
+      tags:
+        - 6. Floor
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 6.7 - Update informations about a floor
+      description: ''
+      operationId: patch_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId
+      tags:
+        - 6. Floor
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContracts(Id={id}):
+    get:
+      summary: 8.5 - Show a specific object contract (according to regulation)
+      description: ''
+      operationId: get_ObjectContracts_Id_id
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts:
+    get:
+      summary: 8.14 - Show all object contracts vacancies
+      description: ''
+      operationId: get_ObjectContracts
+      tags:
+        - 8. ObjectContracts
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 8.15 - Create a new object contract
+      description: ''
+      operationId: post_ObjectContracts
+      tags:
+        - 8. ObjectContracts
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContracts(Id={id}):
+    delete:
+      summary: 8.17 - Delete object contract
+      description: ''
+      operationId: delete_ObjectContracts_Id_id
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 8.16 - Update informations about an object contract
+      description: ''
+      operationId: patch_ObjectContracts_Id_id
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContracts(Id={id})/RealEstate:
+    get:
+      summary: 8.11 - Show the real estate of an object contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_RealEstate
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id})/Object:
+    get:
+      summary: 8.12 - Show the object of an object contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_Object
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id})/Customer:
+    get:
+      summary: 8.13 - Show the customer of an object contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_Customer
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id}):
+    get:
+      summary: 8.8 - Show a specific object contract (staggered rent)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_2
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id}):
+    get:
+      summary: 8.9 - Show a specific object contract (turnover rent)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_3
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id}):
+    get:
+      summary: 8.10 - Show a specific object contract (condominium ownership)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_4
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id}):
+    get:
+      summary: 8.6 - Show a specific object contract (outside regulation)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_5
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id}):
+    get:
+      summary: 8.7 - Show a specific object contract (index)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_6
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id})/Tenant:
+    get:
+      summary: 8.18 - Show the tenant of an object contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_Tenant
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractComponents(ObjectContractId={objectContractId},ValidFrom={validFrom}):
+    get:
+      summary: 11.2 - Show an object contract components of a specific timeline
+      description: ''
+      operationId: get_ObjectContractComponents_ObjectContractId_objectContractId_ValidFrom_validFrom
+      tags:
+        - 11. ObjectContractComponent
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractComponents:
+    get:
+      summary: 11.1 - Show all object contract components
+      description: ''
+      operationId: get_ObjectContractComponents
+      tags:
+        - 11. ObjectContractComponent
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 11.6 - Create an object contract component timeline with rent component
+      description: ''
+      operationId: post_ObjectContractComponents
+      tags:
+        - 11. ObjectContractComponent
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContractComponents(ObjectContractId={objectContractId},ValidFrom={validFrom}):
+    delete:
+      summary: 11.8 - Delete an object contract component (timeline from POST 11.5)
+      description: ''
+      operationId: delete_ObjectContractComponents_ObjectContractId_objectContractId_ValidFrom_validFrom
+      tags:
+        - 11. ObjectContractComponent
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 11.7 - Update informations about an object contract component
+      description: ''
+      operationId: patch_ObjectContractComponents_ObjectContractId_objectContractId_ValidFrom_validFrom
+      tags:
+        - 11. ObjectContractComponent
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContractComponents(ObjectContractId={objectContractId},ValidFrom={validFrom}):
+    delete:
+      summary: 11.9 - Delete an object contract component (timeline from POST 11.6)
+      description: ''
+      operationId: delete_ObjectContractComponents_ObjectContractId_objectContractId_ValidFrom_validFrom_2
+      tags:
+        - 11. ObjectContractComponent
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractPartners(ObjectContractId={objectContractId},ValidFrom={validFrom},SubjectId={subjectId})/Subject:
+    get:
+      summary: 10.5 - Show the subject of a specific object contract partner
+      description: ''
+      operationId: get_ObjectContractPartners_ObjectContractId_objectContractId_ValidFrom_validFrom_SubjectId_subjectId
+      tags:
+        - 10. ObjectContractPartner
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractPartners:
+    get:
+      summary: 10.4 - Show all timelines of a specific object contract partners
+      description: ''
+      operationId: get_ObjectContractPartners
+      tags:
+        - 10. ObjectContractPartner
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 10.6 - Create a new object contract partner
+      description: ''
+      operationId: post_ObjectContractPartners
+      tags:
+        - 10. ObjectContractPartner
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContractPartners(ObjectContractId={objectContractId},ValidFrom={validFrom},SubjectId={subjectId}):
+    delete:
+      summary: 10.8 - Delete an object contract partner
+      description: ''
+      operationId: delete_ObjectContractPartners_ObjectContractId_objectContractId_ValidFrom_validFrom_SubjectId_subjec
+      tags:
+        - 10. ObjectContractPartner
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 10.7 - Update an information about an object contract partner
+      description: ''
+      operationId: patch_ObjectContractPartners_ObjectContractId_objectContractId_ValidFrom_validFrom_SubjectId_subject
+      tags:
+        - 10. ObjectContractPartner
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContracts(Id={id})/ObjectContractPartner:
+    get:
+      summary: >-
+        10.3 - Show all object contract partner timelines of a specific object
+        contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_ObjectContractPartner
+      tags:
+        - 10. ObjectContractPartner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractPartners(ObjectContractId={objectContractId},ValidFrom={validFrom},SubjectId={subjectId}):
+    get:
+      summary: 10.2 - Show a specific timeline of an object contract partner
+      description: ''
+      operationId: get_ObjectContractPartners_ObjectContractId_objectContractId_ValidFrom_validFrom_SubjectId_subjectId_2
+      tags:
+        - 10. ObjectContractPartner
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PartialObjectContracts:
+    post:
+      summary: 9.2 - Create a new partial object contract with GUID (v2025)
+      description: ''
+      operationId: post_PartialObjectContracts
+      tags:
+        - 9. PartialObjectContract
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    get:
+      summary: 9.3 - Show all partial object contracts
+      description: ''
+      operationId: get_PartialObjectContracts
+      tags:
+        - 9. PartialObjectContract
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PartialObjectContracts(RealEstateId={realEstateId},ObjectId={objectId}):
+    delete:
+      summary: 9.9 - Delete partial object contract
+      description: ''
+      operationId: delete_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 9.8 - Update informations about a partial object contract
+      description: ''
+      operationId: patch_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    get:
+      summary: 9.4 - Show a specific partial object contract
+      description: ''
+      operationId: get_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PartialObjectContracts(RealEstateId={realEstateId},ObjectId={objectId})/RealEstate:
+    get:
+      summary: 9.6 - Show the real estate of a partial object contract
+      description: ''
+      operationId: get_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId_RealEstate
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PartialObjectContracts(RealEstateId={realEstateId},ObjectId={objectId})/Object:
+    get:
+      summary: 9.7 - Show the object of a partial object contract
+      description: ''
+      operationId: get_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId_Object
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PartialObjectContracts(RealEstateId={realEstateId},ObjectId={objectId})/Tenant:
+    get:
+      summary: 9.5 - Show the tenant of a partial object contract
+      description: ''
+      operationId: get_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId_Tenant
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PartialObjectContracts(RealEstateId={realEstateId},ObjectId={objectId}):
+    delete:
+      summary: 9.10 - Delete partial object contract
+      description: ''
+      operationId: delete_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId_2
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Customers({id})/ObjectContracts:
+    get:
+      summary: 22.2 - Show the object contracts of a specific customer
+      description: ''
+      operationId: get_Customers_id_ObjectContracts
+      tags:
+        - 22. Customer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Customers({id})/Tenant:
+    get:
+      summary: 22.1 - Show the tenant of a specific customer
+      description: ''
+      operationId: get_Customers_id_Tenant
+      tags:
+        - 22. Customer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RentComponents(ObjectContractId={objectContractId},ValidFrom={validFrom},Id={id}):
+    get:
+      summary: 12.2 - Show a specific rent component
+      description: ''
+      operationId: get_RentComponents_ObjectContractId_objectContractId_ValidFrom_validFrom_Id_id
+      tags:
+        - 12. RentComponent
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RentComponents(ObjectContractId={objectContractId},ValidFrom={validFrom},Id={id}):
+    patch:
+      summary: >-
+        12.4 - Update the rent components of a specific object contract
+        component
+      description: ''
+      operationId: patch_RentComponents_ObjectContractId_objectContractId_ValidFrom_validFrom_Id_id
+      tags:
+        - 12. RentComponent
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /RentComponents(ObjectContractId={objectContractId},ValidFrom={validFrom},Id={id})/ObjectContractComponent:
+    get:
+      summary: 12.3 - Show the object contract component of a specific rent component
+      description: ''
+      operationId: get_RentComponents_ObjectContractId_objectContractId_ValidFrom_validFrom_Id_id_ObjectContractCompone
+      tags:
+        - 12. RentComponent
+      parameters:
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RentComponents:
+    get:
+      summary: 12.1 - Show all rent components
+      description: ''
+      operationId: get_RentComponents
+      tags:
+        - 12. RentComponent
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelations(Id={id}):
+    delete:
+      summary: 16.7 - Delete a contract relation
+      description: ''
+      operationId: delete_ContractRelations_Id_id
+      tags:
+        - 16. ContractRelation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelations:
+    post:
+      summary: 16.6 - Create a new contract relation
+      description: ''
+      operationId: post_ContractRelations
+      tags:
+        - 16. ContractRelation
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    get:
+      summary: 16.1 - Show all contract relations
+      description: ''
+      operationId: get_ContractRelations
+      tags:
+        - 16. ContractRelation
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelations(Id={id}):
+    get:
+      summary: 16.3 - Show an additional designation of a specific contract relation
+      description: ''
+      operationId: get_ContractRelations_Id_id
+      tags:
+        - 16. ContractRelation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 16.4 - Update informations about a contract relation
+      description: ''
+      operationId: patch_ContractRelations_Id_id
+      tags:
+        - 16. ContractRelation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ContractRelationCollectionDisbursement:
+    get:
+      summary: 17.1 - Show all contract relation collection disbursement
+      description: ''
+      operationId: get_ContractRelationCollectionDisbursement
+      tags:
+        - 17. ContractRelationCollectionDisbursement
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: >-
+        17.3 - Create a new timeline about a  contract relation colletion
+        disbursement
+      description: ''
+      operationId: post_ContractRelationCollectionDisbursement
+      tags:
+        - 17. ContractRelationCollectionDisbursement
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ContractRelationCollectionDisbursement(ContractRelationId={contractRelationId},ValidFrom={validFrom}):
+    get:
+      summary: >-
+        17.2 - Show a specific timeline of a specific contract relation
+        colletion disbursement
+      description: ''
+      operationId: get_ContractRelationCollectionDisbursement_ContractRelationId_contractRelationId_ValidFrom_validFrom
+      tags:
+        - 17. ContractRelationCollectionDisbursement
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelationCollectionDisbursement(ContractRelationId={contractRelationId},ValidFrom={validFrom}):
+    patch:
+      summary: 17.4 - Update a timeline from a contract relation colletion disbursement
+      description: ''
+      operationId: patch_ContractRelationCollectionDisbursement_ContractRelationId_contractRelationId_ValidFrom_validFr
+      tags:
+        - 17. ContractRelationCollectionDisbursement
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 17.5 - Delete a timeline from a contract relation colletion disbursement
+      description: ''
+      operationId: delete_ContractRelationCollectionDisbursement_ContractRelationId_contractRelationId_ValidFrom_validF
+      tags:
+        - 17. ContractRelationCollectionDisbursement
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TenantFlatmates:
+    get:
+      summary: 18.1 - Show all tenant flatmates
+      description: ''
+      operationId: get_TenantFlatmates
+      tags:
+        - 18. TenantFlatmates
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 18.3 - Create a new tenant flatmate
+      description: ''
+      operationId: post_TenantFlatmates
+      tags:
+        - 18. TenantFlatmates
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /TenantFlatmates(Id={id},CustomerId={customerId}):
+    get:
+      summary: 18.2 - Show a specific tenant flatmate
+      description: ''
+      operationId: get_TenantFlatmates_Id_id_CustomerId_customerId
+      tags:
+        - 18. TenantFlatmates
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TenantFlatmates(Id={id},CustomerId={customerId}):
+    delete:
+      summary: 18.5 - Delete a tenant flatmate
+      description: ''
+      operationId: delete_TenantFlatmates_Id_id_CustomerId_customerId
+      tags:
+        - 18. TenantFlatmates
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 18.4 - Update an information about a tenant flatmate
+      description: ''
+      operationId: patch_TenantFlatmates_Id_id_CustomerId_customerId
+      tags:
+        - 18. TenantFlatmates
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Maintenances:
+    get:
+      summary: 23.6 - Show all maintenance of a floor
+      description: ''
+      operationId: get_Maintenances
+      tags:
+        - 23. Maintenances
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 23.11 - Create a maintenance for a floor
+      description: ''
+      operationId: post_Maintenances
+      tags:
+        - 23. Maintenances
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Maintenances({id}):
+    get:
+      summary: 23.2 - Show a specific maintenance
+      description: ''
+      operationId: get_Maintenances_id
+      tags:
+        - 23. Maintenances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Maintenances({id}):
+    delete:
+      summary: 23.14 - Delete a maintenance
+      description: ''
+      operationId: delete_Maintenances_id
+      tags:
+        - 23. Maintenances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Maintenances(Id={id}):
+    patch:
+      summary: 23.13 - Update an information about a maintenance
+      description: ''
+      operationId: patch_Maintenances_Id_id
+      tags:
+        - 23. Maintenances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /TenantCollectionDisbursement:
+    get:
+      summary: 19.1 - Show all tenant collection disbursements
+      description: ''
+      operationId: get_TenantCollectionDisbursement
+      tags:
+        - 19. TenantCollectionDisbursement
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 19.3 - Create a new timeline of a tenant collection disbursement
+      description: ''
+      operationId: post_TenantCollectionDisbursement
+      tags:
+        - 19. TenantCollectionDisbursement
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /TenantCollectionDisbursement(CustomerId={customerId},ValidFrom={validFrom}):
+    get:
+      summary: 19.2 - Show a specific timeline of a tenant collection disbursement
+      description: ''
+      operationId: get_TenantCollectionDisbursement_CustomerId_customerId_ValidFrom_validFrom
+      tags:
+        - 19. TenantCollectionDisbursement
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TenantCollectionDisbursement(CustomerId={customerId},ValidFrom={validFrom}):
+    patch:
+      summary: 19.4 - Update informations about a tenant collection disbursement
+      description: ''
+      operationId: patch_TenantCollectionDisbursement_CustomerId_customerId_ValidFrom_validFrom
+      tags:
+        - 19. TenantCollectionDisbursement
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 19.5 - Delete a timeline of a tenant collection disbursement
+      description: ''
+      operationId: delete_TenantCollectionDisbursement_CustomerId_customerId_ValidFrom_validFrom
+      tags:
+        - 19. TenantCollectionDisbursement
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: v
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CooperativeContracts:
+    get:
+      summary: 21.1 - Show all cooperative contracts
+      description: ''
+      operationId: get_CooperativeContracts
+      tags:
+        - 21. CooperativeContracts (Mandant 9999)
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 21.3 - Create a new cooperative contract
+      description: ''
+      operationId: post_CooperativeContracts
+      tags:
+        - 21. CooperativeContracts (Mandant 9999)
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CooperativeContracts(Id={id}):
+    get:
+      summary: 21.2 - Show a specific cooperative contract
+      description: ''
+      operationId: get_CooperativeContracts_Id_id
+      tags:
+        - 21. CooperativeContracts (Mandant 9999)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CooperativeContracts(Id={id}):
+    patch:
+      summary: 21.4 - Update an information about a cooperative contract
+      description: ''
+      operationId: patch_CooperativeContracts_Id_id
+      tags:
+        - 21. CooperativeContracts (Mandant 9999)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 21.5 - Delete a cooperative contract
+      description: ''
+      operationId: delete_CooperativeContracts_Id_id
+      tags:
+        - 21. CooperativeContracts (Mandant 9999)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Codetables:
+    get:
+      summary: 25.1 - Show all codetables
+      description: ''
+      operationId: get_Codetables
+      tags:
+        - 25. Codetables
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 25.3 - Create a codetable
+      description: ''
+      operationId: post_Codetables
+      tags:
+        - 25. Codetables
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Codetables(Type={type},Id={id}):
+    get:
+      summary: 25.2 - Show a specific codetable
+      description: ''
+      operationId: get_Codetables_Type_type_Id_id
+      tags:
+        - 25. Codetables
+      parameters:
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 25.6 - Delete a used codetable
+      description: ''
+      operationId: delete_Codetables_Type_type_Id_id
+      tags:
+        - 25. Codetables
+      parameters:
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Codetables(Type={type},Id={id}):
+    delete:
+      summary: 25.5 - Delete a codetable
+      description: ''
+      operationId: delete_Codetables_Type_type_Id_id_2
+      tags:
+        - 25. Codetables
+      parameters:
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 25.4 - Update a designation
+      description: ''
+      operationId: patch_Codetables_Type_type_Id_id
+      tags:
+        - 25. Codetables
+      parameters:
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /SystemSettings(Switches1='{switches1}'):
+    patch:
+      summary: 24.2 - Update the system settings
+      description: ''
+      operationId: patch_SystemSettings_Switches1_switches1
+      tags:
+        - 24. SystemSettings
+      parameters:
+        - in: path
+          name: switches1
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /SystemSettings:
+    get:
+      summary: 24.1 - Show all system settings
+      description: ''
+      operationId: get_SystemSettings
+      tags:
+        - 24. SystemSettings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id})/Documents:
+    get:
+      summary: 31.1 - Show all documents of a specific object contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_Documents
+      tags:
+        - 31. ObjectContractDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractDocuments({id}):
+    get:
+      summary: 31.2 - Show a specific object contract document
+      description: ''
+      operationId: get_ObjectContractDocuments_id
+      tags:
+        - 31. ObjectContractDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractDocuments({id})/Storage:
+    get:
+      summary: 31.4 - Show the storage of an object contract document
+      description: ''
+      operationId: get_ObjectContractDocuments_id_Storage
+      tags:
+        - 31. ObjectContractDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractDocuments({id})/Content:
+    get:
+      summary: 31.3 - Show the content of an object contract document
+      description: ''
+      operationId: get_ObjectContractDocuments_id_Content
+      tags:
+        - 31. ObjectContractDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContractDocuments({id}):
+    delete:
+      summary: 31.7 - Delete an object contract document
+      description: ''
+      operationId: delete_ObjectContractDocuments_id
+      tags:
+        - 31. ObjectContractDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /user:
+    post:
+      summary: 34.5 - Upload a document to file storage (copy location from header)
+      description: ''
+      operationId: post_user
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: object
+              properties: {}
+  /ObjectContractDocuments:
+    post:
+      summary: >-
+        31.6 - Create an object contract document (insert location to content
+        media link in body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_ObjectContractDocuments
+      tags:
+        - 31. ObjectContractDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Tenants(Id={id})/Documents:
+    get:
+      summary: 33.1 - Show all documents of a specific tenant
+      description: ''
+      operationId: get_Tenants_Id_id_Documents
+      tags:
+        - 33. TenantDocument (Customer)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TenantDocuments({id}):
+    get:
+      summary: 33.2 - Show a specific tenant document
+      description: ''
+      operationId: get_TenantDocuments_id
+      tags:
+        - 33. TenantDocument (Customer)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TenantDocuments({id})/Storage:
+    get:
+      summary: 33.4 - Show the storage of a tenant document
+      description: ''
+      operationId: get_TenantDocuments_id_Storage
+      tags:
+        - 33. TenantDocument (Customer)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TenantDocuments({id})/Content:
+    get:
+      summary: 33.3 - Show the content of a tenant document
+      description: ''
+      operationId: get_TenantDocuments_id_Content
+      tags:
+        - 33. TenantDocument (Customer)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TenantDocuments:
+    post:
+      summary: >-
+        33.6 - Create a tenant document (insert location to content media link
+        in body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_TenantDocuments
+      tags:
+        - 33. TenantDocument (Customer)
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /TenantDocuments({id}):
+    delete:
+      summary: 33.7 - Delete a tenant document
+      description: ''
+      operationId: delete_TenantDocuments_id
+      tags:
+        - 33. TenantDocument (Customer)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelations(Id={id})/Documents:
+    get:
+      summary: 32.1 - Show all documents of a specific contract relation
+      description: ''
+      operationId: get_ContractRelations_Id_id_Documents
+      tags:
+        - 32. ContractRelationDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelationDocuments({id}):
+    get:
+      summary: 32.2 - Show a specific contract relation document
+      description: ''
+      operationId: get_ContractRelationDocuments_id
+      tags:
+        - 32. ContractRelationDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelationDocuments({id})/Storage:
+    get:
+      summary: 32.4 - Show the storage of a contract relation document
+      description: ''
+      operationId: get_ContractRelationDocuments_id_Storage
+      tags:
+        - 32. ContractRelationDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelationDocuments({id})/Content:
+    get:
+      summary: 32.3 - Show the content of a contract relation document
+      description: ''
+      operationId: get_ContractRelationDocuments_id_Content
+      tags:
+        - 32. ContractRelationDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ContractRelationDocuments:
+    post:
+      summary: >-
+        32.6 - Create a contract relation document (insert location to content
+        media link in body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_ContractRelationDocuments
+      tags:
+        - 32. ContractRelationDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ContractRelationDocuments({id}):
+    delete:
+      summary: 32.7 - Delete a contract relation document
+      description: ''
+      operationId: delete_ContractRelationDocuments_id
+      tags:
+        - 32. ContractRelationDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstates(Id={id})/Documents:
+    get:
+      summary: 26.1 - Show all documents of a specific real estate
+      description: ''
+      operationId: get_RealEstates_Id_id_Documents
+      tags:
+        - 26. RealEstateDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstateDocuments({id}):
+    get:
+      summary: 26.2 - Show a specific real estate document
+      description: ''
+      operationId: get_RealEstateDocuments_id
+      tags:
+        - 26. RealEstateDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstateDocuments({id})/Storage:
+    get:
+      summary: 26.4 - Show the storage of a real estate document
+      description: ''
+      operationId: get_RealEstateDocuments_id_Storage
+      tags:
+        - 26. RealEstateDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstateDocuments({id})/Content:
+    get:
+      summary: 26.3 - Show the content of a real estate document
+      description: ''
+      operationId: get_RealEstateDocuments_id_Content
+      tags:
+        - 26. RealEstateDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /RealEstateDocuments:
+    post:
+      summary: >-
+        26.6 - Create a real estate document (insert location to content media
+        link in body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_RealEstateDocuments
+      tags:
+        - 26. RealEstateDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /RealEstateDocuments({id}):
+    delete:
+      summary: 26.7 - Delete a real estate document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_RealEstateDocuments_id
+      tags:
+        - 26. RealEstateDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Buildings(Id={id},RealEstateId={realEstateId})/Documents:
+    get:
+      summary: 27.1 - Show all documents of a specific building
+      description: ''
+      operationId: get_Buildings_Id_id_RealEstateId_realEstateId_Documents
+      tags:
+        - 27. BuildingDocument
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /BuildingDocuments({id}):
+    get:
+      summary: 27.2 - Show a specific building document
+      description: ''
+      operationId: get_BuildingDocuments_id
+      tags:
+        - 27. BuildingDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /BuildingDocuments({id})/Storage:
+    get:
+      summary: 27.4 - Show the storage of a building document
+      description: ''
+      operationId: get_BuildingDocuments_id_Storage
+      tags:
+        - 27. BuildingDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /BuildingDocuments({id})/Content:
+    get:
+      summary: 27.3 - Show the content of a building document
+      description: ''
+      operationId: get_BuildingDocuments_id_Content
+      tags:
+        - 27. BuildingDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /BuildingDocuments:
+    post:
+      summary: >-
+        27.6 - Create a building document (insert location to content media link
+        in body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_BuildingDocuments
+      tags:
+        - 27. BuildingDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /BuildingDocuments({id}):
+    delete:
+      summary: 27.7 - Delete a building document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_BuildingDocuments_id
+      tags:
+        - 27. BuildingDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses(Id={id},RealEstateId={realEstateId})/Documents:
+    get:
+      summary: 28.1 - Show all documents of a specific house
+      description: ''
+      operationId: get_Houses_Id_id_RealEstateId_realEstateId_Documents
+      tags:
+        - 28. HouseDocument
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /HouseDocuments({id}):
+    get:
+      summary: 28.2 - Show a specific house document
+      description: ''
+      operationId: get_HouseDocuments_id
+      tags:
+        - 28. HouseDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /HouseDocuments({id})/Storage:
+    get:
+      summary: 28.4 - Show the storage of a house document
+      description: ''
+      operationId: get_HouseDocuments_id_Storage
+      tags:
+        - 28. HouseDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /HouseDocuments({id})/Content:
+    get:
+      summary: 28.3 - Show the content of a house document
+      description: ''
+      operationId: get_HouseDocuments_id_Content
+      tags:
+        - 28. HouseDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /HouseDocuments:
+    post:
+      summary: >-
+        28.6 - Create a house document (insert location to content media link in
+        body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_HouseDocuments
+      tags:
+        - 28. HouseDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /HouseDocuments({id}):
+    delete:
+      summary: 28.7 - Delete a house document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_HouseDocuments_id
+      tags:
+        - 28. HouseDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/Documents:
+    get:
+      summary: 29.1 - Show all documents of a specific floor
+      description: ''
+      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId_Documents
+      tags:
+        - 29. FloorDocument
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /FloorDocuments({id}):
+    get:
+      summary: 29.2 - Show a specific floor document
+      description: ''
+      operationId: get_FloorDocuments_id
+      tags:
+        - 29. FloorDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /FloorDocuments({id})/Storage:
+    get:
+      summary: 29.4  -Show the storage of a floor document
+      description: ''
+      operationId: get_FloorDocuments_id_Storage
+      tags:
+        - 29. FloorDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /FloorDocuments({id})/Content:
+    get:
+      summary: 29.3 - Show the content of a floor document
+      description: ''
+      operationId: get_FloorDocuments_id_Content
+      tags:
+        - 29. FloorDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /FloorDocuments({id}):
+    delete:
+      summary: 29.7 - Delete a floor document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_FloorDocuments_id
+      tags:
+        - 29. FloorDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /FloorDocuments:
+    post:
+      summary: >-
+        29.6 - Create a floor document (insert location to content media link in
+        body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_FloorDocuments
+      tags:
+        - 29. FloorDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Objects(Id={id},RealEstateId={realEstateId})/Documents:
+    get:
+      summary: 30.1 - Show all documents of a specific object
+      description: ''
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId_Documents
+      tags:
+        - 30. ObjectDocument
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectDocuments({id}):
+    get:
+      summary: 30.2 - Show a specific object document
+      description: ''
+      operationId: get_ObjectDocuments_id
+      tags:
+        - 30. ObjectDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectDocuments({id})/Storage:
+    get:
+      summary: 30.4 - Show the storage of an object document
+      description: ''
+      operationId: get_ObjectDocuments_id_Storage
+      tags:
+        - 30. ObjectDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectDocuments({id})/Content:
+    get:
+      summary: 30.3 - Show the content of an object document
+      description: ''
+      operationId: get_ObjectDocuments_id_Content
+      tags:
+        - 30. ObjectDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectDocuments:
+    post:
+      summary: >-
+        30.6 - Create an object document (insert location to content media link
+        in body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_ObjectDocuments
+      tags:
+        - 30. ObjectDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ObjectDocuments({id}):
+    delete:
+      summary: 30.7 - Delete an object document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_ObjectDocuments_id
+      tags:
+        - 30. ObjectDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblies({id}):
+    get:
+      summary: 20.2 - Show a specific condo owners assembly
+      description: ''
+      operationId: get_CondoOwnersAssemblies_id
+      tags:
+        - 20. CondoOwnersAssembly
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblies:
+    get:
+      summary: 20.1 - Show all condo owners assemblies
+      description: ''
+      operationId: get_CondoOwnersAssemblies
+      tags:
+        - 20. CondoOwnersAssembly
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 20.4 - Create a new condo owners assembly
+      description: ''
+      operationId: post_CondoOwnersAssemblies
+      tags:
+        - 20. CondoOwnersAssembly
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CondoOwnersAssemblies({id})/RealEstate:
+    get:
+      summary: 20.3 - Show the real estate of a specific condo owners assembly
+      description: ''
+      operationId: get_CondoOwnersAssemblies_id_RealEstate
+      tags:
+        - 20. CondoOwnersAssembly
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblies({id}):
+    delete:
+      summary: 20.6 - Delete a condo owners assembly
+      description: ''
+      operationId: delete_CondoOwnersAssemblies_id
+      tags:
+        - 20. CondoOwnersAssembly
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 20.5 - Update informations about a condo owners assembly
+      description: ''
+      operationId: patch_CondoOwnersAssemblies_id
+      tags:
+        - 20. CondoOwnersAssembly
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CondoOwnersAssemblies({id})/Documents:
+    get:
+      summary: 34.1 - Show all documents of a specific condo owners assembly
+      description: ''
+      operationId: get_CondoOwnersAssemblies_id_Documents
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblyDocuments({id}):
+    get:
+      summary: 34.2 - Show a specific condo owners assembly document
+      description: ''
+      operationId: get_CondoOwnersAssemblyDocuments_id
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblyDocuments({id})/Storage:
+    get:
+      summary: 34.4 - Show the storage of a condo owners assembly document
+      description: ''
+      operationId: get_CondoOwnersAssemblyDocuments_id_Storage
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblyDocuments({id})/Content:
+    get:
+      summary: 34.3 - Show the content of a condo owners assembly document
+      description: ''
+      operationId: get_CondoOwnersAssemblyDocuments_id_Content
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblyDocuments({id}):
+    delete:
+      summary: 34.7 - Delete a condo owners assembly document
+      description: ''
+      operationId: delete_CondoOwnersAssemblyDocuments_id
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CondoOwnersAssemblyDocuments:
+    post:
+      summary: >-
+        34.6 - Create an condo owners assembly document (insert location to
+        content media link in body)
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: post_CondoOwnersAssemblyDocuments
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /TurnoverRents({id}):
+    get:
+      summary: 13.4 - Show all details of a specific turnover rent timeline
+      description: ''
+      operationId: get_TurnoverRents_id
+      tags:
+        - 13. TurnoverRent
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRents:
+    get:
+      summary: 13.1 - Show all turnover rents
+      description: ''
+      operationId: get_TurnoverRents
+      tags:
+        - 13. TurnoverRent
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 13.6 - Create a turnover rent
+      description: ''
+      operationId: post_TurnoverRents
+      tags:
+        - 13. TurnoverRent
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /TurnoverRents(Id={id})/TurnoverRentDefinitions:
+    get:
+      summary: >-
+        13.5 - Show the turnover rent definitions of a specific turnover rent
+        timeline
+      description: ''
+      operationId: get_TurnoverRents_Id_id_TurnoverRentDefinitions
+      tags:
+        - 13. TurnoverRent
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts(Id={id})/TurnoverRents:
+    get:
+      summary: 13.2 - Show all turnover rents of a specific object contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_TurnoverRents
+      tags:
+        - 13. TurnoverRent
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRents({id}):
+    delete:
+      summary: 13.7 - Delete a turnover rent
+      description: ''
+      operationId: delete_TurnoverRents_id
+      tags:
+        - 13. TurnoverRent
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentDefinitions({id}):
+    get:
+      summary: 14.2 - Show a specific turnover rent definition
+      description: ''
+      operationId: get_TurnoverRentDefinitions_id
+      tags:
+        - 14. TurnoverRentDefinitions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 14.6 - Delete an already invoiced turnover rent definition
+      description: ''
+      operationId: delete_TurnoverRentDefinitions_id
+      tags:
+        - 14. TurnoverRentDefinitions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentDefinitions:
+    get:
+      summary: 14.1 - Show all turnover rent definitions
+      description: ''
+      operationId: get_TurnoverRentDefinitions
+      tags:
+        - 14. TurnoverRentDefinitions
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentDefinitions({id})/SettlementMarch:
+    get:
+      summary: 14.5 - Show a specific settlement of a specific turnover rent definition
+      description: ''
+      operationId: get_TurnoverRentDefinitions_id_SettlementMarch
+      tags:
+        - 14. TurnoverRentDefinitions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentDefinitions({id})/TurnoverRentLevels:
+    get:
+      summary: >-
+        14.3 - Show all turnover rent levels of a specific turnover rent
+        definition
+      description: ''
+      operationId: get_TurnoverRentDefinitions_id_TurnoverRentLevels
+      tags:
+        - 14. TurnoverRentDefinitions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentDefinitions({id})/TurnoverRent:
+    get:
+      summary: 14.4 - Show the turnover rent of a specific turnover rent definition
+      description: ''
+      operationId: get_TurnoverRentDefinitions_id_TurnoverRent
+      tags:
+        - 14. TurnoverRentDefinitions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentLevels(Id={id}):
+    get:
+      summary: 15.2 - Show a specific turnover rent level
+      description: ''
+      operationId: get_TurnoverRentLevels_Id_id
+      tags:
+        - 15. TurnoverRentLevels
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentLevels:
+    get:
+      summary: 15.1 - Show all turnover rent levels
+      description: ''
+      operationId: get_TurnoverRentLevels
+      tags:
+        - 15. TurnoverRentLevels
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TurnoverRentLevels(Id={id})/TurnoverRentDefinition:
+    get:
+      summary: >-
+        15.3 - Show the turnover rent definition of a specific turnover rent
+        level
+      description: ''
+      operationId: get_TurnoverRentLevels_Id_id_TurnoverRentDefinition
+      tags:
+        - 15. TurnoverRentLevels
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /$metadata:
+    get:
+      summary: Metadata
+      description: ''
+      operationId: get_metadata
+      tags:
+        - 35. Metadata
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error

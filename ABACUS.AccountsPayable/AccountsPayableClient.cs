@@ -27,7 +27,7 @@ public sealed class AccountsPayableClient : IAccountsPayableClient
     {
         try
         {
-            await Raw.GetSuppliers11AllSuppliersAsync(cancellationToken).ConfigureAwait(false);
+            await Raw.Get_SuppliersAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -42,7 +42,7 @@ public sealed class AccountsPayableClient : IAccountsPayableClient
 
         try
         {
-            await Raw.PostSuppliers15SupplierWithBeneficiaryAccountAsync(payload, cancellationToken).ConfigureAwait(false);
+            await Raw.Post_SuppliersAsync(payload, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -55,7 +55,7 @@ public sealed class AccountsPayableClient : IAccountsPayableClient
     {
         try
         {
-            await Raw.GetSuppliercurrencies41AllSupplierCurrenciesAsync(cancellationToken).ConfigureAwait(false);
+            await Raw.Get_SupplierCurrenciesAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -68,7 +68,7 @@ public sealed class AccountsPayableClient : IAccountsPayableClient
     {
         try
         {
-            await Raw.GetSupplierpaymentmethods61AllSupplierPaymentMethodsAsync(cancellationToken).ConfigureAwait(false);
+            await Raw.Get_SupplierPaymentMethodsAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

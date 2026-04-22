@@ -1,0 +1,153 @@
+﻿openapi: 3.0.0
+info:
+  title: ATK-1.1
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /BeneficiaryAccounts:
+    get:
+      summary: BeneficiaryAccounts
+      description: ''
+      operationId: get_BeneficiaryAccounts
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Countries:
+    get:
+      summary: Countries
+      description: ''
+      operationId: get_Countries
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Currencies:
+    get:
+      summary: Currencies
+      description: ''
+      operationId: get_Currencies
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Divisions:
+    get:
+      summary: Divisions
+      description: ''
+      operationId: get_Divisions
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Enterprises:
+    get:
+      summary: Enterprises
+      description: ''
+      operationId: get_Enterprises
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ExchangeRates:
+    get:
+      summary: ExchangeRates
+      description: ''
+      operationId: get_ExchangeRates
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /FinancialInstitutes:
+    get:
+      summary: FinancialInstitutes
+      description: ''
+      operationId: get_FinancialInstitutes
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /StorageFolders:
+    get:
+      summary: StorageFolders
+      description: ''
+      operationId: get_StorageFolders
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Storages:
+    get:
+      summary: Storages
+      description: ''
+      operationId: get_Storages
+      tags:
+        - AnlageInfos
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /$batch:
+    post:
+      summary: Generalbatch
+      description: ''
+      operationId: post_batch
+      tags:
+        - ATK-1.1
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string

@@ -1,0 +1,147 @@
+﻿openapi: 3.0.0
+info:
+  title: WebShop
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /ShopperAccounts:
+    get:
+      summary: 1.3 - ShopperAccountsSelect
+      description: ''
+      operationId: get_ShopperAccounts
+      tags:
+        - 1 - ShopperAccounts
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 1.6 - ShopperAccounts
+      description: ''
+      operationId: post_ShopperAccounts
+      tags:
+        - 1 - ShopperAccounts
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ShopperAccounts(Id={id}):
+    patch:
+      summary: 1.8 - ShopperAccounts
+      description: ''
+      operationId: patch_ShopperAccounts_Id_id
+      tags:
+        - 1 - ShopperAccounts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ShopperAccounts(Id={id}):
+    get:
+      summary: 1.4 - ShopperAccountsExpand
+      description: ''
+      operationId: get_ShopperAccounts_Id_id
+      tags:
+        - 1 - ShopperAccounts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CreateSalesOrderInbox:
+    post:
+      summary: 2.1 - CreateSalesOrderInbox
+      description: ''
+      operationId: post_CreateSalesOrderInbox
+      tags:
+        - 2 - CreateSalesOrderInbox
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CreateSalesOfferInbox:
+    post:
+      summary: 3.2 - CreateSalesOfferInboxMinimal
+      description: ''
+      operationId: post_CreateSalesOfferInbox
+      tags:
+        - 3 - CreateSalesOfferInbox
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CreateSalesReturnInbox:
+    post:
+      summary: 4.2 - CreateSalesReturnInboxMinimal
+      description: ''
+      operationId: post_CreateSalesReturnInbox
+      tags:
+        - 4 - CreateSalesReturnInbox
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}

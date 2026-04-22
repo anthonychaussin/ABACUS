@@ -16,7 +16,7 @@ public sealed class RawRealEstateSmokeTests
 
         var module = new RealEstateClient(httpClient);
 
-        await module.Raw.GetObjectcontractsid185ShowASpecificObjectContractAccordingToRegulationAsync();
+        await module.Raw.Get_ObjectContracts_Id_id_6Async("1");
 
         var request = Assert.Single(handler.Requests);
         Assert.Equal(HttpMethod.Get, request.Method);

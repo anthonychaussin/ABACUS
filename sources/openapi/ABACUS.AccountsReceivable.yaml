@@ -1,0 +1,586 @@
+﻿openapi: 3.0.0
+info:
+  title: AccountsReceivable
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /Customers:
+    get:
+      summary: 1.1 all customers
+      description: ''
+      operationId: get_Customers
+      tags:
+        - 1. Customer
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 1.4 Create customers with multiple dates
+      description: ''
+      operationId: post_Customers
+      tags:
+        - 1. Customer
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Customers({id}):
+    delete:
+      summary: 1.8 delete customer
+      description: ''
+      operationId: delete_Customers_id
+      tags:
+        - 1. Customer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Customers(Id={id}):
+    get:
+      summary: 1.2 customer with address and currency
+      description: ''
+      operationId: get_Customers_Id_id
+      tags:
+        - 1. Customer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 1.7 Change customer note from customer
+      description: ''
+      operationId: patch_Customers_Id_id
+      tags:
+        - 1. Customer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerInvoices({id}):
+    get:
+      summary: 2.1 Invoice with navigations
+      description: ''
+      operationId: get_CustomerInvoices_id
+      tags:
+        - 2. Customer Invoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 2.7 Adjust amount of existing invoice
+      description: ''
+      operationId: patch_CustomerInvoices_id
+      tags:
+        - 2. Customer Invoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerInvoices:
+    post:
+      summary: 2.6 Enter an invoice with a new partial payment condition
+      description: ''
+      operationId: post_CustomerInvoices
+      tags:
+        - 2. Customer Invoice
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerInvoicePositions(Id={id}):
+    get:
+      summary: 3.1 invoice positions
+      description: ''
+      operationId: get_CustomerInvoicePositions_Id_id
+      tags:
+        - 3. Customer Invoice Position
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 3.3 Change text from existing position
+      description: ''
+      operationId: patch_CustomerInvoicePositions_Id_id
+      tags:
+        - 3. Customer Invoice Position
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerInvoicePositions:
+    post:
+      summary: 3.2 Add item to existing invoice
+      description: ''
+      operationId: post_CustomerInvoicePositions
+      tags:
+        - 3. Customer Invoice Position
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerCurrencies(CustomerId={customerId},CurrencyId='{currencyId}'):
+    get:
+      summary: 4.1 Customer currency
+      description: ''
+      operationId: get_CustomerCurrencies_CustomerId_customerId_CurrencyId_currencyId
+      tags:
+        - 4. Customer Currency
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 4.4 Customize customer currency with ABEA data
+      description: ''
+      operationId: patch_CustomerCurrencies_CustomerId_customerId_CurrencyId_currencyId
+      tags:
+        - 4. Customer Currency
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerCurrencies:
+    post:
+      summary: 4.2 Create customer currency with minimal data
+      description: ''
+      operationId: post_CustomerCurrencies
+      tags:
+        - 4. Customer Currency
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerCurrencies(CustomerId={customerId},CurrencyId='{currencyId}'):
+    delete:
+      summary: 4.5 Delete customer currency
+      description: ''
+      operationId: delete_CustomerCurrencies_CustomerId_customerId_CurrencyId_currencyId
+      tags:
+        - 4. Customer Currency
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CustomerDirectDebits(Id={id},CustomerId={customerId}):
+    get:
+      summary: 5.1 Dircet debit
+      description: ''
+      operationId: get_CustomerDirectDebits_Id_id_CustomerId_customerId
+      tags:
+        - 5. Customer Direct Debit
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 5.4 Delete direct debit
+      description: ''
+      operationId: delete_CustomerDirectDebits_Id_id_CustomerId_customerId
+      tags:
+        - 5. Customer Direct Debit
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CustomerDirectDebits:
+    post:
+      summary: 5.2 Direct debit with minimal data
+      description: ''
+      operationId: post_CustomerDirectDebits
+      tags:
+        - 5. Customer Direct Debit
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerDirectDebits(Id={id},CustomerId={customerId}):
+    patch:
+      summary: 5.3 Adjust existing direct debit
+      description: ''
+      operationId: patch_CustomerDirectDebits_Id_id_CustomerId_customerId
+      tags:
+        - 5. Customer Direct Debit
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerPayouts(Id={id},CustomerId={customerId}):
+    get:
+      summary: 6.1 Payout
+      description: ''
+      operationId: get_CustomerPayouts_Id_id_CustomerId_customerId
+      tags:
+        - 6. Customer Payout
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 6.3 Adjust payout
+      description: ''
+      operationId: patch_CustomerPayouts_Id_id_CustomerId_customerId
+      tags:
+        - 6. Customer Payout
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerPayouts:
+    post:
+      summary: 6.2 Payout with minimal data
+      description: ''
+      operationId: post_CustomerPayouts
+      tags:
+        - 6. Customer Payout
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerPayouts(Id={id},CustomerId={customerId}):
+    delete:
+      summary: 6.4 Delete payout
+      description: ''
+      operationId: delete_CustomerPayouts_Id_id_CustomerId_customerId
+      tags:
+        - 6. Customer Payout
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /CustomerOverdues(CustomerId={customerId}):
+    get:
+      summary: 7.1 Overdues
+      description: ''
+      operationId: get_CustomerOverdues_CustomerId_customerId
+      tags:
+        - 7. Customer Overdues
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 7.3 Adjust overdues
+      description: ''
+      operationId: patch_CustomerOverdues_CustomerId_customerId
+      tags:
+        - 7. Customer Overdues
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /CustomerOverdues:
+    post:
+      summary: 7.2 Create overdues
+      description: ''
+      operationId: post_CustomerOverdues
+      tags:
+        - 7. Customer Overdues
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}

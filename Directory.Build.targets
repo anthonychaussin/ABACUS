@@ -1,0 +1,76 @@
+<Project>
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')">
+    <Compile Remove="$(MSBuildProjectDirectory)\Generated\*.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')">
+    <OpenApiReference Include="$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml">
+      <CodeGenerator>NSwagCSharp</CodeGenerator>
+      <Namespace>$(RootNamespace)</Namespace>
+      <OutputPath Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\ABACUS.FieldinformationClient.g.cs</OutputPath>
+      <OutputPath Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\$(MSBuildProjectName)Client.g.cs</OutputPath>
+      <Options>/OperationGenerationMode:SingleClientFromOperationId /GenerateOptionalPropertiesAsNullable:true /GenerateNullableReferenceTypes:true /GenerateExceptionClasses:true</Options>
+    </OpenApiReference>
+  </ItemGroup>
+
+  <Target Name="GenerateAbacusOpenApiClientAlias"
+          BeforeTargets="CoreCompile"
+          Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')">
+    <PropertyGroup>
+      <_AbacusExpectedClientClass Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">ABACUS_FieldinformationClient</_AbacusExpectedClientClass>
+      <_AbacusExpectedClientClass Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$([System.String]::Copy('$(MSBuildProjectName)').Replace('.', '_'))Client</_AbacusExpectedClientClass>
+      <_AbacusAliasFile>$(IntermediateOutputPath)Generated\AbacusClientAlias.g.cs</_AbacusAliasFile>
+      <_AbacusApiExceptionFile>$(IntermediateOutputPath)Generated\AbacusApiException.g.cs</_AbacusApiExceptionFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <_AbacusAliasLines Include="namespace $(RootNamespace)" />
+      <_AbacusAliasLines Include="{" />
+      <_AbacusAliasLines Include="    public partial class $(_AbacusExpectedClientClass) : $(_AbacusExpectedClientClass)_g" />
+      <_AbacusAliasLines Include="    {" />
+      <_AbacusAliasLines Include="        public $(_AbacusExpectedClientClass)(System.Net.Http.HttpClient httpClient) : base(httpClient)" />
+      <_AbacusAliasLines Include="        {" />
+      <_AbacusAliasLines Include="        }" />
+      <_AbacusAliasLines Include="    }" />
+      <_AbacusAliasLines Include="}" />
+    </ItemGroup>
+
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(_AbacusAliasFile)'))" />
+    <WriteLinesToFile File="$(_AbacusAliasFile)" Lines="@(_AbacusAliasLines)" Overwrite="true" />
+
+    <ItemGroup>
+      <_AbacusApiExceptionLines Include="namespace $(RootNamespace)" />
+      <_AbacusApiExceptionLines Include="{" />
+      <_AbacusApiExceptionLines Include="    public partial class ApiException : System.Exception" />
+      <_AbacusApiExceptionLines Include="    {" />
+      <_AbacusApiExceptionLines Include="        public int StatusCode { get%3B private set%3B }" />
+      <_AbacusApiExceptionLines Include="        public string Response { get%3B private set%3B }" />
+      <_AbacusApiExceptionLines Include="        public System.Collections.Generic.IReadOnlyDictionary&lt;string, System.Collections.Generic.IEnumerable&lt;string&gt;&gt; Headers { get%3B private set%3B }" />
+      <_AbacusApiExceptionLines Include="        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary&lt;string, System.Collections.Generic.IEnumerable&lt;string&gt;&gt; headers, System.Exception innerException)" />
+      <_AbacusApiExceptionLines Include="            : base(message + &quot;&#92;n&#92;nStatus: &quot; + statusCode + &quot;&#92;nResponse: &#92;n&quot; + ((response == null) ? &quot;(null)&quot; : response.Substring(0, response.Length &gt;= 512 ? 512 : response.Length)), innerException)" />
+      <_AbacusApiExceptionLines Include="        {" />
+      <_AbacusApiExceptionLines Include="            StatusCode = statusCode%3B" />
+      <_AbacusApiExceptionLines Include="            Response = response%3B" />
+      <_AbacusApiExceptionLines Include="            Headers = headers%3B" />
+      <_AbacusApiExceptionLines Include="        }" />
+      <_AbacusApiExceptionLines Include="    }" />
+      <_AbacusApiExceptionLines Include="    public partial class ApiException&lt;TResult&gt; : ApiException" />
+      <_AbacusApiExceptionLines Include="    {" />
+      <_AbacusApiExceptionLines Include="        public TResult Result { get%3B private set%3B }" />
+      <_AbacusApiExceptionLines Include="        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary&lt;string, System.Collections.Generic.IEnumerable&lt;string&gt;&gt; headers, TResult result, System.Exception innerException)" />
+      <_AbacusApiExceptionLines Include="            : base(message, statusCode, response, headers, innerException)" />
+      <_AbacusApiExceptionLines Include="        {" />
+      <_AbacusApiExceptionLines Include="            Result = result%3B" />
+      <_AbacusApiExceptionLines Include="        }" />
+      <_AbacusApiExceptionLines Include="    }" />
+      <_AbacusApiExceptionLines Include="}" />
+    </ItemGroup>
+
+    <WriteLinesToFile File="$(_AbacusApiExceptionFile)" Lines="@(_AbacusApiExceptionLines)" Overwrite="true" />
+
+    <ItemGroup>
+      <Compile Include="$(_AbacusAliasFile)" Visible="false" />
+      <Compile Include="$(_AbacusApiExceptionFile)" Visible="false" />
+    </ItemGroup>
+  </Target>
+</Project>

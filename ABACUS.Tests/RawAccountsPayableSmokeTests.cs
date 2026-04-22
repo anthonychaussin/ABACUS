@@ -16,7 +16,7 @@ public sealed class RawAccountsPayableSmokeTests
 
         var module = new AccountsPayableClient(httpClient);
 
-        await module.Raw.GetSuppliers11AllSuppliersAsync();
+        await module.Raw.Get_SuppliersAsync();
 
         var request = Assert.Single(handler.Requests);
         Assert.Equal(HttpMethod.Get, request.Method);

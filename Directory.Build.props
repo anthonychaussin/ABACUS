@@ -20,11 +20,15 @@
     <Authors>ABACUS</Authors>
     <Company>ABACUS</Company>
     <PackageProjectUrl>https://TODO-REPLACE.invalid/abacus-dotnet-sdk</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile Condition="Exists('$(MSBuildProjectDirectory)\README.md') or Exists('$(MSBuildThisFileDirectory)README.md')">README.md</PackageReadmeFile>
     <PackageTags>abacus;abacus-sdk;dotnet;api-client</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(IsPackable)' == 'true' and Exists('$(MSBuildThisFileDirectory)README.md')">
+  <ItemGroup Condition="'$(IsPackable)' == 'true' and Exists('$(MSBuildProjectDirectory)\README.md')">
+    <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="\" Link="README.md" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true' and !Exists('$(MSBuildProjectDirectory)\README.md') and Exists('$(MSBuildThisFileDirectory)README.md')">
     <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Link="README.md" />
   </ItemGroup>
 
@@ -35,5 +39,10 @@
   <ItemGroup Condition="'$(IsPackable)' == 'true' and Exists('$(MSBuildThisFileDirectory).git')">
     <PackageReference Include="Microsoft.Build.Tasks.Git" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')">
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="10.0.0" PrivateAssets="All" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2" PrivateAssets="All" />
   </ItemGroup>
 </Project>

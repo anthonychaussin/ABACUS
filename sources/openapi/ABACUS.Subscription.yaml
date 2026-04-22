@@ -1,0 +1,278 @@
+﻿openapi: 3.0.0
+info:
+  title: Subscription
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /subscriptions:
+    get:
+      summary: Subscriptions
+      description: ''
+      operationId: get_subscriptions
+      tags:
+        - Subscription
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /subscribe/{id}/Subject:
+    post:
+      summary: Subscribe
+      description: ''
+      operationId: post_subscribe_id_Subject
+      tags:
+        - Subscription
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /unsubscribe/{id}/Subject:
+    post:
+      summary: Unsubscribe
+      description: ''
+      operationId: post_unsubscribe_id_Subject
+      tags:
+        - Subscription
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /consume/{id}:
+    get:
+      summary: Consume
+      description: ''
+      operationId: get_consume_id
+      tags:
+        - Subscription
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /acknowledge/{id}/{ackId}:
+    post:
+      summary: Acknowledge
+      description: ''
+      operationId: post_acknowledge_id_ackId
+      tags:
+        - Subscription
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: ackId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Subscriptions:
+    get:
+      summary: Subscriptions
+      description: ''
+      operationId: get_Subscriptions_Odata
+      tags:
+        - SubscriptionOdata
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /SubscribeChanges:
+    post:
+      summary: SubscribemehrereTopics
+      description: ''
+      operationId: post_SubscribeChanges
+      tags:
+        - SubscriptionOdata
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Subscriptions({id})/ch.abacus.df.UnsubscribeChanges:
+    post:
+      summary: Unsubscribe
+      description: ''
+      operationId: post_Subscriptions_id_ch_abacus_df_UnsubscribeChanges
+      tags:
+        - SubscriptionOdata
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Subscriptions({id})/ch.abacus.df.ConsumeChanges({consumeId}):
+    get:
+      summary: Consume
+      description: ''
+      operationId: get_Subscriptions_id_ch_abacus_df_ConsumeChanges_consumeId
+      tags:
+        - SubscriptionOdata
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: consumeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Subscriptions({id})/ch.abacus.df.AcknowledgeChanges:
+    post:
+      summary: Acknowledge
+      description: ''
+      operationId: post_Subscriptions_id_ch_abacus_df_AcknowledgeChanges
+      tags:
+        - SubscriptionOdata
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Subscriptions({id}):
+    get:
+      summary: SubscriptionsSpezifisch
+      description: ''
+      operationId: get_Subscriptions_id
+      tags:
+        - SubscriptionOdata
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /TopicFullSync:
+    post:
+      summary: FullSync
+      description: ''
+      operationId: post_TopicFullSync
+      tags:
+        - SubscriptionOdata
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /$metadata:
+    get:
+      summary: Metadata
+      description: ''
+      operationId: get_metadata
+      tags:
+        - Subscription
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error

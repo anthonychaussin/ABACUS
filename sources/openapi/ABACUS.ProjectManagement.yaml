@@ -1,0 +1,2226 @@
+﻿openapi: 3.0.0
+info:
+  title: ProjectManagement
+  version: 1.0.0
+  description: ''
+servers:
+  - url: http://localhost
+paths:
+  /Projects:
+    get:
+      summary: 1.4 Show all projects with customerID 15
+      description: ''
+      operationId: get_Projects
+      tags:
+        - 1 Projects
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 1.7 Create a new project with userfields
+      description: ''
+      operationId: post_Projects
+      tags:
+        - 1 Projects
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Projects(Id={id}):
+    patch:
+      summary: 1.8 Change the name and the internal contact person of the project
+      description: ''
+      operationId: patch_Projects_Id_id
+      tags:
+        - 1 Projects
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: Projects
+      description: ''
+      operationId: delete_Projects_Id_id
+      tags:
+        - 1 Projects
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Projects({id}):
+    get:
+      summary: 1.2 Show a specific project
+      description: ''
+      operationId: get_Projects_id
+      tags:
+        - 1 Projects
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectTeams:
+    get:
+      summary: 2.2 Get all project teams orderd by project number
+      description: ''
+      operationId: get_ProjectTeams
+      tags:
+        - 2 ProjectTeams
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 2.4 Define a new team with different groups
+      description: ''
+      operationId: post_ProjectTeams
+      tags:
+        - 2 ProjectTeams
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectTeams({id}):
+    patch:
+      summary: 2.5 Change the group for an employee
+      description: ''
+      operationId: patch_ProjectTeams_id
+      tags:
+        - 2 ProjectTeams
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 2.6 Delete an employee from a team
+      description: ''
+      operationId: delete_ProjectTeams_id
+      tags:
+        - 2 ProjectTeams
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PersonnelPlannings:
+    get:
+      summary: 3.3 Order services based on project number
+      description: ''
+      operationId: get_PersonnelPlannings
+      tags:
+        - 3 PersonnelPlannings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 3.5 Define a new service and change times
+      description: ''
+      operationId: post_PersonnelPlannings
+      tags:
+        - 3 PersonnelPlannings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /PersonnelPlannings({id}):
+    get:
+      summary: 3.1 Get a specific service
+      description: ''
+      operationId: get_PersonnelPlannings_id
+      tags:
+        - 3 PersonnelPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /PersonnelPlannings({id}):
+    patch:
+      summary: 3.6 Change project number
+      description: ''
+      operationId: patch_PersonnelPlannings_id
+      tags:
+        - 3 PersonnelPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 3.7 Delete a service
+      description: ''
+      operationId: delete_PersonnelPlannings_id
+      tags:
+        - 3 PersonnelPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetPlannings:
+    get:
+      summary: 4.3 Order services by project number
+      description: ''
+      operationId: get_AssetPlannings
+      tags:
+        - 4 AssetPlannings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 4.5 Define a new service and change times
+      description: ''
+      operationId: post_AssetPlannings
+      tags:
+        - 4 AssetPlannings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /AssetPlannings({id}):
+    get:
+      summary: 4.1 Get a specific service
+      description: ''
+      operationId: get_AssetPlannings_id
+      tags:
+        - 4 AssetPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetPlannings({id}):
+    patch:
+      summary: 4.6 Change project number for a service
+      description: ''
+      operationId: patch_AssetPlannings_id
+      tags:
+        - 4 AssetPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 4.7 Delete a service
+      description: ''
+      operationId: delete_AssetPlannings_id
+      tags:
+        - 4 AssetPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /MonthlyPlannings:
+    get:
+      summary: 5.3 Get the plannings orderd by project no.
+      description: ''
+      operationId: get_MonthlyPlannings
+      tags:
+        - 5 MonthlyPlannings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 5.4 Define new plannings
+      description: ''
+      operationId: post_MonthlyPlannings
+      tags:
+        - 5 MonthlyPlannings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    patch:
+      summary: 5.5 Change a planning
+      description: ''
+      operationId: patch_MonthlyPlannings
+      tags:
+        - 5 MonthlyPlannings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /MonthlyPlannings({id}):
+    get:
+      summary: 5.1 Get a specific planning
+      description: ''
+      operationId: get_MonthlyPlannings_id
+      tags:
+        - 5 MonthlyPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 5.6 Delete a planning element
+      description: ''
+      operationId: delete_MonthlyPlannings_id
+      tags:
+        - 5 MonthlyPlannings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /MonthlyPlanningElements:
+    get:
+      summary: 6.3 Get plannings orderd by elements
+      description: ''
+      operationId: get_MonthlyPlanningElements
+      tags:
+        - 6 MonthlyPlanningElements
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 6.5 Define a new planning and add prices
+      description: ''
+      operationId: post_MonthlyPlanningElements
+      tags:
+        - 6 MonthlyPlanningElements
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /MonthlyPlanningElements({id}):
+    get:
+      summary: 6.1  Get all plannings from a specific element
+      description: ''
+      operationId: get_MonthlyPlanningElements_id
+      tags:
+        - 6 MonthlyPlanningElements
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /MonthlyPlanningElements({id}):
+    patch:
+      summary: 6.6 Change the amount of hours
+      description: ''
+      operationId: patch_MonthlyPlanningElements_id
+      tags:
+        - 6 MonthlyPlanningElements
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 6.7 Delete a planning
+      description: ''
+      operationId: delete_MonthlyPlanningElements_id
+      tags:
+        - 6 MonthlyPlanningElements
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /InvoiceCodes:
+    get:
+      summary: 7.2 Filter a specific invoice code
+      description: ''
+      operationId: get_InvoiceCodes
+      tags:
+        - 7 InvoiceCodes
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 7.3 Define a new invoice code
+      description: ''
+      operationId: post_InvoiceCodes
+      tags:
+        - 7 InvoiceCodes
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /InvoiceCodes({id}):
+    get:
+      summary: 7.1 Get a specific invoice code
+      description: ''
+      operationId: get_InvoiceCodes_id
+      tags:
+        - 7 InvoiceCodes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 7.4 Change the name of an invoice code
+      description: ''
+      operationId: patch_InvoiceCodes_id
+      tags:
+        - 7 InvoiceCodes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /InvoiceCodes({id}):
+    delete:
+      summary: 7.5 Delete an invoice code
+      description: ''
+      operationId: delete_InvoiceCodes_id
+      tags:
+        - 7 InvoiceCodes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ServiceCodes:
+    get:
+      summary: 8.2 Order service codes by number
+      description: ''
+      operationId: get_ServiceCodes
+      tags:
+        - 8 ServiceCodes
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 8.4 Define a new service code
+      description: ''
+      operationId: post_ServiceCodes
+      tags:
+        - 8 ServiceCodes
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ServiceCodes({id}):
+    get:
+      summary: 8.1 Get a specific service code
+      description: ''
+      operationId: get_ServiceCodes_id
+      tags:
+        - 8 ServiceCodes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ServiceCodes({id})/ServiceCodeAllowedActions:
+    get:
+      summary: 8.3 Get all "allowed actions" from a service code
+      description: ''
+      operationId: get_ServiceCodes_id_ServiceCodeAllowedActions
+      tags:
+        - 8 ServiceCodes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ServiceCodes({id}):
+    patch:
+      summary: 8.5 Change the allowed actions from a service code
+      description: ''
+      operationId: patch_ServiceCodes_id
+      tags:
+        - 8 ServiceCodes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 8.6 Delte a service code
+      description: ''
+      operationId: delete_ServiceCodes_id
+      tags:
+        - 8 ServiceCodes
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateEmployees:
+    get:
+      summary: 9.2 Order rates by employee id
+      description: ''
+      operationId: get_ProjectRateEmployees
+      tags:
+        - 9 ProjectRateEmployees
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 9.3 Define a new rate
+      description: ''
+      operationId: post_ProjectRateEmployees
+      tags:
+        - 9 ProjectRateEmployees
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateEmployees(EmployeeId={employeeId},CurrencyId='{currencyId}',ServiceCodeId={serviceCodeId},TariffId={tariffId},Date={date}):
+    get:
+      summary: 9.1 Get a rate from an specific employee
+      description: ''
+      operationId: get_ProjectRateEmployees_EmployeeId_employeeId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_Tar
+      tags:
+        - 9 ProjectRateEmployees
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateEmployees(EmployeeId={employeeId},CurrencyId='{currencyId}',ServiceCodeId={serviceCodeId},TariffId={tariffId},Date={date}):
+    patch:
+      summary: 9.4  Edit rate
+      description: ''
+      operationId: patch_ProjectRateEmployees_EmployeeId_employeeId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_T
+      tags:
+        - 9 ProjectRateEmployees
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 9.5 Delete rate
+      description: ''
+      operationId: delete_ProjectRateEmployees_EmployeeId_employeeId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId
+      tags:
+        - 9 ProjectRateEmployees
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateAssets:
+    get:
+      summary: 10.2 Order rates by assets
+      description: ''
+      operationId: get_ProjectRateAssets
+      tags:
+        - 10 ProjectRateAssets
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 10.3 Define a new rate for an asset
+      description: ''
+      operationId: post_ProjectRateAssets
+      tags:
+        - 10 ProjectRateAssets
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateAssets(AssetId={assetId},CurrencyId='{currencyId}',ServiceCodeId={serviceCodeId},TariffId={tariffId},Date={date}):
+    get:
+      summary: 10.1 Get a rate from a specific asset
+      description: ''
+      operationId: get_ProjectRateAssets_AssetId_assetId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_TariffId_tar
+      tags:
+        - 10 ProjectRateAssets
+      parameters:
+        - in: path
+          name: a
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 10.4 Change the rate of an asset
+      description: ''
+      operationId: patch_ProjectRateAssets_AssetId_assetId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_TariffId_t
+      tags:
+        - 10 ProjectRateAssets
+      parameters:
+        - in: path
+          name: a
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 10.5 Delete a rate
+      description: ''
+      operationId: delete_ProjectRateAssets_AssetId_assetId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_TariffId
+      tags:
+        - 10 ProjectRateAssets
+      parameters:
+        - in: path
+          name: a
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateProjects:
+    get:
+      summary: 11.2 Order rates by projects
+      description: ''
+      operationId: get_ProjectRateProjects
+      tags:
+        - 11 ProjectRateProjects
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 11.3 Define a new rate
+      description: ''
+      operationId: post_ProjectRateProjects
+      tags:
+        - 11 ProjectRateProjects
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateProjects(ProjectId={projectId},CurrencyId='{currencyId}',ServiceCodeId={serviceCodeId},TarifId={tarifId},Date={date}):
+    get:
+      summary: 11.1 Get all rates from a specific project
+      description: ''
+      operationId: get_ProjectRateProjects_ProjectId_projectId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_TarifI
+      tags:
+        - 11 ProjectRateProjects
+      parameters:
+        - in: path
+          name: p
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 11.4 Edit the rates of project
+      description: ''
+      operationId: patch_ProjectRateProjects_ProjectId_projectId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_Tari
+      tags:
+        - 11 ProjectRateProjects
+      parameters:
+        - in: path
+          name: p
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 11.5 Delete a rate
+      description: ''
+      operationId: delete_ProjectRateProjects_ProjectId_projectId_CurrencyId_currencyId_ServiceCodeId_serviceCodeId_Tar
+      tags:
+        - 11 ProjectRateProjects
+      parameters:
+        - in: path
+          name: p
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateCostCentres:
+    get:
+      summary: 12.2 Order rates by cost centre
+      description: ''
+      operationId: get_ProjectRateCostCentres
+      tags:
+        - 12 ProjectRateCostCentres
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 12.3 Define a new rate
+      description: ''
+      operationId: post_ProjectRateCostCentres
+      tags:
+        - 12 ProjectRateCostCentres
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateCostCentres(CostCentreId={costCentreId},CurrencyId='{currencyId}',ServiceCodeId={serviceCodeId},TariffId={tariffId},Date={date}):
+    get:
+      summary: 12.1 Get rates from a specific cost centre
+      description: ''
+      operationId: get_ProjectRateCostCentres_CostCentreId_costCentreId_CurrencyId_currencyId_ServiceCodeId_serviceCode
+      tags:
+        - 12 ProjectRateCostCentres
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 12.3 Change the rate
+      description: ''
+      operationId: patch_ProjectRateCostCentres_CostCentreId_costCentreId_CurrencyId_currencyId_ServiceCodeId_serviceCo
+      tags:
+        - 12 ProjectRateCostCentres
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 12.3 Delete the rate
+      description: ''
+      operationId: delete_ProjectRateCostCentres_CostCentreId_costCentreId_CurrencyId_currencyId_ServiceCodeId_serviceC
+      tags:
+        - 12 ProjectRateCostCentres
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateCustomers:
+    get:
+      summary: 13.2 Order by customer id
+      description: ''
+      operationId: get_ProjectRateCustomers
+      tags:
+        - 13 ProjectRateCustomers
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 13.3 Create a new rate
+      description: ''
+      operationId: post_ProjectRateCustomers
+      tags:
+        - 13 ProjectRateCustomers
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateCustomers(CustomerSubjectId={customerSubjectId},CurrencyId='{currencyId}',ServiceCodeId={serviceCodeId},TariffId={tariffId},Date={date}):
+    get:
+      summary: 13.1 Get a specific rate
+      description: ''
+      operationId: get_ProjectRateCustomers_CustomerSubjectId_customerSubjectId_CurrencyId_currencyId_ServiceCodeId_ser
+      tags:
+        - 13 ProjectRateCustomers
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 13.4 Change the rates
+      description: ''
+      operationId: patch_ProjectRateCustomers_CustomerSubjectId_customerSubjectId_CurrencyId_currencyId_ServiceCodeId_s
+      tags:
+        - 13 ProjectRateCustomers
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 13.5 Delete a rate
+      description: ''
+      operationId: delete_ProjectRateCustomers_CustomerSubjectId_customerSubjectId_CurrencyId_currencyId_ServiceCodeId
+      tags:
+        - 13 ProjectRateCustomers
+      parameters:
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateEmployeeGroups:
+    get:
+      summary: 14.2 Order by groups
+      description: ''
+      operationId: get_ProjectRateEmployeeGroups
+      tags:
+        - 14 ProjectRateEmployeeGroups
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 14.3 Create a new rate
+      description: ''
+      operationId: post_ProjectRateEmployeeGroups
+      tags:
+        - 14 ProjectRateEmployeeGroups
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateEmployeeGroups(EmployeeGroupId={employeeGroupId},ServiceCodeId={serviceCodeId},TariffId={tariffId},CurrencyId='{currencyId}',Date={date}):
+    get:
+      summary: 14.1 Get rates from a specific group
+      description: ''
+      operationId: get_ProjectRateEmployeeGroups_EmployeeGroupId_employeeGroupId_ServiceCodeId_serviceCodeId_TariffId_t
+      tags:
+        - 14 ProjectRateEmployeeGroups
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 14.4 Change rates
+      description: ''
+      operationId: patch_ProjectRateEmployeeGroups_EmployeeGroupId_employeeGroupId_ServiceCodeId_serviceCodeId_TariffId
+      tags:
+        - 14 ProjectRateEmployeeGroups
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 14.5 Delete rates
+      description: ''
+      operationId: delete_ProjectRateEmployeeGroups_EmployeeGroupId_employeeGroupId_ServiceCodeId_serviceCodeId_TariffI
+      tags:
+        - 14 ProjectRateEmployeeGroups
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateEmployeeProfiles:
+    get:
+      summary: 15.2 Order rates by profiles
+      description: ''
+      operationId: get_ProjectRateEmployeeProfiles
+      tags:
+        - 15 ProjectRateEmployeeProfiles
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 15.3 Create a new rate
+      description: ''
+      operationId: post_ProjectRateEmployeeProfiles
+      tags:
+        - 15 ProjectRateEmployeeProfiles
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateEmployeeProfiles(EmployeeProfileId={employeeProfileId},ServiceCodeId={serviceCodeId},TariffId={tariffId},CurrencyId='{currencyId}',Date={date}):
+    patch:
+      summary: 15.4 Change rates of a profile
+      description: ''
+      operationId: patch_ProjectRateEmployeeProfiles_EmployeeProfileId_employeeProfileId_ServiceCodeId_serviceCodeId_Ta
+      tags:
+        - 15 ProjectRateEmployeeProfiles
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 15.5 Delete a rate
+      description: ''
+      operationId: delete_ProjectRateEmployeeProfiles_EmployeeProfileId_employeeProfileId_ServiceCodeId_serviceCodeId_T
+      tags:
+        - 15 ProjectRateEmployeeProfiles
+      parameters:
+        - in: path
+          name: e
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectRateInvoiceCodes:
+    get:
+      summary: 16.2 Order rates
+      description: ''
+      operationId: get_ProjectRateInvoiceCodes
+      tags:
+        - 16 ProjectRateInvoiceCodes
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 16.3 Create a new rate
+      description: ''
+      operationId: post_ProjectRateInvoiceCodes
+      tags:
+        - 16 ProjectRateInvoiceCodes
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectRateInvoiceCodes(InvoiceCodeId={invoiceCodeId},ServiceCodeId={serviceCodeId},TariffId={tariffId},CurrencyId='{currencyId}',Date={date}):
+    patch:
+      summary: 16.4 Change rates
+      description: ''
+      operationId: patch_ProjectRateInvoiceCodes_InvoiceCodeId_invoiceCodeId_ServiceCodeId_serviceCodeId_TariffId_tarif
+      tags:
+        - 16 ProjectRateInvoiceCodes
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 16.5 Delete a rate
+      description: ''
+      operationId: delete_ProjectRateInvoiceCodes_InvoiceCodeId_invoiceCodeId_ServiceCodeId_serviceCodeId_TariffId_tari
+      tags:
+        - 16 ProjectRateInvoiceCodes
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: s
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: t
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: c
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: d
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectBookings:
+    get:
+      summary: 17.0 Get all Bookings
+      description: ''
+      operationId: get_ProjectBookings
+      tags:
+        - 17 ProjectBookings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 17.2 Create a new booking
+      description: ''
+      operationId: post_ProjectBookings
+      tags:
+        - 17 ProjectBookings
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectBookings({id}):
+    get:
+      summary: 17.1 Get a specific booking
+      description: ''
+      operationId: get_ProjectBookings_id
+      tags:
+        - 17 ProjectBookings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 17.3 Change the booking
+      description: ''
+      operationId: patch_ProjectBookings_id
+      tags:
+        - 17 ProjectBookings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 17.4 Delete a booking
+      description: ''
+      operationId: delete_ProjectBookings_id
+      tags:
+        - 17 ProjectBookings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectBookingsDocuments:
+    get:
+      summary: 18.0 Get documents
+      description: ''
+      operationId: get_ProjectBookingsDocuments
+      tags:
+        - 18 ProjectBookingsDocuments
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 18.2 Create a new document
+      description: ''
+      operationId: post_ProjectBookingsDocuments
+      tags:
+        - 18 ProjectBookingsDocuments
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectBookingsDocuments({id}):
+    get:
+      summary: 18.1 Get a specific document
+      description: ''
+      operationId: get_ProjectBookingsDocuments_id
+      tags:
+        - 18 ProjectBookingsDocuments
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 18.4 Delete a document
+      description: ''
+      operationId: delete_ProjectBookingsDocuments_id
+      tags:
+        - 18 ProjectBookingsDocuments
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ProjectDocuments({id}):
+    patch:
+      summary: 18.3 Change the name of a document
+      description: ''
+      operationId: patch_ProjectDocuments_id
+      tags:
+        - 18 ProjectBookingsDocuments
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectDocuments:
+    get:
+      summary: 19.0 Get documents
+      description: ''
+      operationId: get_ProjectDocuments
+      tags:
+        - 19 ProjectDocuments
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 19.2 Create a new document
+      description: ''
+      operationId: post_ProjectDocuments
+      tags:
+        - 19 ProjectDocuments
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /ProjectDocuments({id}):
+    get:
+      summary: 19.1 Get a specific document
+      description: ''
+      operationId: get_ProjectDocuments_id
+      tags:
+        - 19 ProjectDocuments
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: 19.3 Change name of a document
+      description: ''
+      operationId: patch_ProjectDocuments_id_2
+      tags:
+        - 19 ProjectDocuments
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    delete:
+      summary: 19.4 Delete a document
+      description: ''
+      operationId: delete_ProjectDocuments_id
+      tags:
+        - 19 ProjectDocuments
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
