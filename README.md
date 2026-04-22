@@ -1,12 +1,35 @@
 # ABACUS
 
-Ce depot contient un SDK .NET decoupe par domaines fonctionnels ABACUS.
+SDK .NET modulaire pour l'API ABACUS.
 
-L'idee est simple : un projet par module metier. Chaque dossier a maintenant son propre `README.md` qui explique ce que couvre le module, sans rentrer dans le detail du workflow du repo.
+Le depot est organise par domaines metier. Chaque module embarque son client propre et depend de `ABACUS.CORE` pour la configuration HTTP, l'authentification et la gestion des erreurs.
+
+## Installation
+
+Depuis un feed NuGet :
+
+```bash
+dotnet add package AbacusBusinessSoftware.Core
+dotnet add package AbacusBusinessSoftware.AccountsPayable
+```
+
+Depuis le code source du depot, reference `ABACUS.CORE` puis le module voulu.
+
+## Demarrage rapide
+
+Le guide de demarrage couvre :
+
+- la creation de `AbacusClientOptions`
+- l'usage de `AbacusHttpClientFactory`
+- l'authentification via `BearerTokenAuthenticationProvider`
+- l'instanciation d'un module
+- les limites actuelles du SDK
+
+Voir [docs/getting-started.md](docs/getting-started.md).
 
 ## Modules
 
-- `ABACUS.CORE` : base commune du SDK.
+- `ABACUS.CORE` : configuration commune, auth, HTTP et erreurs.
 - `ABACUS.AccountsPayable` : comptabilite fournisseurs.
 - `ABACUS.AccountsReceivable` : comptabilite clients.
 - `ABACUS.AssetsLedger` : gestion des immobilisations.
@@ -21,10 +44,9 @@ L'idee est simple : un projet par module metier. Chaque dossier a maintenant son
 - `ABACUS.RealEstate` : gestion immobiliere.
 - `ABACUS.Salary` : paie et donnees salariales.
 - `ABACUS.Subscription` : abonnements aux changements et consommation d'evenements.
-- `ABACUS.Tests` : verification minimale du SDK.
 - `ABACUS.UserDependentAuth` : autorisations liees a l'utilisateur.
 - `ABACUS.WebShop` : comptes acheteurs et flux webshop.
 
-## Lecture
+## Etat actuel
 
-Si tu veux comprendre un projet, ouvre directement le `README.md` du dossier concerne : il decrit ce que fait le module et les objets metier qu'il manipule.
+Le depot compile et fournit une base exploitable, mais la couche SDK reste partielle sur plusieurs modules. Lis le guide de demarrage avant d'integrer un module en production.

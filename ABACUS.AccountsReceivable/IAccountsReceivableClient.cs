@@ -11,4 +11,19 @@ public interface IAccountsReceivableClient : IAbacusModuleClient
     /// Underlying generated client for advanced or not-yet-wrapped endpoints.
     /// </summary>
     ABACUS_AccountsReceivableClient Raw { get; }
+
+    /// <summary>
+    /// Lists all customers.
+    /// </summary>
+    Task ListCustomersAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets a specific customer by identifier.
+    /// </summary>
+    Task GetCustomerAsync(int customerId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes a specific customer by identifier.
+    /// </summary>
+    Task DeleteCustomerAsync(int customerId, CancellationToken cancellationToken = default);
 }

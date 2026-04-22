@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
     <ProjectReference Include="..\ABACUS.AccountsPayable\ABACUS.AccountsPayable.csproj" />
+    <ProjectReference Include="..\ABACUS.AccountsReceivable\ABACUS.AccountsReceivable.csproj" />
     <ProjectReference Include="..\ABACUS.RealEstate\ABACUS.RealEstate.csproj" />
   </ItemGroup>
 
