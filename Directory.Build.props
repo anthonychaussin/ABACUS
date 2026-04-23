@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>latestMajor</LangVersion>
 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Deterministic>true</Deterministic>
@@ -15,11 +15,12 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://TODO-REPLACE.invalid/abacus-dotnet-sdk</RepositoryUrl>
+    <RepositoryUrl>https://github.com/anthonychaussin/ABACUS</RepositoryUrl>
+    <RepositoryBranch>master</RepositoryBranch>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Authors>ABACUS</Authors>
     <Company>ABACUS</Company>
-    <PackageProjectUrl>https://TODO-REPLACE.invalid/abacus-dotnet-sdk</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/anthonychaussin/ABACUS</PackageProjectUrl>
     <PackageReadmeFile Condition="Exists('$(MSBuildProjectDirectory)\README.md') or Exists('$(MSBuildThisFileDirectory)README.md')">README.md</PackageReadmeFile>
     <PackageTags>abacus;abacus-sdk;dotnet;api-client</PackageTags>
   </PropertyGroup>
@@ -42,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')">
-    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="10.0.0" PrivateAssets="All" />
     <PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2" PrivateAssets="All" />
   </ItemGroup>
 </Project>
