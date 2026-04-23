@@ -7,6 +7,8 @@
     <OpenApiReference Include="$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml">
       <CodeGenerator>NSwagCSharp</CodeGenerator>
       <Namespace>$(RootNamespace)</Namespace>
+      <ClassName Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">ABACUS_FieldinformationClient_g</ClassName>
+      <ClassName Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$([System.String]::Copy('$(MSBuildProjectName)').Replace('.', '_'))Client_g</ClassName>
       <OutputPath Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\ABACUS.FieldinformationClient.g.cs</OutputPath>
       <OutputPath Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\$(MSBuildProjectName)Client.g.cs</OutputPath>
       <Options>/OperationGenerationMode:SingleClientFromOperationId /GenerateOptionalPropertiesAsNullable:true /GenerateNullableReferenceTypes:true /GenerateExceptionClasses:false</Options>
