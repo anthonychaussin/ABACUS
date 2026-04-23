@@ -11,7 +11,7 @@
       <ClassName Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$([System.String]::Copy('$(MSBuildProjectName)').Replace('.', '_'))Client_g</ClassName>
       <OutputPath Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\ABACUS.FieldinformationClient.g.cs</OutputPath>
       <OutputPath Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\$(MSBuildProjectName)Client.g.cs</OutputPath>
-      <Options>/OperationGenerationMode:SingleClientFromOperationId /GenerateOptionalPropertiesAsNullable:true /GenerateNullableReferenceTypes:true /GenerateExceptionClasses:false</Options>
+      <Options>/OperationGenerationMode:SingleClientFromOperationId /GenerateOptionalPropertiesAsNullable:true /GenerateNullableReferenceTypes:true /GenerateExceptionClasses:true</Options>
     </OpenApiReference>
   </ItemGroup>
 
