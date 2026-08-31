@@ -42,6 +42,7 @@ Voir [docs/getting-started.md](docs/getting-started.md).
 - `ABACUS.ProductionPlanning` : ressources et suivi de production.
 - `ABACUS.ProjectManagement` : projets, planification, tarifs et imputations.
 - `ABACUS.RealEstate` : gestion immobiliere.
+- `ABACUS.Reporting` : exports AbaReport asynchrones (API v1, formats V2025/V2026).
 - `ABACUS.Salary` : paie et donnees salariales.
 - `ABACUS.Subscription` : abonnements aux changements et consommation d'evenements.
 - `ABACUS.UserDependentAuth` : autorisations liees a l'utilisateur.

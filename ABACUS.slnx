@@ -12,6 +12,7 @@
   <Project Path="ABACUS.ProductionPlanning/ABACUS.ProductionPlanning.csproj" />
   <Project Path="ABACUS.ProjectManagement/ABACUS.ProjectManagement.csproj" />
   <Project Path="ABACUS.RealEstate/ABACUS.RealEstate.csproj" />
+  <Project Path="ABACUS.Reporting/ABACUS.Reporting.csproj" />
   <Project Path="ABACUS.Salary/ABACUS.Salary.csproj" />
   <Project Path="ABACUS.Subscription/ABACUS.Subscription.csproj" />
   <Project Path="ABACUS.Tests/ABACUS.Tests.csproj" />
