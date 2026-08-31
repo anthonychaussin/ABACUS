@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>AbacusBusinessSoftware.Reporting</PackageId>
+    <Description>ABACUS AbaReport REST API SDK module for .NET.</Description>
+    <AssemblyName>ABACUS.Reporting</AssemblyName>
+    <RootNamespace>ABACUS.Reporting</RootNamespace>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
+  </ItemGroup>
+</Project>
