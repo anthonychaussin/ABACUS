@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ABACUS.Core;
@@ -172,6 +173,89 @@ public static class AbacusServiceCollectionExtensions
 
         services.AddTransient<TClient>(CreateClient<TClient>);
         return services;
+    }
+
+    /// <summary>
+    /// Registers <see cref="IAbacusFieldMapper"/> from a fluent field mapping configuration.
+    /// </summary>
+    /// <param name="services">Service collection to update.</param>
+    /// <param name="configure">Delegate used to configure entity field maps.</param>
+    /// <returns>The same <paramref name="services"/> instance.</returns>
+    public static IServiceCollection AddAbacusFieldMapping(
+        this IServiceCollection services,
+        Action<AbacusFieldMappingBuilder> configure)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configure);
+
+        return AddAbacusFieldMapping(services, configure, configuration: null);
+    }
+
+    /// <summary>
+    /// Registers <see cref="IAbacusFieldMapper"/> from the <c>Abacus:FieldMaps</c> configuration section.
+    /// Configuration entries override any previously registered map for the same logical field.
+    /// </summary>
+    /// <param name="services">Service collection to update.</param>
+    /// <param name="configuration">Root configuration containing <c>Abacus:FieldMaps</c>.</param>
+    /// <returns>The same <paramref name="services"/> instance.</returns>
+    public static IServiceCollection AddAbacusFieldMapping(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+
+        return AddAbacusFieldMapping(services, configure: null, configuration);
+    }
+
+    /// <summary>
+    /// Registers <see cref="IAbacusFieldMapper"/> from fluent configuration and optional
+    /// <c>Abacus:FieldMaps</c> settings. Configuration wins field-by-field over the fluent map.
+    /// </summary>
+    /// <param name="services">Service collection to update.</param>
+    /// <param name="configure">Optional fluent configuration.</param>
+    /// <param name="configuration">Optional root configuration containing <c>Abacus:FieldMaps</c>.</param>
+    /// <returns>The same <paramref name="services"/> instance.</returns>
+    public static IServiceCollection AddAbacusFieldMapping(
+        this IServiceCollection services,
+        Action<AbacusFieldMappingBuilder>? configure,
+        IConfiguration? configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+
+        var builder = new AbacusFieldMappingBuilder();
+        configure?.Invoke(builder);
+
+        var mapping = builder.Build();
+        if (configuration is not null)
+        {
+            mapping.MergeFrom(ReadFieldMapsFromConfiguration(configuration));
+        }
+
+        services.AddSingleton(mapping);
+        services.AddSingleton<IAbacusFieldMapper, AbacusFieldMapper>();
+        return services;
+    }
+
+    private static AbacusFieldMapping ReadFieldMapsFromConfiguration(IConfiguration configuration)
+    {
+        var mapping = new AbacusFieldMapping();
+        var section = configuration.GetSection("Abacus:FieldMaps");
+
+        foreach (var entitySection in section.GetChildren())
+        {
+            foreach (var fieldSection in entitySection.GetChildren())
+            {
+                if (string.IsNullOrWhiteSpace(fieldSection.Value))
+                {
+                    continue;
+                }
+
+                mapping.SetField(entitySection.Key, fieldSection.Key, fieldSection.Value);
+            }
+        }
+
+        return mapping;
     }
 
     private static TClient CreateClient<TClient>(IServiceProvider serviceProvider)

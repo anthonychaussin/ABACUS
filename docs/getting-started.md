@@ -113,6 +113,61 @@ var realEstate = new RealEstateClient(httpClient);
 // await realEstate.Raw.SomeGeneratedMethodAsync(...);
 ```
 
+## 6. Mapper les champs (user fields inclus)
+
+Les payloads ABACUS sont souvent des objets ouverts : les noms de champs, surtout les user fields, dependent de l'installation. `IAbacusFieldMapper` convertit un modele metier en dictionnaire JSON pret a etre envoye au module.
+
+En code :
+
+```csharp
+services.AddAbacusFieldMapping(map => map
+    .Entity("Supplier")
+    .Field("Name", "Name")
+    .Field("VatNumber", "UserFields.UserField1")
+    .Field("City", "Address.City"));
+
+var mapper = serviceProvider.GetRequiredService<IAbacusFieldMapper>();
+var payload = mapper.ToPayload("Supplier", supplier);
+await accountsPayable.CreateSupplierAsync(payload);
+```
+
+Sans DI :
+
+```csharp
+var mapping = new AbacusFieldMappingBuilder()
+    .Entity("Supplier")
+    .Field("Name", "Name")
+    .Field("VatNumber", "UserFields.UserField1")
+    .Build();
+
+var mapper = new AbacusFieldMapper(mapping);
+var payload = mapper.ToPayload("Supplier", supplier);
+```
+
+Ou via configuration (`Abacus:FieldMaps`). Si fluent et config sont combines, la config gagne champ par champ :
+
+```json
+{
+  "Abacus": {
+    "FieldMaps": {
+      "Supplier": {
+        "Name": "Name",
+        "VatNumber": "UserFields.UserField1",
+        "City": "Address.City"
+      }
+    }
+  }
+}
+```
+
+```csharp
+services.AddAbacusFieldMapping(configuration);
+```
+
+L'attribut `[AbacusField("UserFields.UserField1")]` sur une propriete sert de defaut ; la map d'entite l'ecrase pour le meme nom logique. Les chemins pointes creent des objets imbriques. Les `null` et les proprietes non mappees sont omis (adapte au `PATCH`).
+
+`FromPayload` reconstruit un modele a partir d'un dictionnaire deja deserialise.
+
 ## Limites actuelles du SDK
 
 Le SDK est utilisable, mais il faut integrer avec prudence :
