@@ -82,6 +82,16 @@ public static class AbacusHttpClientFactory
             handler = new AbacusLoggingHandler(loggerFactory) { InnerHandler = handler };
         }
 
+        if (options.EnableOpenTelemetry)
+        {
+            handler = new AbacusTelemetryHandler { InnerHandler = handler };
+        }
+
+        if (options.EnableReadRetry)
+        {
+            handler = new AbacusReadRetryHandler(options.ReadRetryMaxAttempts) { InnerHandler = handler };
+        }
+
         var client = new HttpClient(handler);
         Configure(client, options);
         return client;

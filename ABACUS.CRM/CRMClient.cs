@@ -30,13 +30,19 @@ public sealed class CRMClient : ICRMClient
     public Task<ODataPage<JsonElement>> ListSubjectsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Subjects", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.ListAsync(_httpClient, "/Subjects", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<T>> ListSubjectsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/Subjects", query, cancellationToken);
 
     /// <inheritdoc />
     public IAsyncEnumerable<JsonElement> EnumerateSubjectsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/Subjects", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.EnumerateAsync(_httpClient, "/Subjects", query, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<JsonElement>> GetSubjectAsync(
@@ -60,6 +66,18 @@ public sealed class CRMClient : ICRMClient
     }
 
     /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateSubjectAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+        ArgumentNullException.ThrowIfNull(mapper);
+        return CreateSubjectAsync(mapper.ToPayload("Subject", model), prefer, cancellationToken);
+    }
+
+    /// <inheritdoc />
     public Task<AbacusResponse<string>> PatchSubjectAsync(
         string id,
         object payload,
@@ -75,6 +93,19 @@ public sealed class CRMClient : ICRMClient
             payload,
             prefer,
             cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchSubjectAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+        ArgumentNullException.ThrowIfNull(mapper);
+        return PatchSubjectAsync(id, mapper.ToPayload("Subject", model), prefer, cancellationToken);
     }
 
     /// <inheritdoc />

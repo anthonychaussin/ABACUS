@@ -2,7 +2,6 @@ using System.Net;
 using System.Text;
 using ABACUS.Core;
 using ABACUS.DossierFileUpload;
-using ABACUS.Tests.Testing;
 using ABACUS.UserDependentAuth;
 
 namespace ABACUS.Tests;

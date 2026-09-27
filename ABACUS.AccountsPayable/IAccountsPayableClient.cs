@@ -44,12 +44,38 @@ public interface IAccountsPayableClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Creates a supplier by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateSupplierAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Patches a supplier.
     /// </summary>
     Task<AbacusResponse<string>> PatchSupplierAsync(
         string id,
         object payload,
         string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches a supplier by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchSupplierAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists suppliers deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListSuppliersAsAsync<T>(
+        ODataQuery? query = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>

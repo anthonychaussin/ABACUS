@@ -10,6 +10,7 @@ dotnet add package AbacusBusinessSoftware.AccountsPayable
 ```
 
 Si tu travailles directement depuis ce depot, ajoute les `ProjectReference` equivalents.
+Exemples executables : [samples/](../samples/README.md).
 
 ## 2. Creer les options du client
 
@@ -97,7 +98,13 @@ using ABACUS.Core;
 var accountsPayable = new AccountsPayableClient(httpClient);
 
 var page = await accountsPayable.ListSuppliersAsync(
-    ODataQuery.Create().Top(50).Filter("Name eq 'Acme'"));
+    ODataQuery.Create()
+        .Top(50)
+        .Where(f => f.Equal("Name", "Acme")));
+
+// Liste typee (DTO minimal)
+var typed = await accountsPayable.ListSuppliersAsAsync<SupplierSummary>(
+    ODataQuery.Create().Top(50));
 
 await foreach (var supplier in accountsPayable.EnumerateSuppliersAsync())
 {
@@ -138,19 +145,22 @@ services.AddAbacusFieldMapping(map => map
     .Field("Name", "Name")
     .Field("VatNumber", "UserFields.UserField1"));
 
-var payload = mapper.ToPayload("Supplier", supplier);
-await accountsPayable.CreateSupplierAsync(payload);
+await accountsPayable.CreateSupplierAsync(supplier, mapper);
+await accountsPayable.PatchSupplierAsync(id, supplier, mapper);
 ```
+
+Details resilience / Prefer / OTel : [resilience.md](resilience.md), [observability.md](observability.md).
 
 ## Quotas Abacus (ordre de grandeur)
 
 Jusqu'a la version 2025 : ~200 req/min, 12k/h, 30k/j. A partir de 2026 : ~400 / 18k / 40k.
 Depassement = HTTP 429 (gere par `AbacusRateLimitHandler`). Une reponse liste au plus 100 lignes.
 
-Details : [resilience.md](resilience.md) (429 vs 5xx, Prefer, `$batch`, journalisation).
+Details : [resilience.md](resilience.md) (429 vs 5xx, Prefer, `$batch`, journalisation, erreurs OData).
+Observabilite : [observability.md](observability.md).
 
 ## Limites actuelles du SDK
 
-- Plusieurs modules exposent surtout `Raw` ; AP, Finance, CRM, Subscription ont des facades plus riches.
+- Les listes typées (`List*AsAsync<T>`) existent pour AP/AR ; les DTOs Hub complets restent a generer hors SDK.
 - Les OpenAPI dans `sources/openapi` restent partiels : reimporte le catalogue API Hub via `scripts/import-openapi.ps1` quand tu as un dump complet.
 - Valide les appels critiques contre ton environnement ABACUS.

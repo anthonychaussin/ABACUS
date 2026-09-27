@@ -30,13 +30,19 @@ public sealed class FinanceClient : IFinanceClient
     public Task<ODataPage<JsonElement>> ListAccountsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Accounts", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.ListAsync(_httpClient, "/Accounts", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<T>> ListAccountsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/Accounts", query, cancellationToken);
 
     /// <inheritdoc />
     public IAsyncEnumerable<JsonElement> EnumerateAccountsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/Accounts", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.EnumerateAsync(_httpClient, "/Accounts", query, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<JsonElement>> GetAccountAsync(
@@ -76,11 +82,16 @@ public sealed class FinanceClient : IFinanceClient
     public Task<AbacusResponse<string>> CreateAccountAsync(
         object payload,
         string? prefer = null,
-        CancellationToken cancellationToken = default)
-    {
-        ArgumentNullException.ThrowIfNull(payload);
-        return AbacusHttp.SendAsync(_httpClient, HttpMethod.Post, "/Accounts", payload, prefer, cancellationToken);
-    }
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/Accounts", payload, prefer, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateAccountAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/Accounts", "Account", model, mapper, prefer, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<string>> PatchAccountAsync(
@@ -92,12 +103,31 @@ public sealed class FinanceClient : IFinanceClient
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(enterpriseId);
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
-        ArgumentNullException.ThrowIfNull(payload);
-        return AbacusHttp.SendAsync(
+        return AbacusODataEntity.PatchAsync(
             _httpClient,
-            HttpMethod.Patch,
             AccountPath(enterpriseId, id),
             payload,
+            prefer,
+            cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchAccountAsync<TModel>(
+        string enterpriseId,
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(enterpriseId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.PatchAsync(
+            _httpClient,
+            AccountPath(enterpriseId, id),
+            "Account",
+            model,
+            mapper,
             prefer,
             cancellationToken);
     }

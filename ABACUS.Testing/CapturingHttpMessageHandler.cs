@@ -1,19 +1,29 @@
 using System.Net;
-using System.Net.Http;
+using System.Text;
 
-namespace ABACUS.Tests.Testing;
+namespace ABACUS.Testing;
 
-internal sealed class CapturingHttpMessageHandler : HttpMessageHandler
+/// <summary>
+/// Captures outbound HTTP requests for assertions in unit tests.
+/// </summary>
+public sealed class CapturingHttpMessageHandler : HttpMessageHandler
 {
     private readonly Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> _responseFactory;
 
+    /// <summary>
+    /// Requests observed by this handler, in order.
+    /// </summary>
     public List<CapturedHttpRequest> Requests { get; } = new();
 
+    /// <summary>
+    /// Creates a capturing handler.
+    /// </summary>
     public CapturingHttpMessageHandler(Func<HttpRequestMessage, CancellationToken, HttpResponseMessage>? responseFactory = null)
     {
         _responseFactory = responseFactory ?? DefaultResponseFactory;
     }
 
+    /// <inheritdoc />
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var body = request.Content is null
@@ -42,7 +52,10 @@ internal sealed class CapturingHttpMessageHandler : HttpMessageHandler
         new(HttpStatusCode.OK);
 }
 
-internal sealed record CapturedHttpRequest(
+/// <summary>
+/// Snapshot of a captured HTTP request.
+/// </summary>
+public sealed record CapturedHttpRequest(
     HttpMethod Method,
     Uri? RequestUri,
     string? Body,

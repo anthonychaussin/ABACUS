@@ -44,6 +44,15 @@ public interface IAccountsReceivableClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Creates a customer by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateCustomerAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Patches a customer.
     /// </summary>
     Task<AbacusResponse<string>> PatchCustomerAsync(
@@ -53,10 +62,27 @@ public interface IAccountsReceivableClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Patches a customer by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchCustomerAsync<TModel>(
+        int customerId,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Deletes a customer by identifier.
     /// </summary>
     Task<AbacusResponse<string>> DeleteCustomerAsync(
         int customerId,
         string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists customers deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListCustomersAsAsync<T>(
+        ODataQuery? query = null,
         CancellationToken cancellationToken = default);
 }

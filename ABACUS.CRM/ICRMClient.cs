@@ -21,6 +21,13 @@ public interface ICRMClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Lists subjects deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListSubjectsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Enumerates subjects following <c>@odata.nextLink</c>.
     /// </summary>
     IAsyncEnumerable<JsonElement> EnumerateSubjectsAsync(
@@ -44,11 +51,30 @@ public interface ICRMClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Creates a subject by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateSubjectAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Patches a subject.
     /// </summary>
     Task<AbacusResponse<string>> PatchSubjectAsync(
         string id,
         object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches a subject by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchSubjectAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
         string? prefer = null,
         CancellationToken cancellationToken = default);
 

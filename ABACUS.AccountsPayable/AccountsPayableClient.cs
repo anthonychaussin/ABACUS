@@ -62,6 +62,18 @@ public sealed class AccountsPayableClient : IAccountsPayableClient
     }
 
     /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateSupplierAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+        ArgumentNullException.ThrowIfNull(mapper);
+        return CreateSupplierAsync(mapper.ToPayload("Supplier", model), prefer, cancellationToken);
+    }
+
+    /// <inheritdoc />
     public Task<AbacusResponse<string>> PatchSupplierAsync(
         string id,
         object payload,
@@ -78,6 +90,25 @@ public sealed class AccountsPayableClient : IAccountsPayableClient
             prefer,
             cancellationToken);
     }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchSupplierAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+        ArgumentNullException.ThrowIfNull(mapper);
+        return PatchSupplierAsync(id, mapper.ToPayload("Supplier", model), prefer, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<ODataPage<T>> ListSuppliersAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/Suppliers", query, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<string>> DeleteSupplierAsync(

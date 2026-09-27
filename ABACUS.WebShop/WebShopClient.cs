@@ -30,13 +30,19 @@ public sealed class WebShopClient : IWebShopClient
     public Task<ODataPage<JsonElement>> ListShopperAccountsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/ShopperAccounts", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.ListAsync(_httpClient, "/ShopperAccounts", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<T>> ListShopperAccountsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/ShopperAccounts", query, cancellationToken);
 
     /// <inheritdoc />
     public IAsyncEnumerable<JsonElement> EnumerateShopperAccountsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/ShopperAccounts", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.EnumerateAsync(_httpClient, "/ShopperAccounts", query, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<JsonElement>> GetShopperAccountAsync(
@@ -45,21 +51,34 @@ public sealed class WebShopClient : IWebShopClient
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
-        var path = query is null
-            ? $"/ShopperAccounts(Id={id})"
-            : query.ApplyTo($"/ShopperAccounts(Id={id})");
-        return AbacusHttp.SendJsonAsync<JsonElement>(_httpClient, HttpMethod.Get, path, cancellationToken: cancellationToken);
+        return AbacusODataEntity.GetAsync(
+            _httpClient,
+            AbacusODataEntity.IdPath("ShopperAccounts", id),
+            query,
+            cancellationToken);
     }
 
     /// <inheritdoc />
     public Task<AbacusResponse<string>> CreateShopperAccountAsync(
         object payload,
         string? prefer = null,
-        CancellationToken cancellationToken = default)
-    {
-        ArgumentNullException.ThrowIfNull(payload);
-        return AbacusHttp.SendAsync(_httpClient, HttpMethod.Post, "/ShopperAccounts", payload, prefer, cancellationToken);
-    }
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/ShopperAccounts", payload, prefer, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateShopperAccountAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(
+            _httpClient,
+            "/ShopperAccounts",
+            "ShopperAccount",
+            model,
+            mapper,
+            prefer,
+            cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<string>> PatchShopperAccountAsync(
@@ -69,12 +88,29 @@ public sealed class WebShopClient : IWebShopClient
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
-        ArgumentNullException.ThrowIfNull(payload);
-        return AbacusHttp.SendAsync(
+        return AbacusODataEntity.PatchAsync(
             _httpClient,
-            HttpMethod.Patch,
-            $"/ShopperAccounts(Id={id})",
+            AbacusODataEntity.IdPath("ShopperAccounts", id),
             payload,
+            prefer,
+            cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchShopperAccountAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.PatchAsync(
+            _httpClient,
+            AbacusODataEntity.IdPath("ShopperAccounts", id),
+            "ShopperAccount",
+            model,
+            mapper,
             prefer,
             cancellationToken);
     }
@@ -86,11 +122,9 @@ public sealed class WebShopClient : IWebShopClient
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
-        return AbacusHttp.SendAsync(
+        return AbacusODataEntity.DeleteAsync(
             _httpClient,
-            HttpMethod.Delete,
-            $"/ShopperAccounts(Id={id})",
-            payload: null,
+            AbacusODataEntity.IdPath("ShopperAccounts", id),
             prefer,
             cancellationToken);
     }

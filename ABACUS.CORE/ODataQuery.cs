@@ -33,6 +33,23 @@ public sealed class ODataQuery
     }
 
     /// <summary>
+    /// Builds a <c>$filter</c> clause with <see cref="ODataFilterBuilder"/> (safe escaping).
+    /// </summary>
+    public ODataQuery Where(Action<ODataFilterBuilder> configure)
+    {
+        ArgumentNullException.ThrowIfNull(configure);
+        var builder = ODataFilterBuilder.Create();
+        configure(builder);
+        var expression = builder.ToFilterExpression();
+        if (!string.IsNullOrWhiteSpace(expression))
+        {
+            _filters.Add(expression);
+        }
+
+        return this;
+    }
+
+    /// <summary>
     /// Sets or appends a <c>$orderby</c> expression.
     /// </summary>
     public ODataQuery OrderBy(string expression)

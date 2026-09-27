@@ -3,7 +3,6 @@ using System.Text;
 using System.Text.Json;
 using ABACUS.AccountsReceivable;
 using ABACUS.Core;
-using ABACUS.Tests.Testing;
 
 namespace ABACUS.Tests;
 

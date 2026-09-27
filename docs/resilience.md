@@ -15,13 +15,31 @@ Les facades riches (AP, AR, Finance, CRM, AssetsLedger, RealEstate) passent par 
 
 ## HTTP 5xx
 
-Le SDK **ne retente pas** les erreurs serveur (500, 502, 503, 504) par defaut. Un retry aveugle sur une mutation non-idempotente peut creer des doublons. Preferer :
+Par defaut le SDK **ne retente pas** les 5xx. Un retry aveugle sur une mutation peut creer des doublons.
 
-1. journaliser / alerter
-2. rejouer manuellement ou via une file avec idempotence metier
-3. utiliser `$batch` pour regrouper des lectures
+Pour les **lectures** (GET/HEAD) uniquement, activer :
 
-Un circuit breaker / Polly pourra etre ajoute ulterieurement si le besoin est confirme.
+```csharp
+options.EnableReadRetry = true;
+options.ReadRetryMaxAttempts = 3; // inclut le premier essai
+```
+
+Les POST/PATCH/DELETE ne sont jamais retentes par `AbacusReadRetryHandler`.
+
+## Erreurs OData
+
+Les corps d'erreur OData (`error.code`, `error.message`, `error.details`) sont parses dans `AbacusApiException`.
+Un HTTP 400 avec `details` devient `AbacusValidationException` :
+
+```csharp
+catch (AbacusValidationException ex)
+{
+    foreach (var d in ex.Details)
+    {
+        // d.Target, d.Message
+    }
+}
+```
 
 ## Prefer par operation
 
@@ -33,12 +51,17 @@ Deux niveaux :
 | Parametre `prefer` sur Create / Patch / Delete | Surcharge pour une mutation |
 
 Constante utile : `AbacusHttp.PreferContinueOnError` (`odata.continue-on-error`) pour continuer malgre des avertissements de validation.
+Autres constantes : `AbacusHttp.PreferReturnRepresentation`, `AbacusHttp.PreferReturnMinimal`.
 
 Exemple :
 
 ```csharp
 await ap.CreateSupplierAsync(payload, prefer: AbacusHttp.PreferContinueOnError);
 ```
+
+## Observabilite
+
+Traces OpenTelemetry : [observability.md](observability.md) (`EnableOpenTelemetry` / `AddAbacusOpenTelemetry`).
 
 ## Annulation
 

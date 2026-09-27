@@ -16,6 +16,13 @@ public interface IRealEstateClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Lists object contracts deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListObjectContractsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Enumerates object contracts following <c>@odata.nextLink</c>.
     /// </summary>
     IAsyncEnumerable<JsonElement> EnumerateObjectContractsAsync(

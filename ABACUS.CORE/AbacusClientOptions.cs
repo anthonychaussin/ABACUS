@@ -71,6 +71,21 @@ public sealed class AbacusClientOptions
     public bool EnableRequestLogging { get; set; }
 
     /// <summary>
+    /// When true, wraps the pipeline with <see cref="AbacusTelemetryHandler"/> (ActivitySource <c>ABACUS.SDK</c>).
+    /// </summary>
+    public bool EnableOpenTelemetry { get; set; }
+
+    /// <summary>
+    /// When true, wraps the pipeline with <see cref="AbacusReadRetryHandler"/> (GET/HEAD only).
+    /// </summary>
+    public bool EnableReadRetry { get; set; }
+
+    /// <summary>
+    /// Total attempts for read retries when <see cref="EnableReadRetry"/> is true (including the first try).
+    /// </summary>
+    public int ReadRetryMaxAttempts { get; set; } = 3;
+
+    /// <summary>
     /// Resolves the effective base URI from <see cref="BaseUri"/> or <see cref="ServerUri"/> + <see cref="Mandant"/>.
     /// </summary>
     public Uri ResolveBaseUri()
@@ -107,6 +122,11 @@ public sealed class AbacusClientOptions
         if (RateLimitBaseDelay < TimeSpan.Zero)
         {
             throw new ArgumentException("RateLimitBaseDelay cannot be negative.", nameof(RateLimitBaseDelay));
+        }
+
+        if (ReadRetryMaxAttempts < 1)
+        {
+            throw new ArgumentException("ReadRetryMaxAttempts must be at least 1.", nameof(ReadRetryMaxAttempts));
         }
     }
 }

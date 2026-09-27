@@ -21,6 +21,13 @@ public interface IAssetsLedgerClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Lists assets deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListAssetsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Enumerates all assets following <c>@odata.nextLink</c>.
     /// </summary>
     IAsyncEnumerable<JsonElement> EnumerateAssetsAsync(
@@ -44,11 +51,30 @@ public interface IAssetsLedgerClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Creates an asset by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateAssetAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Patches an asset.
     /// </summary>
     Task<AbacusResponse<string>> PatchAssetAsync(
         string id,
         object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches an asset by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchAssetAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
         string? prefer = null,
         CancellationToken cancellationToken = default);
 

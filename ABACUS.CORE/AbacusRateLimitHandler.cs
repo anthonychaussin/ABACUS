@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 
 namespace ABACUS.Core;
@@ -52,6 +53,7 @@ public sealed class AbacusRateLimitHandler : DelegatingHandler
                 return response;
             }
 
+            Activity.Current?.SetTag("abacus.retry", attempt + 1);
             var delay = ResolveDelay(response, attempt);
             response.Dispose();
             response = null;

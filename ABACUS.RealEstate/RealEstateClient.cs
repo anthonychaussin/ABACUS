@@ -30,13 +30,19 @@ public sealed class RealEstateClient : IRealEstateClient
     public Task<ODataPage<JsonElement>> ListObjectContractsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/ObjectContracts", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.ListAsync(_httpClient, "/ObjectContracts", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<T>> ListObjectContractsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/ObjectContracts", query, cancellationToken);
 
     /// <inheritdoc />
     public IAsyncEnumerable<JsonElement> EnumerateObjectContractsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/ObjectContracts", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.EnumerateAsync(_httpClient, "/ObjectContracts", query, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<JsonElement>> GetObjectContractAsync(

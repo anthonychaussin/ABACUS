@@ -33,6 +33,12 @@ public sealed class AssetsLedgerClient : IAssetsLedgerClient
         AbacusODataEntity.ListAsync(_httpClient, "/Assets", query, cancellationToken);
 
     /// <inheritdoc />
+    public Task<ODataPage<T>> ListAssetsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/Assets", query, cancellationToken);
+
+    /// <inheritdoc />
     public IAsyncEnumerable<JsonElement> EnumerateAssetsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
@@ -56,6 +62,14 @@ public sealed class AssetsLedgerClient : IAssetsLedgerClient
         AbacusODataEntity.CreateAsync(_httpClient, "/Assets", payload, prefer, cancellationToken);
 
     /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateAssetAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/Assets", "Asset", model, mapper, prefer, cancellationToken);
+
+    /// <inheritdoc />
     public Task<AbacusResponse<string>> PatchAssetAsync(
         string id,
         object payload,
@@ -67,6 +81,25 @@ public sealed class AssetsLedgerClient : IAssetsLedgerClient
             _httpClient,
             AbacusODataEntity.ParenIdPath("Assets", id),
             payload,
+            prefer,
+            cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchAssetAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.PatchAsync(
+            _httpClient,
+            AbacusODataEntity.ParenIdPath("Assets", id),
+            "Asset",
+            model,
+            mapper,
             prefer,
             cancellationToken);
     }

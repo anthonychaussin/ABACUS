@@ -19,6 +19,16 @@ public static class AbacusHttp
     public const string PreferContinueOnError = "odata.continue-on-error";
 
     /// <summary>
+    /// Prefer header that requests the created/updated entity representation in the response body when supported.
+    /// </summary>
+    public const string PreferReturnRepresentation = "return=representation";
+
+    /// <summary>
+    /// Prefer header that requests a minimal response body when supported.
+    /// </summary>
+    public const string PreferReturnMinimal = "return=minimal";
+
+    /// <summary>
     /// Sends an HTTP request and returns the response body as text with metadata.
     /// </summary>
     public static async Task<AbacusResponse<string>> SendAsync(
@@ -60,8 +70,7 @@ public static class AbacusHttp
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new AbacusApiException(
-                    message: $"The HTTP status code of the response was not expected ({(int)response.StatusCode}).",
+                throw AbacusODataErrorParser.CreateException(
                     statusCode: (int)response.StatusCode,
                     responseBody: body,
                     headers: headers);
@@ -249,11 +258,10 @@ public static class AbacusHttp
             var headers = BuildHeaders(response);
             if (!response.IsSuccessStatusCode)
             {
-                throw new AbacusApiException(
-                    $"The HTTP status code of the response was not expected ({(int)response.StatusCode}).",
-                    (int)response.StatusCode,
-                    body,
-                    headers);
+                throw AbacusODataErrorParser.CreateException(
+                    statusCode: (int)response.StatusCode,
+                    responseBody: body,
+                    headers: headers);
             }
 
             return new AbacusResponse<string>(body, (int)response.StatusCode, headers);
@@ -326,11 +334,10 @@ public static class AbacusHttp
             var headers = BuildHeaders(response);
             if (!response.IsSuccessStatusCode)
             {
-                throw new AbacusApiException(
-                    $"The HTTP status code of the response was not expected ({(int)response.StatusCode}).",
-                    (int)response.StatusCode,
-                    raw,
-                    headers);
+                throw AbacusODataErrorParser.CreateException(
+                    statusCode: (int)response.StatusCode,
+                    responseBody: raw,
+                    headers: headers);
             }
 
             var responseContentType = response.Content?.Headers.ContentType?.ToString();

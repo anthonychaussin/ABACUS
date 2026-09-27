@@ -10,12 +10,14 @@
   <Project Path="ABACUS.FieldInformation/ABACUS.FieldInformation.csproj" />
   <Project Path="ABACUS.Finance/ABACUS.Finance.csproj" />
   <Project Path="ABACUS.General/ABACUS.General.csproj" />
+  <Project Path="ABACUS.Generators/ABACUS.Generators.csproj" />
   <Project Path="ABACUS.HumanResources/ABACUS.HumanResources.csproj" />
   <Project Path="ABACUS.ProductionPlanning/ABACUS.ProductionPlanning.csproj" />
   <Project Path="ABACUS.ProjectManagement/ABACUS.ProjectManagement.csproj" />
   <Project Path="ABACUS.RealEstate/ABACUS.RealEstate.csproj" />
   <Project Path="ABACUS.Salary/ABACUS.Salary.csproj" />
   <Project Path="ABACUS.Subscription/ABACUS.Subscription.csproj" />
+  <Project Path="ABACUS.Testing/ABACUS.Testing.csproj" />
   <Project Path="ABACUS.Tests/ABACUS.Tests.csproj" />
   <Project Path="ABACUS.UserDependentAuth/ABACUS.UserDependentAuth.csproj" />
   <Project Path="ABACUS.WebShop/ABACUS.WebShop.csproj" />

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>AbacusBusinessSoftware.Testing</PackageId>
+    <Description>Test helpers for ABACUS .NET SDK (capturing/fake HTTP handlers, OData response builders).</Description>
+    <AssemblyName>ABACUS.Testing</AssemblyName>
+    <RootNamespace>ABACUS.Testing</RootNamespace>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+</Project>

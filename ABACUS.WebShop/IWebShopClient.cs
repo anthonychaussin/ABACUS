@@ -21,6 +21,13 @@ public interface IWebShopClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Lists shopper accounts deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListShopperAccountsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Enumerates shopper accounts following <c>@odata.nextLink</c>.
     /// </summary>
     IAsyncEnumerable<JsonElement> EnumerateShopperAccountsAsync(
@@ -44,11 +51,30 @@ public interface IWebShopClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Creates a shopper account by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateShopperAccountAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Patches a shopper account.
     /// </summary>
     Task<AbacusResponse<string>> PatchShopperAccountAsync(
         string id,
         object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches a shopper account by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchShopperAccountAsync<TModel>(
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
         string? prefer = null,
         CancellationToken cancellationToken = default);
 

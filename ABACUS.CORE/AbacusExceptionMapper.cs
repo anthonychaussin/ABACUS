@@ -29,6 +29,16 @@ public static class AbacusExceptionMapper
         var response = responseProperty?.GetValue(exception) as string;
         var headers = headersProperty?.GetValue(exception) as IReadOnlyDictionary<string, IEnumerable<string>>;
 
+        if (statusCode is int code && !string.IsNullOrWhiteSpace(response))
+        {
+            return AbacusODataErrorParser.CreateException(
+                statusCode: code,
+                responseBody: response,
+                headers: headers,
+                innerException: exception,
+                fallbackMessage: exception.Message);
+        }
+
         return new AbacusApiException(
             message: exception.Message,
             statusCode: statusCode,

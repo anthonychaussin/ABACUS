@@ -3,7 +3,6 @@ using System.Text;
 using System.Text.Json;
 using ABACUS.Core;
 using ABACUS.ProductionPlanning;
-using ABACUS.Tests.Testing;
 
 namespace ABACUS.Tests;
 

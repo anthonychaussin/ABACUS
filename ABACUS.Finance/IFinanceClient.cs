@@ -21,6 +21,13 @@ public interface IFinanceClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Lists accounts deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListAccountsAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Enumerates all accounts following <c>@odata.nextLink</c>.
     /// </summary>
     IAsyncEnumerable<JsonElement> EnumerateAccountsAsync(
@@ -59,12 +66,32 @@ public interface IFinanceClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Creates an account by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateAccountAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Patches an account.
     /// </summary>
     Task<AbacusResponse<string>> PatchAccountAsync(
         string enterpriseId,
         string id,
         object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches an account by mapping a model with <see cref="IAbacusFieldMapper"/>.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchAccountAsync<TModel>(
+        string enterpriseId,
+        string id,
+        TModel model,
+        IAbacusFieldMapper mapper,
         string? prefer = null,
         CancellationToken cancellationToken = default);
 

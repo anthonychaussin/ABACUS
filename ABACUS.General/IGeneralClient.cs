@@ -29,6 +29,13 @@ public interface IGeneralClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Lists countries deserialized as <typeparamref name="T"/>.
+    /// </summary>
+    Task<ODataPage<T>> ListCountriesAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Enumerates countries following <c>@odata.nextLink</c>.
     /// </summary>
     IAsyncEnumerable<JsonElement> EnumerateCountriesAsync(

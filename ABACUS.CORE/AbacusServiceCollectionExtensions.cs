@@ -87,15 +87,65 @@ public static class AbacusServiceCollectionExtensions
                         handlers.Add(new AbacusLoggingHandler(loggerFactory));
                     }
                 }
+
+                if (resolvedOptions.EnableOpenTelemetry ||
+                    serviceProvider.GetService<AbacusOpenTelemetryMarker>() is not null)
+                {
+                    handlers.Add(new AbacusTelemetryHandler());
+                }
+
+                if (resolvedOptions.EnableReadRetry)
+                {
+                    handlers.Add(new AbacusReadRetryHandler(resolvedOptions.ReadRetryMaxAttempts));
+                }
             });
 
         return services;
     }
 
     /// <summary>
+    /// Enables <see cref="AbacusTelemetryHandler"/> on the shared SDK HttpClient.
+    /// Call after or before <see cref="AddAbacusSdk(IServiceCollection, AbacusClientOptions)"/>;
+    /// alternatively set <see cref="AbacusClientOptions.EnableOpenTelemetry"/>.
+    /// </summary>
+    public static IServiceCollection AddAbacusOpenTelemetry(this IServiceCollection services)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        services.AddSingleton<AbacusOpenTelemetryMarker>();
+        return services;
+    }
+
+    /// <summary>
+    /// Registers <see cref="IAbacusChangeFeed"/> and <see cref="AbacusChangeFeedHostedService"/>.
+    /// </summary>
+    public static IServiceCollection AddAbacusChangeFeedHostedService(
+        this IServiceCollection services,
+        Action<AbacusChangeFeedOptions> configure)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configure);
+
+        services.AddOptions<AbacusChangeFeedOptions>().Configure(configure);
+        services.AddSingleton<IAbacusChangeFeed>(sp =>
+        {
+            var factory = sp.GetRequiredService<IHttpClientFactory>();
+            var http = factory.CreateClient(AbacusHttpClientFactory.HttpClientName);
+            return new AbacusChangeFeed(http);
+        });
+        services.AddHostedService<AbacusChangeFeedHostedService>();
+        return services;
+    }
+
+    /// <summary>
+    /// Marker type used by <see cref="AddAbacusOpenTelemetry"/>.
+    /// </summary>
+    internal sealed class AbacusOpenTelemetryMarker;
+
+    /// <summary>
     /// Registers the shared ABACUS SDK <see cref="HttpClient"/> from the <c>Abacus</c> configuration section.
     /// Supported keys: <c>ServerUri</c>, <c>Mandant</c>, <c>BaseUri</c>, <c>UserAgent</c>, <c>Timeout</c>,
-    /// <c>Prefer</c>, <c>RateLimitMaxRetries</c>, <c>RateLimitBaseDelay</c>, <c>EnableRequestLogging</c>.
+    /// <c>Prefer</c>, <c>RateLimitMaxRetries</c>, <c>RateLimitBaseDelay</c>, <c>EnableRequestLogging</c>,
+    /// <c>EnableOpenTelemetry</c>.
     /// </summary>
     public static IServiceCollection AddAbacusSdk(this IServiceCollection services, IConfiguration configuration)
     {
@@ -349,6 +399,24 @@ public static class AbacusServiceCollectionExtensions
         if (!string.IsNullOrWhiteSpace(enableLogging) && bool.TryParse(enableLogging, out var logging))
         {
             options.EnableRequestLogging = logging;
+        }
+
+        var enableOtel = section["EnableOpenTelemetry"];
+        if (!string.IsNullOrWhiteSpace(enableOtel) && bool.TryParse(enableOtel, out var otel))
+        {
+            options.EnableOpenTelemetry = otel;
+        }
+
+        var enableReadRetry = section["EnableReadRetry"];
+        if (!string.IsNullOrWhiteSpace(enableReadRetry) && bool.TryParse(enableReadRetry, out var readRetry))
+        {
+            options.EnableReadRetry = readRetry;
+        }
+
+        var readRetryAttempts = section["ReadRetryMaxAttempts"];
+        if (!string.IsNullOrWhiteSpace(readRetryAttempts) && int.TryParse(readRetryAttempts, out var attempts))
+        {
+            options.ReadRetryMaxAttempts = attempts;
         }
 
         return options;

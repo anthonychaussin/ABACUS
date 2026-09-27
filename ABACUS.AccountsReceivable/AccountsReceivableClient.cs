@@ -65,6 +65,18 @@ public sealed class AccountsReceivableClient : IAccountsReceivableClient
     }
 
     /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateCustomerAsync<TModel>(
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+        ArgumentNullException.ThrowIfNull(mapper);
+        return CreateCustomerAsync(mapper.ToPayload("Customer", model), prefer, cancellationToken);
+    }
+
+    /// <inheritdoc />
     public Task<AbacusResponse<string>> PatchCustomerAsync(
         int customerId,
         object payload,
@@ -83,6 +95,19 @@ public sealed class AccountsReceivableClient : IAccountsReceivableClient
     }
 
     /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchCustomerAsync<TModel>(
+        int customerId,
+        TModel model,
+        IAbacusFieldMapper mapper,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+        ArgumentNullException.ThrowIfNull(mapper);
+        return PatchCustomerAsync(customerId, mapper.ToPayload("Customer", model), prefer, cancellationToken);
+    }
+
+    /// <inheritdoc />
     public Task<AbacusResponse<string>> DeleteCustomerAsync(
         int customerId,
         string? prefer = null,
@@ -97,6 +122,12 @@ public sealed class AccountsReceivableClient : IAccountsReceivableClient
             prefer,
             cancellationToken);
     }
+
+    /// <inheritdoc />
+    public Task<ODataPage<T>> ListCustomersAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/Customers", query, cancellationToken);
 
     private static void EnsureCustomerId(int customerId)
     {

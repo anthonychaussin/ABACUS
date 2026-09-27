@@ -40,13 +40,19 @@ public sealed class GeneralClient : IGeneralClient
     public Task<ODataPage<JsonElement>> ListCountriesAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Countries", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.ListAsync(_httpClient, "/Countries", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<T>> ListCountriesAsAsync<T>(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync<T>(_httpClient, "/Countries", query, cancellationToken);
 
     /// <inheritdoc />
     public IAsyncEnumerable<JsonElement> EnumerateCountriesAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/Countries", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.EnumerateAsync(_httpClient, "/Countries", query, cancellationToken);
 
     /// <inheritdoc />
     public Task<ODataPage<JsonElement>> ListCurrenciesAsync(
