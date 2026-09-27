@@ -1,144 +1,229 @@
 ﻿openapi: 3.0.0
 info:
-  title: ATK-1.1
+  title: General
   version: 1.0.0
-  description: ''
+  description: Abacus General entity API (partial OpenAPI used for NSwag generation).
 servers:
   - url: http://localhost
 paths:
   /BeneficiaryAccounts:
     get:
-      summary: BeneficiaryAccounts
-      description: ''
+      summary: List beneficiary accounts
       operationId: get_BeneficiaryAccounts
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /Countries:
     get:
-      summary: Countries
-      description: ''
+      summary: List countries
       operationId: get_Countries
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /Currencies:
     get:
-      summary: Currencies
-      description: ''
+      summary: List currencies
       operationId: get_Currencies
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /Divisions:
     get:
-      summary: Divisions
-      description: ''
+      summary: List divisions
       operationId: get_Divisions
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /Enterprises:
     get:
-      summary: Enterprises
-      description: ''
+      summary: List enterprises
       operationId: get_Enterprises
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /ExchangeRates:
     get:
-      summary: ExchangeRates
-      description: ''
+      summary: List exchange rates
       operationId: get_ExchangeRates
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /FinancialInstitutes:
     get:
-      summary: FinancialInstitutes
-      description: ''
+      summary: List financial institutes
       operationId: get_FinancialInstitutes
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /StorageFolders:
     get:
-      summary: StorageFolders
-      description: ''
+      summary: List storage folders
       operationId: get_StorageFolders
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /Storages:
     get:
-      summary: Storages
-      description: ''
+      summary: List storages
       operationId: get_Storages
       tags:
         - AnlageInfos
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /$batch:
     post:
-      summary: Generalbatch
-      description: ''
+      summary: OData batch
       operationId: post_batch
       tags:
-        - ATK-1.1
+        - Batch
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
       responses:
         '200':
           description: Successful
@@ -146,8 +231,48 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          text/plain:
-            schema:
-              type: string
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

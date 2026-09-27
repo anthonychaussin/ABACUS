@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>AbacusBusinessSoftware.DependencyInjection</PackageId>
+    <Description>Registers all packaged ABACUS SDK module clients for dependency injection.</Description>
+    <AssemblyName>ABACUS.DependencyInjection</AssemblyName>
+    <RootNamespace>ABACUS.DependencyInjection</RootNamespace>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ABACUS.CORE\ABACUS.Core.csproj" />
+    <ProjectReference Include="..\ABACUS.AccountsPayable\ABACUS.AccountsPayable.csproj" />
+    <ProjectReference Include="..\ABACUS.AccountsReceivable\ABACUS.AccountsReceivable.csproj" />
+    <ProjectReference Include="..\ABACUS.AssetsLedger\ABACUS.AssetsLedger.csproj" />
+    <ProjectReference Include="..\ABACUS.CRM\ABACUS.CRM.csproj" />
+    <ProjectReference Include="..\ABACUS.Finance\ABACUS.Finance.csproj" />
+    <ProjectReference Include="..\ABACUS.General\ABACUS.General.csproj" />
+    <ProjectReference Include="..\ABACUS.RealEstate\ABACUS.RealEstate.csproj" />
+    <ProjectReference Include="..\ABACUS.Subscription\ABACUS.Subscription.csproj" />
+    <ProjectReference Include="..\ABACUS.FieldInformation\ABACUS.FieldInformation.csproj" />
+    <ProjectReference Include="..\ABACUS.WebShop\ABACUS.WebShop.csproj" />
+  </ItemGroup>
+</Project>

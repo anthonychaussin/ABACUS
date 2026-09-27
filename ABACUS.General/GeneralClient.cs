@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ABACUS.Core;
 
 namespace ABACUS.General;
@@ -34,4 +35,40 @@ public sealed class GeneralClient : IGeneralClient
         ArgumentNullException.ThrowIfNull(batch);
         return AbacusHttp.SendBatchAsync(_httpClient, batch, prefer, cancellationToken: cancellationToken);
     }
+
+    /// <inheritdoc />
+    public Task<ODataPage<JsonElement>> ListCountriesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Countries", query, cancellationToken: cancellationToken);
+
+    /// <inheritdoc />
+    public IAsyncEnumerable<JsonElement> EnumerateCountriesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/Countries", query, cancellationToken: cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<JsonElement>> ListCurrenciesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Currencies", query, cancellationToken: cancellationToken);
+
+    /// <inheritdoc />
+    public IAsyncEnumerable<JsonElement> EnumerateCurrenciesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/Currencies", query, cancellationToken: cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<JsonElement>> ListDivisionsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Divisions", query, cancellationToken: cancellationToken);
+
+    /// <inheritdoc />
+    public Task<ODataPage<JsonElement>> ListEnterprisesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Enterprises", query, cancellationToken: cancellationToken);
 }

@@ -31,7 +31,7 @@ Use [ABACUS.AccountsPayable.yaml](openapi/ABACUS.AccountsPayable.yaml) / [ABACUS
 5. **Open request bodies** — prefer `additionalProperties: true` over empty `properties: {}`.
 6. **Keep operationIds stable** and descriptive (`get_Accounts`, not example-driven names).
 
-Modules already curated for OData collections: AccountsPayable, AssetsLedger, AccountsReceivable, Finance, CRM, RealEstate (path merge + collection enrichment).
+Modules already curated for OData collections: AccountsPayable, AssetsLedger, AccountsReceivable, Finance, CRM, RealEstate, General, WebShop (path merge + collection enrichment).
 
 ## Notes
 

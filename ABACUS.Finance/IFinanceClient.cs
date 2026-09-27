@@ -28,6 +28,15 @@ public interface IFinanceClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Gets an account by enterprise id and account id.
+    /// </summary>
+    Task<AbacusResponse<JsonElement>> GetAccountAsync(
+        string enterpriseId,
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Lists general ledger entries (first page).
     /// </summary>
     Task<ODataPage<JsonElement>> ListGeneralLedgerEntriesAsync(
@@ -46,6 +55,25 @@ public interface IFinanceClient : IAbacusModuleClient
     /// </summary>
     Task<AbacusResponse<string>> CreateAccountAsync(
         object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches an account.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchAccountAsync(
+        string enterpriseId,
+        string id,
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes an account.
+    /// </summary>
+    Task<AbacusResponse<string>> DeleteAccountAsync(
+        string enterpriseId,
+        string id,
         string? prefer = null,
         CancellationToken cancellationToken = default);
 }

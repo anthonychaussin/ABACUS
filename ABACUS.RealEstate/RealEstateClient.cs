@@ -33,6 +33,25 @@ public sealed class RealEstateClient : IRealEstateClient
         AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/ObjectContracts", query, cancellationToken: cancellationToken);
 
     /// <inheritdoc />
+    public IAsyncEnumerable<JsonElement> EnumerateObjectContractsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/ObjectContracts", query, cancellationToken: cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<JsonElement>> GetObjectContractAsync(
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        var path = query is null
+            ? $"/ObjectContracts(Id={id})"
+            : query.ApplyTo($"/ObjectContracts(Id={id})");
+        return AbacusHttp.SendJsonAsync<JsonElement>(_httpClient, HttpMethod.Get, path, cancellationToken: cancellationToken);
+    }
+
+    /// <inheritdoc />
     public Task<ODataPage<JsonElement>> ListPartialObjectContractsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>

@@ -60,6 +60,51 @@ public sealed class FinanceClientTests
     }
 
     [Fact]
+    public async Task GetAccountAsync_SendsCompositeKeyPath()
+    {
+        using var handler = new CapturingHttpMessageHandler((_, _) =>
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"Id":"3090500"}""", Encoding.UTF8, "application/json"),
+            });
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
+        var client = new FinanceClient(httpClient);
+
+        await client.GetAccountAsync("500", "3090500");
+
+        Assert.Equal("/Accounts(EnterpriseId=500,Id=3090500)", handler.Requests[0].RequestUri?.AbsolutePath);
+    }
+
+    [Fact]
+    public async Task PatchAccountAsync_SendsPreferHeader()
+    {
+        using var handler = new CapturingHttpMessageHandler();
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
+        var client = new FinanceClient(httpClient);
+
+        await client.PatchAccountAsync("500", "3090500", new { Name = "Updated" }, prefer: AbacusHttp.PreferContinueOnError);
+
+        var request = Assert.Single(handler.Requests);
+        Assert.Equal(HttpMethod.Patch, request.Method);
+        Assert.Equal("/Accounts(EnterpriseId=500,Id=3090500)", request.RequestUri?.AbsolutePath);
+        Assert.Equal(AbacusHttp.PreferContinueOnError, request.Prefer);
+    }
+
+    [Fact]
+    public async Task DeleteAccountAsync_SendsCompositeKeyPath()
+    {
+        using var handler = new CapturingHttpMessageHandler();
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
+        var client = new FinanceClient(httpClient);
+
+        await client.DeleteAccountAsync("500", "3090500");
+
+        var request = Assert.Single(handler.Requests);
+        Assert.Equal(HttpMethod.Delete, request.Method);
+        Assert.Equal("/Accounts(EnterpriseId=500,Id=3090500)", request.RequestUri?.AbsolutePath);
+    }
+
+    [Fact]
     public async Task ListAccountsAsync_ThrowsAbacusApiException_OnHttpFailure()
     {
         using var handler = new CapturingHttpMessageHandler(static (_, _) =>

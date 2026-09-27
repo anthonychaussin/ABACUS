@@ -47,8 +47,16 @@ using var auth = new ClientCredentialsAuthenticationProvider(
 Avec DI :
 
 ```csharp
-services.AddAbacusSdk(options);
+services.AddAbacusSdk(configuration); // lit Abacus:ServerUri, Mandant, Prefer, retries, ...
 services.AddAbacusClientCredentials("<client-id>", "<client-secret>", "abacus.pad");
+services.AddAbacusAllModules(); // package AbacusBusinessSoftware.DependencyInjection
+```
+
+Ou module par module :
+
+```csharp
+services.AddAbacusSdk(options);
+services.AddAbacusModuleClient<IAccountsPayableClient, AccountsPayableClient>();
 ```
 
 ### Utilisateur interactif (authorization code)

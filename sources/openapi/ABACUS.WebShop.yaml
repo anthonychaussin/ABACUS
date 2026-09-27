@@ -2,30 +2,44 @@
 info:
   title: WebShop
   version: 1.0.0
-  description: ''
+  description: Abacus WebShop entity API (partial OpenAPI used for NSwag generation).
 servers:
   - url: http://localhost
 paths:
   /ShopperAccounts:
     get:
-      summary: 1.3 - ShopperAccountsSelect
-      description: ''
+      summary: List shopper accounts
       operationId: get_ShopperAccounts
       tags:
-        - 1 - ShopperAccounts
+        - ShopperAccounts
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
     post:
-      summary: 1.6 - ShopperAccounts
-      description: ''
+      summary: Create shopper account
       operationId: post_ShopperAccounts
       tags:
-        - 1 - ShopperAccounts
+        - ShopperAccounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -33,45 +47,61 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /ShopperAccounts(Id={id}):
-    patch:
-      summary: 1.8 - ShopperAccounts
-      description: ''
-      operationId: patch_ShopperAccounts_Id_id
-      tags:
-        - 1 - ShopperAccounts
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /ShopperAccounts(Id={id}):
     get:
-      summary: 1.4 - ShopperAccountsExpand
-      description: ''
+      summary: Get shopper account
       operationId: get_ShopperAccounts_Id_id
       tags:
-        - 1 - ShopperAccounts
+        - ShopperAccounts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ODataExpand'
+        - $ref: '#/components/parameters/ODataSelect'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: Patch shopper account
+      operationId: patch_ShopperAccounts_Id_id
+      tags:
+        - ShopperAccounts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: Delete shopper account
+      operationId: delete_ShopperAccounts_Id_id
+      tags:
+        - ShopperAccounts
       parameters:
         - in: path
           name: id
@@ -81,17 +111,24 @@ paths:
       responses:
         '200':
           description: Successful
+        '204':
+          description: No Content
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /CreateSalesOrderInbox:
     post:
-      summary: 2.1 - CreateSalesOrderInbox
-      description: ''
+      summary: Create sales order inbox
       operationId: post_CreateSalesOrderInbox
       tags:
-        - 2 - CreateSalesOrderInbox
+        - SalesInbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -99,19 +136,18 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /CreateSalesOfferInbox:
     post:
-      summary: 3.2 - CreateSalesOfferInboxMinimal
-      description: ''
+      summary: Create sales offer inbox
       operationId: post_CreateSalesOfferInbox
       tags:
-        - 3 - CreateSalesOfferInbox
+        - SalesInbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -119,19 +155,18 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /CreateSalesReturnInbox:
     post:
-      summary: 4.2 - CreateSalesReturnInboxMinimal
-      description: ''
+      summary: Create sales return inbox
       operationId: post_CreateSalesReturnInbox
       tags:
-        - 4 - CreateSalesReturnInbox
+        - SalesInbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -139,9 +174,48 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

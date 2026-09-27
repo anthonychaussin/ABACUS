@@ -1,9 +1,11 @@
 <Solution>
+  <Project Path="ABACUS.AbaReport/ABACUS.AbaReport.csproj" />
   <Project Path="ABACUS.AccountsPayable/ABACUS.AccountsPayable.csproj" />
   <Project Path="ABACUS.AccountsReceivable/ABACUS.AccountsReceivable.csproj" />
   <Project Path="ABACUS.AssetsLedger/ABACUS.AssetsLedger.csproj" />
   <Project Path="ABACUS.CORE/ABACUS.Core.csproj" />
   <Project Path="ABACUS.CRM/ABACUS.CRM.csproj" />
+  <Project Path="ABACUS.DependencyInjection/ABACUS.DependencyInjection.csproj" />
   <Project Path="ABACUS.DossierFileUpload/ABACUS.DossierFileUpload.csproj" />
   <Project Path="ABACUS.FieldInformation/ABACUS.FieldInformation.csproj" />
   <Project Path="ABACUS.Finance/ABACUS.Finance.csproj" />

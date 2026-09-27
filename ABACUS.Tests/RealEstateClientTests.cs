@@ -63,6 +63,58 @@ public sealed class RealEstateClientTests
     }
 
     [Fact]
+    public async Task GetObjectContractAsync_SendsExpectedPath()
+    {
+        using var handler = new CapturingHttpMessageHandler((_, _) =>
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"Id":"42"}""", Encoding.UTF8, "application/json"),
+            });
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
+        var client = new RealEstateClient(httpClient);
+
+        await client.GetObjectContractAsync("42");
+
+        Assert.Equal("/ObjectContracts(Id=42)", handler.Requests[0].RequestUri?.AbsolutePath);
+    }
+
+    [Fact]
+    public async Task EnumerateObjectContractsAsync_FollowsNextLink()
+    {
+        var call = 0;
+        using var handler = new CapturingHttpMessageHandler((_, _) =>
+        {
+            call++;
+            if (call == 1)
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(
+                        """{"value":[{"Id":"1"}],"@odata.nextLink":"/ObjectContracts?$skiptoken=x"}""",
+                        Encoding.UTF8,
+                        "application/json"),
+                };
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"value":[{"Id":"2"}]}""", Encoding.UTF8, "application/json"),
+            };
+        });
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
+        var client = new RealEstateClient(httpClient);
+
+        var items = new List<JsonElement>();
+        await foreach (var item in client.EnumerateObjectContractsAsync())
+        {
+            items.Add(item);
+        }
+
+        Assert.Equal(2, items.Count);
+        Assert.Equal(2, handler.Requests.Count);
+    }
+
+    [Fact]
     public async Task ListObjectContractsAsync_ThrowsAbacusApiException_OnHttpFailure()
     {
         using var handler = new CapturingHttpMessageHandler(static (_, _) =>

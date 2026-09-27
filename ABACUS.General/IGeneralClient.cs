@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ABACUS.Core;
 
 namespace ABACUS.General;
@@ -18,5 +19,47 @@ public interface IGeneralClient : IAbacusModuleClient
     Task<ODataBatchResponse> PostBatchAsync(
         ODataBatchRequest batch,
         string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists countries (first page).
+    /// </summary>
+    Task<ODataPage<JsonElement>> ListCountriesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Enumerates countries following <c>@odata.nextLink</c>.
+    /// </summary>
+    IAsyncEnumerable<JsonElement> EnumerateCountriesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists currencies (first page).
+    /// </summary>
+    Task<ODataPage<JsonElement>> ListCurrenciesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Enumerates currencies following <c>@odata.nextLink</c>.
+    /// </summary>
+    IAsyncEnumerable<JsonElement> EnumerateCurrenciesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists divisions (first page).
+    /// </summary>
+    Task<ODataPage<JsonElement>> ListDivisionsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists enterprises (first page).
+    /// </summary>
+    Task<ODataPage<JsonElement>> ListEnterprisesAsync(
+        ODataQuery? query = null,
         CancellationToken cancellationToken = default);
 }

@@ -29,6 +29,9 @@
     <ProjectReference Include="..\ABACUS.RealEstate\ABACUS.RealEstate.csproj" />
     <ProjectReference Include="..\ABACUS.Subscription\ABACUS.Subscription.csproj" />
     <ProjectReference Include="..\ABACUS.AbaReport\ABACUS.AbaReport.csproj" />
+    <ProjectReference Include="..\ABACUS.WebShop\ABACUS.WebShop.csproj" />
+    <ProjectReference Include="..\ABACUS.FieldInformation\ABACUS.FieldInformation.csproj" />
+    <ProjectReference Include="..\ABACUS.DependencyInjection\ABACUS.DependencyInjection.csproj" />
   </ItemGroup>
 
   <ItemGroup>

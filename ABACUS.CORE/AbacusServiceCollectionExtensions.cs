@@ -93,6 +93,19 @@ public static class AbacusServiceCollectionExtensions
     }
 
     /// <summary>
+    /// Registers the shared ABACUS SDK <see cref="HttpClient"/> from the <c>Abacus</c> configuration section.
+    /// Supported keys: <c>ServerUri</c>, <c>Mandant</c>, <c>BaseUri</c>, <c>UserAgent</c>, <c>Timeout</c>,
+    /// <c>Prefer</c>, <c>RateLimitMaxRetries</c>, <c>RateLimitBaseDelay</c>, <c>EnableRequestLogging</c>.
+    /// </summary>
+    public static IServiceCollection AddAbacusSdk(this IServiceCollection services, IConfiguration configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+
+        return services.AddAbacusSdk(BindClientOptions(configuration));
+    }
+
+    /// <summary>
     /// Registers an <see cref="IAbacusAuthenticationProvider"/> used for all ABACUS SDK requests.
     /// </summary>
     /// <typeparam name="TProvider">Authentication provider implementation.</typeparam>
@@ -285,6 +298,60 @@ public static class AbacusServiceCollectionExtensions
         services.AddSingleton(mapping);
         services.AddSingleton<IAbacusFieldMapper, AbacusFieldMapper>();
         return services;
+    }
+
+    private static AbacusClientOptions BindClientOptions(IConfiguration configuration)
+    {
+        var section = configuration.GetSection("Abacus");
+        var options = new AbacusClientOptions();
+
+        var baseUri = section["BaseUri"];
+        if (!string.IsNullOrWhiteSpace(baseUri))
+        {
+            options.BaseUri = new Uri(baseUri, UriKind.Absolute);
+        }
+
+        var serverUri = section["ServerUri"];
+        if (!string.IsNullOrWhiteSpace(serverUri))
+        {
+            options.ServerUri = new Uri(serverUri, UriKind.Absolute);
+        }
+
+        options.Mandant = section["Mandant"] ?? options.Mandant;
+
+        var userAgent = section["UserAgent"];
+        if (!string.IsNullOrWhiteSpace(userAgent))
+        {
+            options.UserAgent = userAgent;
+        }
+
+        var timeout = section["Timeout"];
+        if (!string.IsNullOrWhiteSpace(timeout) && TimeSpan.TryParse(timeout, out var timeoutValue))
+        {
+            options.Timeout = timeoutValue;
+        }
+
+        options.Prefer = section["Prefer"] ?? options.Prefer;
+
+        var maxRetries = section["RateLimitMaxRetries"];
+        if (!string.IsNullOrWhiteSpace(maxRetries) && int.TryParse(maxRetries, out var retries))
+        {
+            options.RateLimitMaxRetries = retries;
+        }
+
+        var baseDelay = section["RateLimitBaseDelay"];
+        if (!string.IsNullOrWhiteSpace(baseDelay) && TimeSpan.TryParse(baseDelay, out var delayValue))
+        {
+            options.RateLimitBaseDelay = delayValue;
+        }
+
+        var enableLogging = section["EnableRequestLogging"];
+        if (!string.IsNullOrWhiteSpace(enableLogging) && bool.TryParse(enableLogging, out var logging))
+        {
+            options.EnableRequestLogging = logging;
+        }
+
+        return options;
     }
 
     private static AbacusFieldMapping ReadFieldMapsFromConfiguration(IConfiguration configuration)

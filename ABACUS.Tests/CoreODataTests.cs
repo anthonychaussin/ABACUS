@@ -146,6 +146,27 @@ public sealed class AbacusHttpTests
     }
 }
 
+public sealed class AbacusODataEntityTests
+{
+    [Fact]
+    public async Task ListAndCreate_UseCollectionPath()
+    {
+        using var handler = new CapturingHttpMessageHandler((_, _) =>
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"value":[{"Id":"1"}]}""", Encoding.UTF8, "application/json"),
+            });
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
+
+        await AbacusODataEntity.ListAsync(httpClient, "/Things", ODataQuery.Create().Top(5));
+        await AbacusODataEntity.CreateAsync(httpClient, "/Things", new { Name = "X" });
+
+        Assert.Equal("/Things?$top=5", handler.Requests[0].RequestUri?.PathAndQuery);
+        Assert.Equal(HttpMethod.Post, handler.Requests[1].Method);
+        Assert.Equal("/Things(Id=9)", AbacusODataEntity.IdPath("Things", "9"));
+    }
+}
+
 public sealed class AbacusRateLimitHandlerTests
 {
     [Fact]
