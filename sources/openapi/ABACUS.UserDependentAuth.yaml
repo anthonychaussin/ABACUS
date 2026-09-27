@@ -2,35 +2,72 @@
 info:
   title: UserDependentAuth
   version: 1.0.0
-  description: ''
+  description: Abacus endpoints that require user-dependent (authorization_code) access.
 servers:
   - url: http://localhost
 paths:
   /ProjectDocuments:
     get:
-      summary: Authorization
-      description: ''
+      summary: List project documents (user auth)
       operationId: get_ProjectDocuments
-      tags:
-        - Authorization
+      tags: [Authorization]
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /Storages:
     get:
-      summary: Authorization
-      description: ''
+      summary: List storages (user auth)
       operationId: get_Storages
-      tags:
-        - Authorization
+      tags: [Authorization]
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

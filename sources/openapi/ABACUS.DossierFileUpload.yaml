@@ -2,17 +2,21 @@
 info:
   title: DossierFileUpload
   version: 1.0.0
-  description: ''
+  description: Abacus Dossier / file-store API (partial OpenAPI used for NSwag generation).
 servers:
   - url: http://localhost
 paths:
   /api/file-store/v1/user:
     post:
-      summary: FileUploadindirectory
-      description: ''
+      summary: Upload file to user file-store
       operationId: post_api_file_store_v1_user
-      tags:
-        - TextStream
+      tags: [FileStream]
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
       responses:
         '200':
           description: Successful
@@ -20,32 +24,35 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/octet-stream:
-            schema:
-              type: object
-              properties: {}
   /CustomerInvoiceDocuments:
     get:
-      summary: Dossier
-      description: ''
+      summary: List customer invoice documents
       operationId: get_CustomerInvoiceDocuments
-      tags:
-        - DossierFileUpload
+      tags: [DossierFileUpload]
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
     post:
-      summary: UploadFileinDossier
-      description: ''
+      summary: Upload customer invoice document
       operationId: post_CustomerInvoiceDocuments
-      tags:
-        - DossierFileUpload
+      tags: [DossierFileUpload]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -53,19 +60,11 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /Storages({id}):
     get:
-      summary: Dossier
-      description: ''
+      summary: Get storage
       operationId: get_Storages_id
-      tags:
-        - DossierFileUpload
+      tags: [DossierFileUpload]
       parameters:
         - in: path
           name: id
@@ -75,27 +74,39 @@ paths:
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
         '400':
           description: Bad Request
         '500':
           description: Server Error
-  /ProjectBookings:
-    post:
-      summary: Create project booking internal text
-      description: ''
-      operationId: post_ProjectBookings
-      tags:
-        - TextStream
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

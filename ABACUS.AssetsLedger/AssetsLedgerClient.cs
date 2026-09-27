@@ -30,13 +30,13 @@ public sealed class AssetsLedgerClient : IAssetsLedgerClient
     public Task<ODataPage<JsonElement>> ListAssetsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Assets", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.ListAsync(_httpClient, "/Assets", query, cancellationToken);
 
     /// <inheritdoc />
     public IAsyncEnumerable<JsonElement> EnumerateAssetsAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/Assets", query, cancellationToken: cancellationToken);
+        AbacusODataEntity.EnumerateAsync(_httpClient, "/Assets", query, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<JsonElement>> GetAssetAsync(
@@ -45,14 +45,15 @@ public sealed class AssetsLedgerClient : IAssetsLedgerClient
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
-        var path = $"/Assets({id})";
-        if (query is not null)
-        {
-            path = query.ApplyTo(path);
-        }
-
-        return AbacusHttp.SendJsonAsync<JsonElement>(_httpClient, HttpMethod.Get, path, cancellationToken: cancellationToken);
+        return AbacusODataEntity.GetAsync(_httpClient, AbacusODataEntity.ParenIdPath("Assets", id), query, cancellationToken);
     }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateAssetAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/Assets", payload, prefer, cancellationToken);
 
     /// <inheritdoc />
     public Task<AbacusResponse<string>> PatchAssetAsync(
@@ -62,11 +63,9 @@ public sealed class AssetsLedgerClient : IAssetsLedgerClient
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
-        ArgumentNullException.ThrowIfNull(payload);
-        return AbacusHttp.SendAsync(
+        return AbacusODataEntity.PatchAsync(
             _httpClient,
-            HttpMethod.Patch,
-            $"/Assets({id})",
+            AbacusODataEntity.ParenIdPath("Assets", id),
             payload,
             prefer,
             cancellationToken);
@@ -76,9 +75,69 @@ public sealed class AssetsLedgerClient : IAssetsLedgerClient
     public Task<ODataPage<JsonElement>> ListAssetCategoriesAsync(
         ODataQuery? query = null,
         CancellationToken cancellationToken = default) =>
-        AbacusHttp.GetODataPageAsync<JsonElement>(
+        AbacusODataEntity.ListAsync(_httpClient, "/AssetCategories", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<JsonElement>> GetAssetCategoryAsync(
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.GetAsync(
             _httpClient,
-            "/AssetCategories",
+            AbacusODataEntity.ParenIdPath("AssetCategories", id),
             query,
-            cancellationToken: cancellationToken);
+            cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateAssetCategoryAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/AssetCategories", payload, prefer, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchAssetCategoryAsync(
+        string id,
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.PatchAsync(
+            _httpClient,
+            AbacusODataEntity.ParenIdPath("AssetCategories", id),
+            payload,
+            prefer,
+            cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<ODataPage<JsonElement>> ListAssetBookingsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync(_httpClient, "/AssetBookings", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<JsonElement>> GetAssetBookingAsync(
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.GetAsync(
+            _httpClient,
+            AbacusODataEntity.ParenIdPath("AssetBookings", id),
+            query,
+            cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateAssetBookingAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/AssetBookings", payload, prefer, cancellationToken);
 }

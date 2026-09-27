@@ -36,6 +36,14 @@ public interface IAssetsLedgerClient : IAbacusModuleClient
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Creates an asset.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateAssetAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Patches an asset.
     /// </summary>
     Task<AbacusResponse<string>> PatchAssetAsync(
@@ -49,5 +57,53 @@ public interface IAssetsLedgerClient : IAbacusModuleClient
     /// </summary>
     Task<ODataPage<JsonElement>> ListAssetCategoriesAsync(
         ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets an asset category by id.
+    /// </summary>
+    Task<AbacusResponse<JsonElement>> GetAssetCategoryAsync(
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Creates an asset category.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateAssetCategoryAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches an asset category.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchAssetCategoryAsync(
+        string id,
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists asset bookings (first page).
+    /// </summary>
+    Task<ODataPage<JsonElement>> ListAssetBookingsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets an asset booking by id.
+    /// </summary>
+    Task<AbacusResponse<JsonElement>> GetAssetBookingAsync(
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Creates an asset booking.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateAssetBookingAsync(
+        object payload,
+        string? prefer = null,
         CancellationToken cancellationToken = default);
 }

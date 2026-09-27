@@ -1,8 +1,15 @@
 using System.Text;
+using ABACUS.AbaReport;
 using ABACUS.AccountsPayable;
 using ABACUS.Core;
 using ABACUS.DependencyInjection;
+using ABACUS.DossierFileUpload;
 using ABACUS.General;
+using ABACUS.HumanResources;
+using ABACUS.ProductionPlanning;
+using ABACUS.ProjectManagement;
+using ABACUS.Salary;
+using ABACUS.UserDependentAuth;
 using ABACUS.WebShop;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -93,5 +100,23 @@ public sealed class DiRegistrationTests
         Assert.Equal("AccountsPayable", provider.GetRequiredService<IAccountsPayableClient>().ModuleName);
         Assert.Equal("General", provider.GetRequiredService<IGeneralClient>().ModuleName);
         Assert.Equal("WebShop", provider.GetRequiredService<IWebShopClient>().ModuleName);
+        Assert.Equal("HumanResources", provider.GetRequiredService<IHumanResourcesClient>().ModuleName);
+        Assert.Equal("Salary", provider.GetRequiredService<ISalaryClient>().ModuleName);
+        Assert.Equal("ProjectManagement", provider.GetRequiredService<IProjectManagementClient>().ModuleName);
+        Assert.Equal("ProductionPlanning", provider.GetRequiredService<IProductionPlanningClient>().ModuleName);
+        Assert.Equal("DossierFileUpload", provider.GetRequiredService<IDossierFileUploadClient>().ModuleName);
+        Assert.Equal("UserDependentAuth", provider.GetRequiredService<IUserDependentAuthClient>().ModuleName);
+    }
+
+    [Fact]
+    public void AddAbacusAbaReport_ResolvesWithServerOrigin()
+    {
+        var services = new ServiceCollection();
+        services.AddAbacusAbaReport(new Uri("https://example.invalid:40000"));
+
+        using var provider = services.BuildServiceProvider();
+        var client = provider.GetRequiredService<IAbaReportClient>();
+
+        Assert.Equal("AbaReport", client.ModuleName);
     }
 }

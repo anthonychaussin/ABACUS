@@ -1,10 +1,13 @@
 # ABACUS DependencyInjection
 
-Registers the packaged entity-module clients that share the mandant `HttpClient`.
+Registers packaged module clients that share the mandant `HttpClient`, plus an optional AbaReport registration.
 
 ```csharp
 services.AddAbacusSdk(configuration); // reads Abacus:*
 services.AddAbacusAllModules();
+services.AddAbacusAbaReport(new Uri("https://abacus.example:40000"));
 ```
 
-AbaReport is not included: it needs a separate `HttpClient` whose `BaseAddress` is the server origin.
+`AddAbacusAllModules` includes AP, AR, AssetsLedger, CRM, Finance, General, RealEstate, Subscription, FieldInformation, WebShop, HumanResources, Salary, ProjectManagement, ProductionPlanning, DossierFileUpload, and UserDependentAuth.
+
+AbaReport needs a separate BaseAddress (server origin) via `AddAbacusAbaReport`.

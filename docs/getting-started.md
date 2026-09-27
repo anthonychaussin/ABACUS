@@ -50,6 +50,7 @@ Avec DI :
 services.AddAbacusSdk(configuration); // lit Abacus:ServerUri, Mandant, Prefer, retries, ...
 services.AddAbacusClientCredentials("<client-id>", "<client-secret>", "abacus.pad");
 services.AddAbacusAllModules(); // package AbacusBusinessSoftware.DependencyInjection
+services.AddAbacusAbaReport(new Uri("https://example.abacus:40000")); // BaseAddress = origine serveur
 ```
 
 Ou module par module :
@@ -58,6 +59,8 @@ Ou module par module :
 services.AddAbacusSdk(options);
 services.AddAbacusModuleClient<IAccountsPayableClient, AccountsPayableClient>();
 ```
+
+`UserDependentAuth` (documents / storages sous auth utilisateur) necessite `AddAbacusAuthorizationCode` plutot que client-credentials seul.
 
 ### Utilisateur interactif (authorization code)
 

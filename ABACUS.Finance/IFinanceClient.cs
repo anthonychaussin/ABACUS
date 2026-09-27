@@ -76,4 +76,54 @@ public interface IFinanceClient : IAbacusModuleClient
         string id,
         string? prefer = null,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists cost centres (first page).
+    /// </summary>
+    Task<ODataPage<JsonElement>> ListCostCentresAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Enumerates cost centres following <c>@odata.nextLink</c>.
+    /// </summary>
+    IAsyncEnumerable<JsonElement> EnumerateCostCentresAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets a cost centre by enterprise id and id.
+    /// </summary>
+    Task<AbacusResponse<JsonElement>> GetCostCentreAsync(
+        string enterpriseId,
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Creates a cost centre.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateCostCentreAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches a cost centre.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchCostCentreAsync(
+        string enterpriseId,
+        string id,
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes a cost centre.
+    /// </summary>
+    Task<AbacusResponse<string>> DeleteCostCentreAsync(
+        string enterpriseId,
+        string id,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
 }

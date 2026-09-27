@@ -18,6 +18,11 @@ public static class AbacusHttpClientFactory
     public const string TokenHttpClientName = "ABACUS.SDK.Token";
 
     /// <summary>
+    /// Logical name used for the AbaReport REST client (server origin BaseAddress).
+    /// </summary>
+    public const string AbaReportHttpClientName = "ABACUS.SDK.AbaReport";
+
+    /// <summary>
     /// Applies ABACUS SDK HTTP configuration to an existing client instance.
     /// </summary>
     public static void Configure(HttpClient client, AbacusClientOptions options)

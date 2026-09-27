@@ -32,6 +32,12 @@
     <ProjectReference Include="..\ABACUS.WebShop\ABACUS.WebShop.csproj" />
     <ProjectReference Include="..\ABACUS.FieldInformation\ABACUS.FieldInformation.csproj" />
     <ProjectReference Include="..\ABACUS.DependencyInjection\ABACUS.DependencyInjection.csproj" />
+    <ProjectReference Include="..\ABACUS.HumanResources\ABACUS.HumanResources.csproj" />
+    <ProjectReference Include="..\ABACUS.Salary\ABACUS.Salary.csproj" />
+    <ProjectReference Include="..\ABACUS.ProjectManagement\ABACUS.ProjectManagement.csproj" />
+    <ProjectReference Include="..\ABACUS.ProductionPlanning\ABACUS.ProductionPlanning.csproj" />
+    <ProjectReference Include="..\ABACUS.DossierFileUpload\ABACUS.DossierFileUpload.csproj" />
+    <ProjectReference Include="..\ABACUS.UserDependentAuth\ABACUS.UserDependentAuth.csproj" />
   </ItemGroup>
 
   <ItemGroup>

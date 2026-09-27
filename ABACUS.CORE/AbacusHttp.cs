@@ -212,6 +212,85 @@ public static class AbacusHttp
     }
 
     /// <summary>
+    /// Sends raw bytes (for example <c>application/octet-stream</c> file-store uploads).
+    /// </summary>
+    public static async Task<AbacusResponse<string>> SendBytesAsync(
+        HttpClient httpClient,
+        HttpMethod method,
+        string relativePath,
+        byte[] content,
+        string mediaType = "application/octet-stream",
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        ArgumentNullException.ThrowIfNull(method);
+        ArgumentException.ThrowIfNullOrWhiteSpace(relativePath);
+        ArgumentNullException.ThrowIfNull(content);
+
+        using var request = new HttpRequestMessage(method, relativePath)
+        {
+            Content = new ByteArrayContent(content),
+        };
+        request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(mediaType);
+        if (!string.IsNullOrWhiteSpace(prefer))
+        {
+            request.Headers.TryAddWithoutValidation("Prefer", prefer);
+        }
+
+        try
+        {
+            using var response = await httpClient
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+                .ConfigureAwait(false);
+            var body = response.Content is null
+                ? string.Empty
+                : await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+            var headers = BuildHeaders(response);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new AbacusApiException(
+                    $"The HTTP status code of the response was not expected ({(int)response.StatusCode}).",
+                    (int)response.StatusCode,
+                    body,
+                    headers);
+            }
+
+            return new AbacusResponse<string>(body, (int)response.StatusCode, headers);
+        }
+        catch (Exception ex) when (ex is not AbacusApiException)
+        {
+            throw AbacusExceptionMapper.Map(ex);
+        }
+    }
+
+    /// <summary>
+    /// Sends a stream body (for example file-store uploads). The stream is copied into memory.
+    /// </summary>
+    public static async Task<AbacusResponse<string>> SendStreamAsync(
+        HttpClient httpClient,
+        HttpMethod method,
+        string relativePath,
+        Stream content,
+        string mediaType = "application/octet-stream",
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(content);
+        using var buffer = new MemoryStream();
+        await content.CopyToAsync(buffer, cancellationToken).ConfigureAwait(false);
+        return await SendBytesAsync(
+                httpClient,
+                method,
+                relativePath,
+                buffer.ToArray(),
+                mediaType,
+                prefer,
+                cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    /// <summary>
     /// Posts an OData <c>$batch</c> multipart request and parses nested responses.
     /// </summary>
     public static async Task<ODataBatchResponse> SendBatchAsync(

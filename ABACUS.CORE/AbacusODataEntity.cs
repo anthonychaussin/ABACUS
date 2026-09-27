@@ -90,4 +90,15 @@ public static class AbacusODataEntity
         var name = collectionName.Trim('/');
         return $"/{name}(Id={id})";
     }
+
+    /// <summary>
+    /// Builds a parenthesized key path <c>/Collection({id})</c> (AssetsLedger style).
+    /// </summary>
+    public static string ParenIdPath(string collectionName, string id)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(collectionName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        var name = collectionName.Trim('/');
+        return $"/{name}({id})";
+    }
 }

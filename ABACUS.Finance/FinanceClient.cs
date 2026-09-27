@@ -120,6 +120,65 @@ public sealed class FinanceClient : IFinanceClient
             cancellationToken);
     }
 
+    /// <inheritdoc />
+    public Task<ODataPage<JsonElement>> ListCostCentresAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.ListAsync(_httpClient, "/CostCentres", query, cancellationToken);
+
+    /// <inheritdoc />
+    public IAsyncEnumerable<JsonElement> EnumerateCostCentresAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.EnumerateAsync(_httpClient, "/CostCentres", query, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<JsonElement>> GetCostCentreAsync(
+        string enterpriseId,
+        string id,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(enterpriseId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.GetAsync(_httpClient, CostCentrePath(enterpriseId, id), query, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateCostCentreAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusODataEntity.CreateAsync(_httpClient, "/CostCentres", payload, prefer, cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchCostCentreAsync(
+        string enterpriseId,
+        string id,
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(enterpriseId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.PatchAsync(_httpClient, CostCentrePath(enterpriseId, id), payload, prefer, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> DeleteCostCentreAsync(
+        string enterpriseId,
+        string id,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(enterpriseId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        return AbacusODataEntity.DeleteAsync(_httpClient, CostCentrePath(enterpriseId, id), prefer, cancellationToken);
+    }
+
     private static string AccountPath(string enterpriseId, string id) =>
         $"/Accounts(EnterpriseId={enterpriseId},Id={id})";
+
+    private static string CostCentrePath(string enterpriseId, string id) =>
+        $"/CostCentres(EnterpriseId={enterpriseId},Id={id})";
 }

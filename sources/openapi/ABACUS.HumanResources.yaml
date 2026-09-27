@@ -2,666 +2,170 @@
 info:
   title: HumanResources
   version: 1.0.0
-  description: ''
+  description: Abacus Human Resources entity API (partial OpenAPI used for NSwag generation).
 servers:
   - url: http://localhost
 paths:
-  /LearningTrainings:
-    get:
-      summary: 9.17 LearningTrainings
-      description: ''
-      operationId: get_LearningTrainings
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 9.00 LearningTrainings post
-      description: ''
-      operationId: post_LearningTrainings
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /LearningCategories:
-    get:
-      summary: 9.01 LearningCategories
-      description: ''
-      operationId: get_LearningCategories
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvCompetences:
-    get:
-      summary: 9.02 LearningCvCompetences
-      description: ''
-      operationId: get_LearningCvCompetences
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvEducationDocuments:
-    get:
-      summary: 9.03 LearningCvEducationDocuments
-      description: ''
-      operationId: get_LearningCvEducationDocuments
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvEducations:
-    get:
-      summary: 9.04 LearningCvEducations
-      description: ''
-      operationId: get_LearningCvEducations
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvFurtherTrainingDocuments:
-    get:
-      summary: 9.05 LearningCvFurtherTrainingDocuments
-      description: ''
-      operationId: get_LearningCvFurtherTrainingDocuments
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvFurtherTrainings:
-    get:
-      summary: 9.06 LearningCvFurtherTrainings
-      description: ''
-      operationId: get_LearningCvFurtherTrainings
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvOthers:
-    get:
-      summary: 9.07 LearningCvOthers
-      description: ''
-      operationId: get_LearningCvOthers
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvWorkExperienceDocuments:
-    get:
-      summary: 9.08 LearningCvWorkExperienceDocuments
-      description: ''
-      operationId: get_LearningCvWorkExperienceDocuments
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvWorkExperiences:
-    get:
-      summary: 9.09 LearningCvWorkExperiences
-      description: ''
-      operationId: get_LearningCvWorkExperiences
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningCvs:
-    get:
-      summary: 9.10 LearningCvs
-      description: ''
-      operationId: get_LearningCvs
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningEmployeeTrainingDocuments:
-    get:
-      summary: 9.12 LearningEmployeeTrainingDocuments
-      description: ''
-      operationId: get_LearningEmployeeTrainingDocuments
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningEmployeeTrainings:
-    get:
-      summary: 9.13 LearningEmployeeTrainings
-      description: ''
-      operationId: get_LearningEmployeeTrainings
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningEvents:
-    get:
-      summary: 9.14 LearningEvents
-      description: ''
-      operationId: get_LearningEvents
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningFieldDefinitions:
-    get:
-      summary: 9.15 LearningFieldDefinitions
-      description: ''
-      operationId: get_LearningFieldDefinitions
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /LearningTrainingDocuments:
-    get:
-      summary: 9.16 LearningTrainingDocuments
-      description: ''
-      operationId: get_LearningTrainingDocuments
-      tags:
-        - 3 Bildungsmanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationDeputies:
-    get:
-      summary: 7.01 OrganisationDeputies
-      description: ''
-      operationId: get_OrganisationDeputies
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationDeputyHasPermissions:
-    get:
-      summary: 7.02 OrganisationDeputyHasPermissions
-      description: ''
-      operationId: get_OrganisationDeputyHasPermissions
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationDeputyHasRoles:
-    get:
-      summary: 7.03 OrganisationDeputyHasRoles
-      description: ''
-      operationId: get_OrganisationDeputyHasRoles
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationDeputyOfEmployees:
-    get:
-      summary: 7.04 OrganisationDeputyOfEmployees
-      description: ''
-      operationId: get_OrganisationDeputyOfEmployees
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationDeputyOfPositions:
-    get:
-      summary: 7.05 OrganisationDeputyOfPositions
-      description: ''
-      operationId: get_OrganisationDeputyOfPositions
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationEmployeeHasRoles:
-    get:
-      summary: 7.06 OrganisationEmployeeHasRoles
-      description: ''
-      operationId: get_OrganisationEmployeeHasRoles
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationEmployeeIsDeputies:
-    get:
-      summary: 7.07 OrganisationEmployeeIsDeputies
-      description: ''
-      operationId: get_OrganisationEmployeeIsDeputies
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
   /OrganisationEmployees:
     get:
-      summary: 7.08 OrganisationEmployees
-      description: ''
+      summary: List organisation employees
       operationId: get_OrganisationEmployees
-      tags:
-        - 1 Organisation
+      tags: [OrganisationEmployees]
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
-  /OrganisationHasOrgUnits:
+  /OrganisationEmployees({id}):
     get:
-      summary: 7.09 OrganisationHasOrgUnits
-      description: ''
-      operationId: get_OrganisationHasOrgUnits
-      tags:
-        - 1 Organisation
+      summary: Get organisation employee
+      operationId: get_OrganisationEmployees_id
+      tags: [OrganisationEmployees]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationOrgUnitHasEmployees:
-    get:
-      summary: 7.11 OrganisationOrgUnitHasFloatingEmployees
-      description: ''
-      operationId: get_OrganisationOrgUnitHasEmployees
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationOrgUnitHasPositions:
-    get:
-      summary: 7.12 OrganisationOrgUnitHasPositions
-      description: ''
-      operationId: get_OrganisationOrgUnitHasPositions
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /OrganisationOrgUnits:
     get:
-      summary: 7.13 OrganisationOrgUnits
-      description: ''
+      summary: List organisation org units
       operationId: get_OrganisationOrgUnits
-      tags:
-        - 1 Organisation
+      tags: [OrganisationOrgUnits]
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
-  /OrganisationPermissions:
+  /OrganisationOrgUnits({id}):
     get:
-      summary: 7.14 OrganisationPermissions
-      description: ''
-      operationId: get_OrganisationPermissions
-      tags:
-        - 1 Organisation
+      summary: Get organisation org unit
+      operationId: get_OrganisationOrgUnits_id
+      tags: [OrganisationOrgUnits]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationPositionHasEmployees:
-    get:
-      summary: 7.15 OrganisationPositionHasEmployees
-      description: ''
-      operationId: get_OrganisationPositionHasEmployees
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationPositionHasRoles:
-    get:
-      summary: 7.16 OrganisationPositionHasRoles
-      description: ''
-      operationId: get_OrganisationPositionHasRoles
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationPositions:
-    get:
-      summary: 7.17 OrganisationPositions
-      description: ''
-      operationId: get_OrganisationPositions
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationRoleGroups:
-    get:
-      summary: 7.18 OrganisationRoleGroups
-      description: ''
-      operationId: get_OrganisationRoleGroups
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationRoleHasGroups:
-    get:
-      summary: 7.19 OrganisationRoleHasGroups
-      description: ''
-      operationId: get_OrganisationRoleHasGroups
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationRoleHasPermissions:
-    get:
-      summary: 7.20 OrganisationRoleHasPermissions
-      description: ''
-      operationId: get_OrganisationRoleHasPermissions
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationRoleLimitationEmployees:
-    get:
-      summary: 7.21 OrganisationRoleLimitationEmployees
-      description: ''
-      operationId: get_OrganisationRoleLimitationEmployees
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationRoleLimitationPositions:
-    get:
-      summary: 7.22 OrganisationRoleLimitationPositions
-      description: ''
-      operationId: get_OrganisationRoleLimitationPositions
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /OrganisationRoles:
-    get:
-      summary: 7.23 OrganisationRoles
-      description: ''
-      operationId: get_OrganisationRoles
-      tags:
-        - 1 Organisation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ApplicantActors:
-    get:
-      summary: 8.11 ApplicantActors
-      description: ''
-      operationId: get_ApplicantActors
-      tags:
-        - 2 Bewerbermanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ApplicantApplications:
-    get:
-      summary: 8.12 ApplicantApplications
-      description: ''
-      operationId: get_ApplicantApplications
-      tags:
-        - 2 Bewerbermanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ApplicantJobPortals:
-    get:
-      summary: 8.13 ApplicantJobPortals
-      description: ''
-      operationId: get_ApplicantJobPortals
-      tags:
-        - 2 Bewerbermanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ApplicantJobTeams:
-    get:
-      summary: 8.14 ApplicantJobTeams
-      description: ''
-      operationId: get_ApplicantJobTeams
-      tags:
-        - 2 Bewerbermanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ApplicantJobs:
-    get:
-      summary: 8.15 ApplicantJobs
-      description: ''
-      operationId: get_ApplicantJobs
-      tags:
-        - 2 Bewerbermanagement
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ApplicantPublications:
-    get:
-      summary: 8.16 ApplicantPublications
-      description: ''
-      operationId: get_ApplicantPublications
-      tags:
-        - 2 Bewerbermanagement
-      responses:
-        '200':
-          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
         '400':
           description: Bad Request
         '500':
           description: Server Error
   /Applicants:
     get:
-      summary: 8.17 Applicants
-      description: ''
+      summary: List applicants
       operationId: get_Applicants
-      tags:
-        - 2 Bewerbermanagement
+      tags: [Applicants]
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
-  /JobAssignments:
+  /Applicants({id}):
     get:
-      summary: 8.18 JobAssignments
-      description: ''
-      operationId: get_JobAssignments
-      tags:
-        - 2 Bewerbermanagement
+      summary: Get applicant
+      operationId: get_Applicants_id
+      tags: [Applicants]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /LearningTrainings:
+    get:
+      summary: List learning trainings
+      operationId: get_LearningTrainings
+      tags: [LearningTrainings]
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: Create learning training
+      operationId: post_LearningTrainings
+      tags: [LearningTrainings]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -669,3 +173,48 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true
