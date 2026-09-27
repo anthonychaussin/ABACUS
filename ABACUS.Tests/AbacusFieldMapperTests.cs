@@ -151,12 +151,21 @@ public sealed class AbacusFieldMapperTests
     [Fact]
     public void AddAbacusFieldMapping_ConfigurationOverridesFluentFieldByField()
     {
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
+        const string json = """
             {
-                ["Abacus:FieldMaps:Supplier:Name"] = "Name",
-                ["Abacus:FieldMaps:Supplier:VatNumber"] = "UserFields.FromConfig",
-            })
+              "Abacus": {
+                "FieldMaps": {
+                  "Supplier": {
+                    "Name": "Name",
+                    "VatNumber": "UserFields.FromConfig"
+                  }
+                }
+              }
+            }
+            """;
+        using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(json));
+        var configuration = new ConfigurationBuilder()
+            .AddJsonStream(stream)
             .Build();
 
         var services = new ServiceCollection();

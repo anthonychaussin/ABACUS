@@ -26,60 +26,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /RealEstates:
-    get:
-      summary: 3.1 - Show all real estates
-      description: ''
-      operationId: get_RealEstates
-      tags:
-        - 3. Real Estate
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 3.9 - Create a new real estate
-      description: ''
-      operationId: post_RealEstates
-      tags:
-        - 3. Real Estate
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /RealEstates({id})/Owner:
-    get:
-      summary: 3.8 - Show the main owner of a real estate
-      description: ''
-      operationId: get_RealEstates_id_Owner
-      tags:
-        - 3. Real Estate
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /RealEstates({id}):
     delete:
       summary: 3.12 - Delete real estate
       description: ''
@@ -123,7 +69,70 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+  /RealEstates:
+    get:
+      summary: 3.1 - Show all real estates
+      description: ''
+      operationId: get_RealEstates
+      tags:
+        - 3. Real Estate
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 3.9 - Create a new real estate
+      description: ''
+      operationId: post_RealEstates
+      tags:
+        - 3. Real Estate
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  /RealEstates({id})/Owner:
+    get:
+      summary: 3.8 - Show the main owner of a real estate
+      description: ''
+      operationId: get_RealEstates_id_Owner
+      tags:
+        - 3. Real Estate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
   /RealEstates({id})/Buildings:
     get:
       summary: 3.3 - Show all buildings of a real estate
@@ -231,9 +240,19 @@ paths:
       operationId: get_Owners
       tags:
         - 1. Owner
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -256,7 +275,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Owners({id})/Subject:
     get:
       summary: 1.3 - Show specific owner with subject
@@ -282,6 +301,44 @@ paths:
       summary: 1.2 - Show specific owner whithout address
       description: ''
       operationId: get_Owners_id
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    get:
+      summary: 1.6 - Show a nonexistent owner
+      description: ''
+      operationId: get_Owners_id_2
+      tags:
+        - 1. Owner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 1.11 - Delete owner
+      description: ''
+      operationId: delete_Owners_id
       tags:
         - 1. Owner
       parameters:
@@ -337,46 +394,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Owners({id}):
-    get:
-      summary: 1.6 - Show a nonexistent owner
-      description: ''
-      operationId: get_Owners_id_2
-      tags:
-        - 1. Owner
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /Owners({id}):
-    delete:
-      summary: 1.11 - Delete owner
-      description: ''
-      operationId: delete_Owners_id
-      tags:
-        - 1. Owner
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
   /Owners({id})/Designation:
     put:
       summary: 1.9 - Update an owner designation
@@ -402,7 +419,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     delete:
       summary: 1.10 - Delete an owner designation
       description: ''
@@ -422,7 +439,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Owners({id})/Designation:
     get:
       summary: 1.7 - Show the designation of an owner
       description: ''
@@ -462,66 +478,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Tenants:
-    get:
-      summary: 2.7 - Show all tenants sorted by subjectId
-      description: ''
-      operationId: get_Tenants
-      tags:
-        - 2. Tenant
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 2.9 - Create a new tenant from an existing debtor
-      description: >-
-        Im D31 einen neuen Debitor erfassen -> Debitornummer.
-
-        Diese Debitornummer in diesem Request als ID und als Addressnumber
-        mitgeben.
-
-        So wird ein neuer Mieter mit dem existierenden Debitor erstellt.
-      operationId: post_Tenants
-      tags:
-        - 2. Tenant
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /Tenants({id})/Subject:
-    get:
-      summary: 2.4 - Show the subject of a tenant
-      description: ''
-      operationId: get_Tenants_id_Subject
-      tags:
-        - 2. Tenant
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /Tenants({id}):
     delete:
       summary: 2.11 - Delete tenant
       description: ''
@@ -565,7 +521,76 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+  /Tenants:
+    get:
+      summary: 2.7 - Show all tenants sorted by subjectId
+      description: ''
+      operationId: get_Tenants
+      tags:
+        - 2. Tenant
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 2.9 - Create a new tenant from an existing debtor
+      description: >-
+        Im D31 einen neuen Debitor erfassen -> Debitornummer.
+
+        Diese Debitornummer in diesem Request als ID und als Addressnumber
+        mitgeben.
+
+        So wird ein neuer Mieter mit dem existierenden Debitor erstellt.
+      operationId: post_Tenants
+      tags:
+        - 2. Tenant
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  /Tenants({id})/Subject:
+    get:
+      summary: 2.4 - Show the subject of a tenant
+      description: ''
+      operationId: get_Tenants_id_Subject
+      tags:
+        - 2. Tenant
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
   /Tenants({id})/Customer:
     get:
       summary: 2.6 - Show the customer informations of a tenant
@@ -671,40 +696,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Buildings:
-    get:
-      summary: 4.1 - Show all buildings
-      description: ''
-      operationId: get_Buildings
-      tags:
-        - 4. Building
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 4.5 - Create a new building
-      description: ''
-      operationId: post_Buildings
-      tags:
-        - 4. Building
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /Buildings(Id={id},RealEstateId={realEstateId}):
     delete:
       summary: 4.7 - Delete building
       description: ''
@@ -758,7 +749,50 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+  /Buildings:
+    get:
+      summary: 4.1 - Show all buildings
+      description: ''
+      operationId: get_Buildings
+      tags:
+        - 4. Building
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 4.5 - Create a new building
+      description: ''
+      operationId: post_Buildings
+      tags:
+        - 4. Building
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
   /Buildings(Id={id},RealEstateId={realEstateId})/RealEstate:
     get:
       summary: 4.4 - Show the real eastate of a building
@@ -834,65 +868,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Houses:
-    get:
-      summary: 5.1 - Show all houses
-      description: ''
-      operationId: get_Houses
-      tags:
-        - 5. House
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 5.8 - Create a new house with OCSTAT
-      description: ''
-      operationId: post_Houses
-      tags:
-        - 5. House
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /Houses(Id={id},RealEstateId={realEstateId})/RealEstate:
-    get:
-      summary: 5.6 - Show the real estate of a house
-      description: ''
-      operationId: get_Houses_Id_id_RealEstateId_realEstateId_RealEstate
-      tags:
-        - 5. House
-      parameters:
-        - in: path
-          name: i
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: r
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /Houses(Id={id},RealEstateId={realEstateId}):
     delete:
       summary: 5.10 - Delete house
       description: ''
@@ -946,7 +921,99 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+    delete:
+      summary: 5.11 - Delete house
+      description: ''
+      operationId: delete_Houses_Id_id_RealEstateId_realEstateId_2
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Houses:
+    get:
+      summary: 5.1 - Show all houses
+      description: ''
+      operationId: get_Houses
+      tags:
+        - 5. House
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 5.8 - Create a new house with OCSTAT
+      description: ''
+      operationId: post_Houses
+      tags:
+        - 5. House
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  /Houses(Id={id},RealEstateId={realEstateId})/RealEstate:
+    get:
+      summary: 5.6 - Show the real estate of a house
+      description: ''
+      operationId: get_Houses_Id_id_RealEstateId_realEstateId_RealEstate
+      tags:
+        - 5. House
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
   /Houses(Id={id},RealEstateId={realEstateId})/Building:
     get:
       summary: 5.5 - Show the building of a house
@@ -1022,13 +1089,13 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Houses(Id={id},RealEstateId={realEstateId}):
-    delete:
-      summary: 5.11 - Delete house
+  /Objects(Id={id},RealEstateId={realEstateId}):
+    get:
+      summary: 7.2 - Show a specific object
       description: ''
-      operationId: delete_Houses_Id_id_RealEstateId_realEstateId_2
+      operationId: get_Objects_Id_id_RealEstateId_realEstateId
       tags:
-        - 5. House
+        - 7. Object
       parameters:
         - in: path
           name: i
@@ -1047,11 +1114,40 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Objects(Id={id},RealEstateId={realEstateId}):
-    get:
-      summary: 7.2 - Show a specific object
+    patch:
+      summary: 7.9 - Update informations about an object
       description: ''
-      operationId: get_Objects_Id_id_RealEstateId_realEstateId
+      operationId: patch_Objects_Id_id_RealEstateId_realEstateId
+      tags:
+        - 7. Object
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    delete:
+      summary: 7.10 - Delete object
+      description: ''
+      operationId: delete_Objects_Id_id_RealEstateId_realEstateId
       tags:
         - 7. Object
       parameters:
@@ -1079,9 +1175,19 @@ paths:
       operationId: get_Objects
       tags:
         - 7. Object
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -1104,7 +1210,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Objects(Id={id},RealEstateId={realEstateId})/RealEstate:
     get:
       summary: 7.6 - Show the real estate of an object
@@ -1160,61 +1266,6 @@ paths:
       summary: 7.4 - Show the house of an object
       description: ''
       operationId: get_Objects_Id_id_RealEstateId_realEstateId_House
-      tags:
-        - 7. Object
-      parameters:
-        - in: path
-          name: i
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: r
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /Objects(Id={id},RealEstateId={realEstateId}):
-    patch:
-      summary: 7.9 - Update informations about an object
-      description: ''
-      operationId: patch_Objects_Id_id_RealEstateId_realEstateId
-      tags:
-        - 7. Object
-      parameters:
-        - in: path
-          name: i
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: r
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-    delete:
-      summary: 7.10 - Delete object
-      description: ''
-      operationId: delete_Objects_Id_id_RealEstateId_realEstateId
       tags:
         - 7. Object
       parameters:
@@ -1317,100 +1368,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Floors:
-    get:
-      summary: 6.3 - Show all floors of a real estate
-      description: ''
-      operationId: get_Floors
-      tags:
-        - 6. Floor
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 6.6 - Create a new floor
-      description: ''
-      operationId: post_Floors
-      tags:
-        - 6. Floor
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/House:
-    get:
-      summary: 6.5 - Show the house of a floor
-      description: ''
-      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId_House
-      tags:
-        - 6. Floor
-      parameters:
-        - in: path
-          name: i
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: r
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: h
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/RealEstate:
-    get:
-      summary: 6.4 - Show the real estate of a floor
-      description: ''
-      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId_RealEstate
-      tags:
-        - 6. Floor
-      parameters:
-        - in: path
-          name: i
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: r
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: h
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId}):
     delete:
       summary: 6.8 - Delete floor
       description: ''
@@ -1474,7 +1431,110 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+  /Floors:
+    get:
+      summary: 6.3 - Show all floors of a real estate
+      description: ''
+      operationId: get_Floors
+      tags:
+        - 6. Floor
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 6.6 - Create a new floor
+      description: ''
+      operationId: post_Floors
+      tags:
+        - 6. Floor
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/House:
+    get:
+      summary: 6.5 - Show the house of a floor
+      description: ''
+      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId_House
+      tags:
+        - 6. Floor
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/RealEstate:
+    get:
+      summary: 6.4 - Show the real estate of a floor
+      description: ''
+      operationId: get_Floors_Id_id_RealEstateId_realEstateId_HouseId_houseId_RealEstate
+      tags:
+        - 6. Floor
+      parameters:
+        - in: path
+          name: i
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: h
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
   /ObjectContracts(Id={id}):
     get:
       summary: 8.5 - Show a specific object contract (according to regulation)
@@ -1495,40 +1555,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /ObjectContracts:
-    get:
-      summary: 8.14 - Show all object contracts vacancies
-      description: ''
-      operationId: get_ObjectContracts
-      tags:
-        - 8. ObjectContracts
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 8.15 - Create a new object contract
-      description: ''
-      operationId: post_ObjectContracts
-      tags:
-        - 8. ObjectContracts
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /ObjectContracts(Id={id}):
     delete:
       summary: 8.17 - Delete object contract
       description: ''
@@ -1572,7 +1598,145 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+    get:
+      summary: 8.8 - Show a specific object contract (staggered rent)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_2
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    get:
+      summary: 8.9 - Show a specific object contract (turnover rent)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_3
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    get:
+      summary: 8.10 - Show a specific object contract (condominium ownership)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_4
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    get:
+      summary: 8.6 - Show a specific object contract (outside regulation)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_5
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    get:
+      summary: 8.7 - Show a specific object contract (index)
+      description: ''
+      operationId: get_ObjectContracts_Id_id_6
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /ObjectContracts:
+    get:
+      summary: 8.14 - Show all object contracts vacancies
+      description: ''
+      operationId: get_ObjectContracts
+      tags:
+        - 8. ObjectContracts
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 8.15 - Create a new object contract
+      description: ''
+      operationId: post_ObjectContracts
+      tags:
+        - 8. ObjectContracts
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
   /ObjectContracts(Id={id})/RealEstate:
     get:
       summary: 8.11 - Show the real estate of an object contract
@@ -1633,106 +1797,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /ObjectContracts(Id={id}):
-    get:
-      summary: 8.8 - Show a specific object contract (staggered rent)
-      description: ''
-      operationId: get_ObjectContracts_Id_id_2
-      tags:
-        - 8. ObjectContracts
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ObjectContracts(Id={id}):
-    get:
-      summary: 8.9 - Show a specific object contract (turnover rent)
-      description: ''
-      operationId: get_ObjectContracts_Id_id_3
-      tags:
-        - 8. ObjectContracts
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ObjectContracts(Id={id}):
-    get:
-      summary: 8.10 - Show a specific object contract (condominium ownership)
-      description: ''
-      operationId: get_ObjectContracts_Id_id_4
-      tags:
-        - 8. ObjectContracts
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ObjectContracts(Id={id}):
-    get:
-      summary: 8.6 - Show a specific object contract (outside regulation)
-      description: ''
-      operationId: get_ObjectContracts_Id_id_5
-      tags:
-        - 8. ObjectContracts
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ObjectContracts(Id={id}):
-    get:
-      summary: 8.7 - Show a specific object contract (index)
-      description: ''
-      operationId: get_ObjectContracts_Id_id_6
-      tags:
-        - 8. ObjectContracts
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
   /ObjectContracts(Id={id})/Tenant:
     get:
       summary: 8.18 - Show the tenant of an object contract
@@ -1778,40 +1842,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /ObjectContractComponents:
-    get:
-      summary: 11.1 - Show all object contract components
-      description: ''
-      operationId: get_ObjectContractComponents
-      tags:
-        - 11. ObjectContractComponent
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 11.6 - Create an object contract component timeline with rent component
-      description: ''
-      operationId: post_ObjectContractComponents
-      tags:
-        - 11. ObjectContractComponent
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /ObjectContractComponents(ObjectContractId={objectContractId},ValidFrom={validFrom}):
     delete:
       summary: 11.8 - Delete an object contract component (timeline from POST 11.5)
       description: ''
@@ -1865,8 +1895,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /ObjectContractComponents(ObjectContractId={objectContractId},ValidFrom={validFrom}):
+              additionalProperties: true
     delete:
       summary: 11.9 - Delete an object contract component (timeline from POST 11.6)
       description: ''
@@ -1891,6 +1920,49 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
+  /ObjectContractComponents:
+    get:
+      summary: 11.1 - Show all object contract components
+      description: ''
+      operationId: get_ObjectContractComponents
+      tags:
+        - 11. ObjectContractComponent
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 11.6 - Create an object contract component timeline with rent component
+      description: ''
+      operationId: post_ObjectContractComponents
+      tags:
+        - 11. ObjectContractComponent
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
   /ObjectContractPartners(ObjectContractId={objectContractId},ValidFrom={validFrom},SubjectId={subjectId})/Subject:
     get:
       summary: 10.5 - Show the subject of a specific object contract partner
@@ -1928,9 +2000,19 @@ paths:
       operationId: get_ObjectContractPartners
       tags:
         - 10. ObjectContractPartner
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -1953,7 +2035,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /ObjectContractPartners(ObjectContractId={objectContractId},ValidFrom={validFrom},SubjectId={subjectId}):
     delete:
       summary: 10.8 - Delete an object contract partner
@@ -2018,30 +2100,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /ObjectContracts(Id={id})/ObjectContractPartner:
-    get:
-      summary: >-
-        10.3 - Show all object contract partner timelines of a specific object
-        contract
-      description: ''
-      operationId: get_ObjectContracts_Id_id_ObjectContractPartner
-      tags:
-        - 10. ObjectContractPartner
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ObjectContractPartners(ObjectContractId={objectContractId},ValidFrom={validFrom},SubjectId={subjectId}):
+              additionalProperties: true
     get:
       summary: 10.2 - Show a specific timeline of an object contract partner
       description: ''
@@ -2071,6 +2130,28 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
+  /ObjectContracts(Id={id})/ObjectContractPartner:
+    get:
+      summary: >-
+        10.3 - Show all object contract partner timelines of a specific object
+        contract
+      description: ''
+      operationId: get_ObjectContracts_Id_id_ObjectContractPartner
+      tags:
+        - 10. ObjectContractPartner
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
   /PartialObjectContracts:
     post:
       summary: 9.2 - Create a new partial object contract with GUID (v2025)
@@ -2090,16 +2171,26 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     get:
       summary: 9.3 - Show all partial object contracts
       description: ''
       operationId: get_PartialObjectContracts
       tags:
         - 9. PartialObjectContract
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -2158,11 +2249,35 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     get:
       summary: 9.4 - Show a specific partial object contract
       description: ''
       operationId: get_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId
+      tags:
+        - 9. PartialObjectContract
+      parameters:
+        - in: path
+          name: r
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: o
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 9.10 - Delete partial object contract
+      description: ''
+      operationId: delete_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId_2
       tags:
         - 9. PartialObjectContract
       parameters:
@@ -2258,31 +2373,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /PartialObjectContracts(RealEstateId={realEstateId},ObjectId={objectId}):
-    delete:
-      summary: 9.10 - Delete partial object contract
-      description: ''
-      operationId: delete_PartialObjectContracts_RealEstateId_realEstateId_ObjectId_objectId_2
-      tags:
-        - 9. PartialObjectContract
-      parameters:
-        - in: path
-          name: r
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: o
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
   /Customers({id})/ObjectContracts:
     get:
       summary: 22.2 - Show the object contracts of a specific customer
@@ -2353,7 +2443,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /RentComponents(ObjectContractId={objectContractId},ValidFrom={validFrom},Id={id}):
     patch:
       summary: >-
         12.4 - Update the rent components of a specific object contract
@@ -2390,7 +2479,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /RentComponents(ObjectContractId={objectContractId},ValidFrom={validFrom},Id={id})/ObjectContractComponent:
     get:
       summary: 12.3 - Show the object contract component of a specific rent component
@@ -2428,9 +2517,19 @@ paths:
       operationId: get_RentComponents
       tags:
         - 12. RentComponent
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -2455,40 +2554,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /ContractRelations:
-    post:
-      summary: 16.6 - Create a new contract relation
-      description: ''
-      operationId: post_ContractRelations
-      tags:
-        - 16. ContractRelation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-    get:
-      summary: 16.1 - Show all contract relations
-      description: ''
-      operationId: get_ContractRelations
-      tags:
-        - 16. ContractRelation
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /ContractRelations(Id={id}):
     get:
       summary: 16.3 - Show an additional designation of a specific contract relation
       description: ''
@@ -2532,7 +2597,50 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+  /ContractRelations:
+    post:
+      summary: 16.6 - Create a new contract relation
+      description: ''
+      operationId: post_ContractRelations
+      tags:
+        - 16. ContractRelation
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+    get:
+      summary: 16.1 - Show all contract relations
+      description: ''
+      operationId: get_ContractRelations
+      tags:
+        - 16. ContractRelation
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
   /ContractRelationCollectionDisbursement:
     get:
       summary: 17.1 - Show all contract relation collection disbursement
@@ -2540,9 +2648,19 @@ paths:
       operationId: get_ContractRelationCollectionDisbursement
       tags:
         - 17. ContractRelationCollectionDisbursement
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -2567,7 +2685,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /ContractRelationCollectionDisbursement(ContractRelationId={contractRelationId},ValidFrom={validFrom}):
     get:
       summary: >-
@@ -2595,7 +2713,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /ContractRelationCollectionDisbursement(ContractRelationId={contractRelationId},ValidFrom={validFrom}):
     patch:
       summary: 17.4 - Update a timeline from a contract relation colletion disbursement
       description: ''
@@ -2625,7 +2742,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     delete:
       summary: 17.5 - Delete a timeline from a contract relation colletion disbursement
       description: ''
@@ -2657,9 +2774,19 @@ paths:
       operationId: get_TenantFlatmates
       tags:
         - 18. TenantFlatmates
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -2682,7 +2809,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /TenantFlatmates(Id={id},CustomerId={customerId}):
     get:
       summary: 18.2 - Show a specific tenant flatmate
@@ -2708,7 +2835,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /TenantFlatmates(Id={id},CustomerId={customerId}):
     delete:
       summary: 18.5 - Delete a tenant flatmate
       description: ''
@@ -2762,7 +2888,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Maintenances:
     get:
       summary: 23.6 - Show all maintenance of a floor
@@ -2770,9 +2896,19 @@ paths:
       operationId: get_Maintenances
       tags:
         - 23. Maintenances
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -2795,7 +2931,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Maintenances({id}):
     get:
       summary: 23.2 - Show a specific maintenance
@@ -2816,7 +2952,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Maintenances({id}):
     delete:
       summary: 23.14 - Delete a maintenance
       description: ''
@@ -2861,7 +2996,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /TenantCollectionDisbursement:
     get:
       summary: 19.1 - Show all tenant collection disbursements
@@ -2869,9 +3004,19 @@ paths:
       operationId: get_TenantCollectionDisbursement
       tags:
         - 19. TenantCollectionDisbursement
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -2894,7 +3039,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /TenantCollectionDisbursement(CustomerId={customerId},ValidFrom={validFrom}):
     get:
       summary: 19.2 - Show a specific timeline of a tenant collection disbursement
@@ -2920,7 +3065,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /TenantCollectionDisbursement(CustomerId={customerId},ValidFrom={validFrom}):
     patch:
       summary: 19.4 - Update informations about a tenant collection disbursement
       description: ''
@@ -2950,7 +3094,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     delete:
       summary: 19.5 - Delete a timeline of a tenant collection disbursement
       description: ''
@@ -2982,9 +3126,19 @@ paths:
       operationId: get_CooperativeContracts
       tags:
         - 21. CooperativeContracts (Mandant 9999)
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -3007,7 +3161,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CooperativeContracts(Id={id}):
     get:
       summary: 21.2 - Show a specific cooperative contract
@@ -3028,7 +3182,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /CooperativeContracts(Id={id}):
     patch:
       summary: 21.4 - Update an information about a cooperative contract
       description: ''
@@ -3053,7 +3206,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     delete:
       summary: 21.5 - Delete a cooperative contract
       description: ''
@@ -3080,9 +3233,19 @@ paths:
       operationId: get_Codetables
       tags:
         - 25. Codetables
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -3105,7 +3268,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Codetables(Type={type},Id={id}):
     get:
       summary: 25.2 - Show a specific codetable
@@ -3155,7 +3318,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Codetables(Type={type},Id={id}):
     delete:
       summary: 25.5 - Delete a codetable
       description: ''
@@ -3209,7 +3371,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /SystemSettings(Switches1='{switches1}'):
     patch:
       summary: 24.2 - Update the system settings
@@ -3235,7 +3397,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /SystemSettings:
     get:
       summary: 24.1 - Show all system settings
@@ -3243,9 +3405,19 @@ paths:
       operationId: get_SystemSettings
       tags:
         - 24. SystemSettings
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -3275,6 +3447,25 @@ paths:
       summary: 31.2 - Show a specific object contract document
       description: ''
       operationId: get_ObjectContractDocuments_id
+      tags:
+        - 31. ObjectContractDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 31.7 - Delete an object contract document
+      description: ''
+      operationId: delete_ObjectContractDocuments_id
       tags:
         - 31. ObjectContractDocument
       parameters:
@@ -3330,26 +3521,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /ObjectContractDocuments({id}):
-    delete:
-      summary: 31.7 - Delete an object contract document
-      description: ''
-      operationId: delete_ObjectContractDocuments_id
-      tags:
-        - 31. ObjectContractDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
   /user:
     post:
       summary: 34.5 - Upload a document to file storage (copy location from header)
@@ -3369,7 +3540,7 @@ paths:
           application/octet-stream:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /ObjectContractDocuments:
     post:
       summary: >-
@@ -3394,7 +3565,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Tenants(Id={id})/Documents:
     get:
       summary: 33.1 - Show all documents of a specific tenant
@@ -3420,6 +3591,25 @@ paths:
       summary: 33.2 - Show a specific tenant document
       description: ''
       operationId: get_TenantDocuments_id
+      tags:
+        - 33. TenantDocument (Customer)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 33.7 - Delete a tenant document
+      description: ''
+      operationId: delete_TenantDocuments_id
       tags:
         - 33. TenantDocument (Customer)
       parameters:
@@ -3499,27 +3689,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /TenantDocuments({id}):
-    delete:
-      summary: 33.7 - Delete a tenant document
-      description: ''
-      operationId: delete_TenantDocuments_id
-      tags:
-        - 33. TenantDocument (Customer)
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
+              additionalProperties: true
   /ContractRelations(Id={id})/Documents:
     get:
       summary: 32.1 - Show all documents of a specific contract relation
@@ -3545,6 +3715,25 @@ paths:
       summary: 32.2 - Show a specific contract relation document
       description: ''
       operationId: get_ContractRelationDocuments_id
+      tags:
+        - 32. ContractRelationDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 32.7 - Delete a contract relation document
+      description: ''
+      operationId: delete_ContractRelationDocuments_id
       tags:
         - 32. ContractRelationDocument
       parameters:
@@ -3624,27 +3813,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /ContractRelationDocuments({id}):
-    delete:
-      summary: 32.7 - Delete a contract relation document
-      description: ''
-      operationId: delete_ContractRelationDocuments_id
-      tags:
-        - 32. ContractRelationDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
+              additionalProperties: true
   /RealEstates(Id={id})/Documents:
     get:
       summary: 26.1 - Show all documents of a specific real estate
@@ -3670,6 +3839,28 @@ paths:
       summary: 26.2 - Show a specific real estate document
       description: ''
       operationId: get_RealEstateDocuments_id
+      tags:
+        - 26. RealEstateDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 26.7 - Delete a real estate document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_RealEstateDocuments_id
       tags:
         - 26. RealEstateDocument
       parameters:
@@ -3749,30 +3940,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /RealEstateDocuments({id}):
-    delete:
-      summary: 26.7 - Delete a real estate document
-      description: >
-        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
-        Uploads über unseren FileUpload Service. Sie ist im Response Header
-        "Location" zu finden
-      operationId: delete_RealEstateDocuments_id
-      tags:
-        - 26. RealEstateDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
+              additionalProperties: true
   /Buildings(Id={id},RealEstateId={realEstateId})/Documents:
     get:
       summary: 27.1 - Show all documents of a specific building
@@ -3803,6 +3971,28 @@ paths:
       summary: 27.2 - Show a specific building document
       description: ''
       operationId: get_BuildingDocuments_id
+      tags:
+        - 27. BuildingDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 27.7 - Delete a building document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_BuildingDocuments_id
       tags:
         - 27. BuildingDocument
       parameters:
@@ -3882,30 +4072,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /BuildingDocuments({id}):
-    delete:
-      summary: 27.7 - Delete a building document
-      description: >
-        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
-        Uploads über unseren FileUpload Service. Sie ist im Response Header
-        "Location" zu finden
-      operationId: delete_BuildingDocuments_id
-      tags:
-        - 27. BuildingDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
+              additionalProperties: true
   /Houses(Id={id},RealEstateId={realEstateId})/Documents:
     get:
       summary: 28.1 - Show all documents of a specific house
@@ -3936,6 +4103,28 @@ paths:
       summary: 28.2 - Show a specific house document
       description: ''
       operationId: get_HouseDocuments_id
+      tags:
+        - 28. HouseDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 28.7 - Delete a house document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_HouseDocuments_id
       tags:
         - 28. HouseDocument
       parameters:
@@ -4015,30 +4204,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /HouseDocuments({id}):
-    delete:
-      summary: 28.7 - Delete a house document
-      description: >
-        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
-        Uploads über unseren FileUpload Service. Sie ist im Response Header
-        "Location" zu finden
-      operationId: delete_HouseDocuments_id
-      tags:
-        - 28. HouseDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
+              additionalProperties: true
   /Floors(Id={id},RealEstateId={realEstateId},HouseId={houseId})/Documents:
     get:
       summary: 29.1 - Show all documents of a specific floor
@@ -4074,6 +4240,28 @@ paths:
       summary: 29.2 - Show a specific floor document
       description: ''
       operationId: get_FloorDocuments_id
+      tags:
+        - 29. FloorDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 29.7 - Delete a floor document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_FloorDocuments_id
       tags:
         - 29. FloorDocument
       parameters:
@@ -4129,29 +4317,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /FloorDocuments({id}):
-    delete:
-      summary: 29.7 - Delete a floor document
-      description: >
-        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
-        Uploads über unseren FileUpload Service. Sie ist im Response Header
-        "Location" zu finden
-      operationId: delete_FloorDocuments_id
-      tags:
-        - 29. FloorDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
   /FloorDocuments:
     post:
       summary: >-
@@ -4176,7 +4341,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Objects(Id={id},RealEstateId={realEstateId})/Documents:
     get:
       summary: 30.1 - Show all documents of a specific object
@@ -4207,6 +4372,28 @@ paths:
       summary: 30.2 - Show a specific object document
       description: ''
       operationId: get_ObjectDocuments_id
+      tags:
+        - 30. ObjectDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 30.7 - Delete an object document
+      description: >
+        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
+        Uploads über unseren FileUpload Service. Sie ist im Response Header
+        "Location" zu finden
+      operationId: delete_ObjectDocuments_id
       tags:
         - 30. ObjectDocument
       parameters:
@@ -4286,30 +4473,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /ObjectDocuments({id}):
-    delete:
-      summary: 30.7 - Delete an object document
-      description: >
-        Content@odata.mediaReadLink: Diese URL erhält man aus der Response des
-        Uploads über unseren FileUpload Service. Sie ist im Response Header
-        "Location" zu finden
-      operationId: delete_ObjectDocuments_id
-      tags:
-        - 30. ObjectDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
+              additionalProperties: true
   /CondoOwnersAssemblies({id}):
     get:
       summary: 20.2 - Show a specific condo owners assembly
@@ -4330,60 +4494,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /CondoOwnersAssemblies:
-    get:
-      summary: 20.1 - Show all condo owners assemblies
-      description: ''
-      operationId: get_CondoOwnersAssemblies
-      tags:
-        - 20. CondoOwnersAssembly
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-    post:
-      summary: 20.4 - Create a new condo owners assembly
-      description: ''
-      operationId: post_CondoOwnersAssemblies
-      tags:
-        - 20. CondoOwnersAssembly
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /CondoOwnersAssemblies({id})/RealEstate:
-    get:
-      summary: 20.3 - Show the real estate of a specific condo owners assembly
-      description: ''
-      operationId: get_CondoOwnersAssemblies_id_RealEstate
-      tags:
-        - 20. CondoOwnersAssembly
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /CondoOwnersAssemblies({id}):
     delete:
       summary: 20.6 - Delete a condo owners assembly
       description: ''
@@ -4427,7 +4537,70 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+  /CondoOwnersAssemblies:
+    get:
+      summary: 20.1 - Show all condo owners assemblies
+      description: ''
+      operationId: get_CondoOwnersAssemblies
+      tags:
+        - 20. CondoOwnersAssembly
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: 20.4 - Create a new condo owners assembly
+      description: ''
+      operationId: post_CondoOwnersAssemblies
+      tags:
+        - 20. CondoOwnersAssembly
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+  /CondoOwnersAssemblies({id})/RealEstate:
+    get:
+      summary: 20.3 - Show the real estate of a specific condo owners assembly
+      description: ''
+      operationId: get_CondoOwnersAssemblies_id_RealEstate
+      tags:
+        - 20. CondoOwnersAssembly
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
   /CondoOwnersAssemblies({id})/Documents:
     get:
       summary: 34.1 - Show all documents of a specific condo owners assembly
@@ -4453,6 +4626,25 @@ paths:
       summary: 34.2 - Show a specific condo owners assembly document
       description: ''
       operationId: get_CondoOwnersAssemblyDocuments_id
+      tags:
+        - 34. CondoOwnersAssemblyDocument
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 34.7 - Delete a condo owners assembly document
+      description: ''
+      operationId: delete_CondoOwnersAssemblyDocuments_id
       tags:
         - 34. CondoOwnersAssemblyDocument
       parameters:
@@ -4508,26 +4700,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /CondoOwnersAssemblyDocuments({id}):
-    delete:
-      summary: 34.7 - Delete a condo owners assembly document
-      description: ''
-      operationId: delete_CondoOwnersAssemblyDocuments_id
-      tags:
-        - 34. CondoOwnersAssemblyDocument
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
   /CondoOwnersAssemblyDocuments:
     post:
       summary: >-
@@ -4552,12 +4724,31 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /TurnoverRents({id}):
     get:
       summary: 13.4 - Show all details of a specific turnover rent timeline
       description: ''
       operationId: get_TurnoverRents_id
+      tags:
+        - 13. TurnoverRent
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: 13.7 - Delete a turnover rent
+      description: ''
+      operationId: delete_TurnoverRents_id
       tags:
         - 13. TurnoverRent
       parameters:
@@ -4580,9 +4771,19 @@ paths:
       operationId: get_TurnoverRents
       tags:
         - 13. TurnoverRent
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -4605,7 +4806,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /TurnoverRents(Id={id})/TurnoverRentDefinitions:
     get:
       summary: >-
@@ -4633,26 +4834,6 @@ paths:
       summary: 13.2 - Show all turnover rents of a specific object contract
       description: ''
       operationId: get_ObjectContracts_Id_id_TurnoverRents
-      tags:
-        - 13. TurnoverRent
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-  /TurnoverRents({id}):
-    delete:
-      summary: 13.7 - Delete a turnover rent
-      description: ''
-      operationId: delete_TurnoverRents_id
       tags:
         - 13. TurnoverRent
       parameters:
@@ -4714,9 +4895,19 @@ paths:
       operationId: get_TurnoverRentDefinitions
       tags:
         - 14. TurnoverRentDefinitions
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -4810,9 +5001,19 @@ paths:
       operationId: get_TurnoverRentLevels
       tags:
         - 15. TurnoverRentLevels
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -4846,10 +5047,66 @@ paths:
       operationId: get_metadata
       tags:
         - 35. Metadata
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
+
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

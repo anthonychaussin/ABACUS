@@ -13,9 +13,19 @@ paths:
       operationId: get_AccountDocuments
       tags:
         - 1 Account
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -27,9 +37,19 @@ paths:
       operationId: get_Accounts
       tags:
         - 1 Account
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -52,7 +72,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Accounts(EnterpriseId={enterpriseId},Id={id}):
     get:
       summary: 1.2 - Show Account "3090500" from Enterprise "500"
@@ -78,7 +98,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Accounts(EnterpriseId={enterpriseId},Id={id}):
     patch:
       summary: 1.5 - edit Account
       description: ''
@@ -108,7 +127,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     delete:
       summary: 1.7 - delete Account
       description: ''
@@ -140,9 +159,19 @@ paths:
       operationId: get_AccountClassificationDefinitions
       tags:
         - 2 AccountClassificationDefinitions
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -165,7 +194,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /AccountClassificationDefinitions({id}):
     get:
       summary: 2.2 - show Account Classification Definition expand Enterprise
@@ -212,9 +241,19 @@ paths:
       operationId: get_CostCentreDocuments
       tags:
         - 5 CostCentres
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -226,9 +265,19 @@ paths:
       operationId: get_CostCentres
       tags:
         - 5 CostCentres
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -251,7 +300,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CostCentres(EnterpriseId={enterpriseId},Id={id}):
     get:
       summary: 5.2 - show CostCentres with expand
@@ -301,7 +350,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /CostCentres(EnterpriseId={enterpriseId},Id={id}):
     patch:
       summary: '5.7 - edit CostCentres '
       description: ''
@@ -331,7 +379,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /GeneralLedgerEntries:
     get:
       summary: 6.4 - show GeneralLedgerEntries(Filter)
@@ -339,9 +387,19 @@ paths:
       operationId: get_GeneralLedgerEntries
       tags:
         - 6 GeneralLedgerEntries
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -364,7 +422,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /GeneralLedgerEntryDocuments:
     get:
       summary: 6.7 - show GeneralLedgerEntryDocuments
@@ -372,9 +430,19 @@ paths:
       operationId: get_GeneralLedgerEntryDocuments
       tags:
         - 6 GeneralLedgerEntries
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -404,7 +472,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     delete:
       summary: 6.1 - delete booking
       description: ''
@@ -431,9 +499,19 @@ paths:
       operationId: get_AccountClassificationDetails
       tags:
         - 3 AccountClassificationDetails
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -469,7 +547,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /AccountClassificationDetails({id}):
     patch:
       summary: 3.2 - edit Account Classification Details
@@ -495,8 +573,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /AccountClassificationDetails({id}):
+              additionalProperties: true
     get:
       summary: 3.4 - show Account Classification Details with filter, expand
       description: ''
@@ -523,9 +600,19 @@ paths:
       operationId: get_AccountClassificationElements
       tags:
         - 4 AccountClassificationElements
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -548,7 +635,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /AccountClassificationElements({id}):
     patch:
       summary: 4.2 - Edit Account Classification Element
@@ -574,4 +661,50 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

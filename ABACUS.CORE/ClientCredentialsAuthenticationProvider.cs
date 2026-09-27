@@ -146,10 +146,16 @@ public sealed class ClientCredentialsAuthenticationProvider : IAbacusAuthenticat
     {
         using var request = new HttpRequestMessage(HttpMethod.Post, tokenEndpoint);
         request.Headers.Authorization = new AuthenticationHeaderValue("Basic", CreateBasicCredential());
-        request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+        var form = new Dictionary<string, string>
         {
             ["grant_type"] = "client_credentials",
-        });
+        };
+        if (_options.Scopes.Count > 0)
+        {
+            form["scope"] = string.Join(' ', _options.Scopes);
+        }
+
+        request.Content = new FormUrlEncodedContent(form);
 
         using var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
         var body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);

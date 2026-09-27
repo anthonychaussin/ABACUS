@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ABACUS.Core;
 
 namespace ABACUS.RealEstate;
@@ -8,19 +9,25 @@ namespace ABACUS.RealEstate;
 public interface IRealEstateClient : IAbacusModuleClient
 {
     /// <summary>
-    /// Lists object contracts.
+    /// Lists object contracts (first page).
     /// </summary>
-    Task ListObjectContractsAsync(CancellationToken cancellationToken = default);
+    Task<ODataPage<JsonElement>> ListObjectContractsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Lists partial object contracts.
+    /// Lists partial object contracts (first page).
     /// </summary>
-    Task ListPartialObjectContractsAsync(CancellationToken cancellationToken = default);
+    Task<ODataPage<JsonElement>> ListPartialObjectContractsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Lists code tables.
+    /// Lists code tables (first page).
     /// </summary>
-    Task ListCodeTablesAsync(CancellationToken cancellationToken = default);
+    Task<ODataPage<JsonElement>> ListCodeTablesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Underlying generated client for advanced or not-yet-wrapped endpoints.

@@ -6,9 +6,11 @@ Il ne porte pas un domaine metier ABACUS en particulier. Son role est de fournir
 
 ## Ce que ce projet apporte
 
-- la configuration commune du client ABACUS
-- la gestion de l'authentification (client credentials ou bearer deja obtenu)
+- la configuration commune du client ABACUS (mandant, Prefer, retries 429)
+- la gestion de l'authentification (client credentials avec scopes, authorization code, ou bearer deja obtenu)
 - la construction du client HTTP
+- les primitives OData (`ODataQuery`, pagination `@odata.nextLink`, `AbacusHttp`)
+- le change feed (`IAbacusChangeFeed`) pour Subscribe/Consume/Acknowledge
 - la gestion standardisee des reponses et des erreurs
 - le mapping configurable des champs (y compris les user fields propres a une installation)
 

@@ -29,7 +29,8 @@ Voir [docs/getting-started.md](docs/getting-started.md).
 
 ## Modules
 
-- `ABACUS.CORE` : configuration commune, auth, HTTP et erreurs.
+- `ABACUS.CORE` : configuration commune, auth (client credentials + authorization code), HTTP, OData, erreurs, change feed.
+- `ABACUS.AbaReport` : export de rapports AbaReport.
 - `ABACUS.AccountsPayable` : comptabilite fournisseurs.
 - `ABACUS.AccountsReceivable` : comptabilite clients.
 - `ABACUS.AssetsLedger` : gestion des immobilisations.

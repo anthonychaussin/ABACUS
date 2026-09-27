@@ -1,0 +1,352 @@
+openapi: 3.0.0
+info:
+  title: AssetsLedger
+  version: 1.0.0
+  description: Abacus Assets Ledger entity API (parameterized subset for NSwag generation).
+servers:
+  - url: http://localhost
+paths:
+  /Assets:
+    get:
+      summary: List assets
+      operationId: get_Assets
+      tags:
+        - Assets
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: Create asset
+      operationId: post_Assets
+      tags:
+        - Assets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /Assets({id}):
+    get:
+      summary: Get asset
+      operationId: get_Assets_id
+      tags:
+        - Assets
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ODataExpand'
+        - $ref: '#/components/parameters/ODataSelect'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: Patch asset
+      operationId: patch_Assets_id
+      tags:
+        - Assets
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetCategories:
+    get:
+      summary: List asset categories
+      operationId: get_AssetCategories
+      tags:
+        - AssetCategories
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: Create asset category
+      operationId: post_AssetCategories
+      tags:
+        - AssetCategories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetCategories({id}):
+    get:
+      summary: Get asset category
+      operationId: get_AssetCategories_id
+      tags:
+        - AssetCategories
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    patch:
+      summary: Patch asset category
+      operationId: patch_AssetCategories_id
+      tags:
+        - AssetCategories
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetBookings:
+    get:
+      summary: List asset bookings
+      operationId: get_AssetBookings
+      tags:
+        - AssetBookings
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: Create asset booking
+      operationId: post_AssetBookings
+      tags:
+        - AssetBookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetBookings({id}):
+    get:
+      summary: Get asset booking
+      operationId: get_AssetBookings_id
+      tags:
+        - AssetBookings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetTransactionTypes:
+    get:
+      summary: List asset transaction types
+      operationId: get_AssetTransactionTypes
+      tags:
+        - AssetTransactionTypes
+      parameters:
+        - $ref: '#/components/parameters/ODataTop'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetClassificationDefinitions:
+    get:
+      summary: List asset classification definitions
+      operationId: get_AssetClassificationDefinitions
+      tags:
+        - AssetClassifications
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetClassificationDetails:
+    get:
+      summary: List asset classification details
+      operationId: get_AssetClassificationDetails
+      tags:
+        - AssetClassifications
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /AssetClassificationElements:
+    get:
+      summary: List asset classification elements
+      operationId: get_AssetClassificationElements
+      tags:
+        - AssetClassifications
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

@@ -20,12 +20,19 @@ internal sealed class CapturingHttpMessageHandler : HttpMessageHandler
             ? null
             : await request.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
+        string? prefer = null;
+        if (request.Headers.TryGetValues("Prefer", out var preferValues))
+        {
+            prefer = string.Join(", ", preferValues);
+        }
+
         Requests.Add(new CapturedHttpRequest(
             request.Method,
             request.RequestUri,
             body,
             request.Content?.Headers.ContentType?.ToString(),
             request.Headers.Authorization?.ToString(),
+            prefer,
             cancellationToken));
 
         return _responseFactory(request, cancellationToken);
@@ -41,4 +48,5 @@ internal sealed record CapturedHttpRequest(
     string? Body,
     string? ContentType,
     string? Authorization,
+    string? Prefer,
     CancellationToken CancellationToken);

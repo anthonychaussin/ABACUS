@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ABACUS.Core;
 
 namespace ABACUS.RealEstate;
@@ -7,6 +8,8 @@ namespace ABACUS.RealEstate;
 /// </summary>
 public sealed class RealEstateClient : IRealEstateClient
 {
+    private readonly HttpClient _httpClient;
+
     /// <inheritdoc />
     public string ModuleName => "RealEstate";
 
@@ -19,45 +22,25 @@ public sealed class RealEstateClient : IRealEstateClient
     public RealEstateClient(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
+        _httpClient = httpClient;
         Raw = new ABACUS_RealEstateClient(httpClient);
     }
 
     /// <inheritdoc />
-    public async Task ListObjectContractsAsync(CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            await Raw.Get_ObjectContractsAsync(cancellationToken).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            throw AbacusExceptionMapper.Map(ex);
-        }
-    }
+    public Task<ODataPage<JsonElement>> ListObjectContractsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/ObjectContracts", query, cancellationToken: cancellationToken);
 
     /// <inheritdoc />
-    public async Task ListPartialObjectContractsAsync(CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            await Raw.Get_PartialObjectContractsAsync(cancellationToken).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            throw AbacusExceptionMapper.Map(ex);
-        }
-    }
+    public Task<ODataPage<JsonElement>> ListPartialObjectContractsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/PartialObjectContracts", query, cancellationToken: cancellationToken);
 
     /// <inheritdoc />
-    public async Task ListCodeTablesAsync(CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            await Raw.Get_CodetablesAsync(cancellationToken).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            throw AbacusExceptionMapper.Map(ex);
-        }
-    }
+    public Task<ODataPage<JsonElement>> ListCodeTablesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Codetables", query, cancellationToken: cancellationToken);
 }

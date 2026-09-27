@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http;
+using System.Text;
 
 namespace ABACUS.Tests.Testing;
 
@@ -11,7 +12,10 @@ internal sealed class FakeHttpMessageHandler : HttpMessageHandler
 
     public FakeHttpMessageHandler(Func<HttpRequestMessage, HttpResponseMessage>? responseFactory = null)
     {
-        _responseFactory = responseFactory ?? (_ => new HttpResponseMessage(HttpStatusCode.OK));
+        _responseFactory = responseFactory ?? (_ => new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent("""{"value":[]}""", Encoding.UTF8, "application/json"),
+        });
     }
 
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

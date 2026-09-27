@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ABACUS.Core;
 
@@ -64,10 +65,27 @@ public static class AbacusServiceCollectionExtensions
             })
             .ConfigureAdditionalHttpMessageHandlers(static (handlers, serviceProvider) =>
             {
+                var resolvedOptions = serviceProvider.GetRequiredService<AbacusClientOptions>();
+                if (resolvedOptions.RateLimitMaxRetries > 0)
+                {
+                    handlers.Add(new AbacusRateLimitHandler(
+                        resolvedOptions.RateLimitMaxRetries,
+                        resolvedOptions.RateLimitBaseDelay));
+                }
+
                 var authenticationProvider = serviceProvider.GetService<IAbacusAuthenticationProvider>();
                 if (authenticationProvider is not null)
                 {
                     handlers.Add(new AbacusAuthenticationHandler(authenticationProvider));
+                }
+
+                if (resolvedOptions.EnableRequestLogging)
+                {
+                    var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+                    if (loggerFactory is not null)
+                    {
+                        handlers.Add(new AbacusLoggingHandler(loggerFactory));
+                    }
                 }
             });
 
@@ -90,17 +108,47 @@ public static class AbacusServiceCollectionExtensions
     }
 
     /// <summary>
+    /// Registers an authorization-code provider for user-dependent Abacus access.
+    /// Call <see cref="AuthorizationCodeAuthenticationProvider.ExchangeCodeAsync"/> after the user signs in.
+    /// </summary>
+    public static IServiceCollection AddAbacusAuthorizationCode(
+        this IServiceCollection services,
+        AbacusAuthorizationCodeOptions options)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(options);
+        options.Validate();
+
+        services.AddHttpClient(AbacusHttpClientFactory.TokenHttpClientName);
+        services.AddSingleton(options);
+        services.AddSingleton<IAbacusAuthenticationProvider>(serviceProvider =>
+        {
+            var httpClient = serviceProvider
+                .GetRequiredService<IHttpClientFactory>()
+                .CreateClient(AbacusHttpClientFactory.TokenHttpClientName);
+            return new AuthorizationCodeAuthenticationProvider(
+                serviceProvider.GetRequiredService<AbacusAuthorizationCodeOptions>(),
+                httpClient);
+        });
+
+        return services;
+    }
+
+    /// <summary>
     /// Registers a client-credentials provider that obtains a bearer from the ABACUS token endpoint.
-    /// The server origin is the authority of the registered <see cref="AbacusClientOptions.BaseUri"/>.
+    /// The server origin is <see cref="AbacusClientOptions.ServerUri"/> when set, otherwise the
+    /// authority of the resolved base URI.
     /// </summary>
     /// <param name="services">Service collection to update.</param>
     /// <param name="clientId">Service-user client id.</param>
     /// <param name="clientSecret">Service-user client secret.</param>
+    /// <param name="scopes">Optional OAuth scopes (maximum <see cref="AbacusClientCredentialsOptions.MaxScopes"/>).</param>
     /// <returns>The same <paramref name="services"/> instance.</returns>
     public static IServiceCollection AddAbacusClientCredentials(
         this IServiceCollection services,
         string clientId,
-        string clientSecret)
+        string clientSecret,
+        params string[] scopes)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentException.ThrowIfNullOrWhiteSpace(clientId);
@@ -113,13 +161,15 @@ public static class AbacusServiceCollectionExtensions
             var httpClient = serviceProvider
                 .GetRequiredService<IHttpClientFactory>()
                 .CreateClient(AbacusHttpClientFactory.TokenHttpClientName);
+            var serverUri = options.ServerUri ?? new Uri(options.ResolveBaseUri().GetLeftPart(UriPartial.Authority));
 
             return new ClientCredentialsAuthenticationProvider(
                 new AbacusClientCredentialsOptions
                 {
-                    ServerUri = new Uri(options.BaseUri.GetLeftPart(UriPartial.Authority)),
+                    ServerUri = serverUri,
                     ClientId = clientId,
                     ClientSecret = clientSecret,
+                    Scopes = scopes?.ToList() ?? new List<string>(),
                 },
                 httpClient);
         });

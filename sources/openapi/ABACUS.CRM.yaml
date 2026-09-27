@@ -25,16 +25,26 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     get:
       summary: 1.2 - Show all subjects with the name "Musterfirma AG"
       description: ''
       operationId: get_Subjects
       tags:
         - 1 Subjects
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -98,7 +108,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /Subjects({id}):
     patch:
       summary: 1.13 - Edit name to subject
       description: ''
@@ -123,7 +132,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Addresses:
     get:
       summary: 2.1 - Show address of a subject
@@ -131,9 +140,19 @@ paths:
       operationId: get_Addresses
       tags:
         - 2 Addresses
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -156,7 +175,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Communications:
     get:
       summary: 3.3 - Search communication data by e-mail (filter)
@@ -164,9 +183,19 @@ paths:
       operationId: get_Communications
       tags:
         - 3 Communications
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -189,7 +218,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Links:
     post:
       summary: 4.3 - Create contact person on subject (new address)
@@ -209,16 +238,26 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
     get:
       summary: 4.1 - Show all links
       description: ''
       operationId: get_Links
       tags:
         - 4 Links
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -250,9 +289,19 @@ paths:
       operationId: get_LinkTypes
       tags:
         - 5 LinkTypes
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -264,9 +313,19 @@ paths:
       operationId: get_SubjectGroupings
       tags:
         - 6 SubjectGroupings
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -289,7 +348,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /SubjectGroupings({id}):
     delete:
       summary: 6.3 - Delete grouping
@@ -317,9 +376,19 @@ paths:
       operationId: get_Salutations
       tags:
         - 8 Salutations
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -343,7 +412,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /$batch:
     post:
       summary: 9.2 - Duplicate check for a list of subjects (batch request)
@@ -370,9 +439,19 @@ paths:
       operationId: get_SubjectGroupingEntries
       tags:
         - 7 SubjectGroupingEntries
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -395,7 +474,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /SubjectGroupingEntries({id}):
     delete:
       summary: 7.5 - Delete grouping entry on subject
@@ -423,9 +502,19 @@ paths:
       operationId: get_SubjectDocuments
       tags:
         - 10 SubjectDocuments
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -437,10 +526,66 @@ paths:
       operationId: get_LinkDocuments
       tags:
         - 11 LinkDocuments
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
+
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

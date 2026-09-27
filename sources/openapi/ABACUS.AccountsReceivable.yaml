@@ -13,9 +13,19 @@ paths:
       operationId: get_Customers
       tags:
         - 1. Customer
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
@@ -38,7 +48,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /Customers({id}):
     delete:
       summary: 1.8 delete customer
@@ -103,7 +113,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CustomerInvoices({id}):
     get:
       summary: 2.1 Invoice with navigations
@@ -148,7 +158,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CustomerInvoices:
     post:
       summary: 2.6 Enter an invoice with a new partial payment condition
@@ -168,7 +178,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CustomerInvoicePositions(Id={id}):
     get:
       summary: 3.1 invoice positions
@@ -213,7 +223,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CustomerInvoicePositions:
     post:
       summary: 3.2 Add item to existing invoice
@@ -233,7 +243,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CustomerCurrencies(CustomerId={customerId},CurrencyId='{currencyId}'):
     get:
       summary: 4.1 Customer currency
@@ -278,28 +288,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /CustomerCurrencies:
-    post:
-      summary: 4.2 Create customer currency with minimal data
-      description: ''
-      operationId: post_CustomerCurrencies
-      tags:
-        - 4. Customer Currency
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /CustomerCurrencies(CustomerId={customerId},CurrencyId='{currencyId}'):
+              additionalProperties: true
     delete:
       summary: 4.5 Delete customer currency
       description: ''
@@ -319,6 +308,26 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
+  /CustomerCurrencies:
+    post:
+      summary: 4.2 Create customer currency with minimal data
+      description: ''
+      operationId: post_CustomerCurrencies
+      tags:
+        - 4. Customer Currency
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
   /CustomerDirectDebits(Id={id},CustomerId={customerId}):
     get:
       summary: 5.1 Dircet debit
@@ -368,27 +377,6 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-  /CustomerDirectDebits:
-    post:
-      summary: 5.2 Direct debit with minimal data
-      description: ''
-      operationId: post_CustomerDirectDebits
-      tags:
-        - 5. Customer Direct Debit
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /CustomerDirectDebits(Id={id},CustomerId={customerId}):
     patch:
       summary: 5.3 Adjust existing direct debit
       description: ''
@@ -418,7 +406,27 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+  /CustomerDirectDebits:
+    post:
+      summary: 5.2 Direct debit with minimal data
+      description: ''
+      operationId: post_CustomerDirectDebits
+      tags:
+        - 5. Customer Direct Debit
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
   /CustomerPayouts(Id={id},CustomerId={customerId}):
     get:
       summary: 6.1 Payout
@@ -473,28 +481,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
-  /CustomerPayouts:
-    post:
-      summary: 6.2 Payout with minimal data
-      description: ''
-      operationId: post_CustomerPayouts
-      tags:
-        - 6. Customer Payout
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /CustomerPayouts(Id={id},CustomerId={customerId}):
+              additionalProperties: true
     delete:
       summary: 6.4 Delete payout
       description: ''
@@ -519,6 +506,26 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
+  /CustomerPayouts:
+    post:
+      summary: 6.2 Payout with minimal data
+      description: ''
+      operationId: post_CustomerPayouts
+      tags:
+        - 6. Customer Payout
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
   /CustomerOverdues(CustomerId={customerId}):
     get:
       summary: 7.1 Overdues
@@ -563,7 +570,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
   /CustomerOverdues:
     post:
       summary: 7.2 Create overdues
@@ -583,4 +590,50 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              additionalProperties: true
+
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

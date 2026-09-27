@@ -13,193 +13,133 @@ Si tu travailles directement depuis ce depot, ajoute les `ProjectReference` equi
 
 ## 2. Creer les options du client
 
-`AbacusClientOptions` porte l'URL de base, le timeout, le `User-Agent` et les en-tetes par defaut.
+Prefere `ServerUri` + `Mandant` pour construire
+`{server}/api/entity/v1/mandants/{mandant}/`. Tu peux aussi fixer `BaseUri` directement.
 
 ```csharp
 using ABACUS.Core;
 
 var options = new AbacusClientOptions
 {
-    BaseUri = new Uri("https://example.abacus/api/"),
+    ServerUri = new Uri("https://example.abacus:40000"),
+    Mandant = "7777",
     UserAgent = "MyCompany.MyApp/1.0.0",
     Timeout = TimeSpan.FromSeconds(30),
-    DefaultHeaders = new Dictionary<string, string>
-    {
-        ["X-Correlation-Id"] = Guid.NewGuid().ToString("N"),
-    },
+    RateLimitMaxRetries = 3,
 };
 ```
 
 ## 3. Ajouter l'authentification
 
-Le cas courant est un service user ABACUS (Q910 ou Q981) identifie par un Client-ID et un Client-Secret. `ClientCredentialsAuthenticationProvider` decouvre le `token_endpoint` via `/.well-known/openid-configuration`, demande un bearer (`grant_type=client_credentials`) et le reutilise jusqu'a peu avant `expires_in`.
+### Service-User (client credentials)
 
 ```csharp
-using ABACUS.Core;
-
 using var auth = new ClientCredentialsAuthenticationProvider(
-    new Uri("https://example.abacus"),
-    clientId: "<client-id>",
-    clientSecret: "<client-secret>");
+    new AbacusClientCredentialsOptions
+    {
+        ServerUri = new Uri("https://example.abacus:40000"),
+        ClientId = "<client-id>",
+        ClientSecret = "<client-secret>",
+        Scopes = { "abacus.pad" }, // max 25 scopes
+    });
 ```
 
-`ServerUri` est l'origine du serveur ABACUS. Le jeton n'est pas demande sous le chemin `/api/`.
-
-Avec l'injection de dependances, l'origine est deduite de `AbacusClientOptions.BaseUri` :
+Avec DI :
 
 ```csharp
 services.AddAbacusSdk(options);
-services.AddAbacusClientCredentials("<client-id>", "<client-secret>");
+services.AddAbacusClientCredentials("<client-id>", "<client-secret>", "abacus.pad");
 ```
 
-Si tu as deja un access token, `BearerTokenAuthenticationProvider` l'envoie tel quel dans `Authorization: Bearer ...`.
+### Utilisateur interactif (authorization code)
 
 ```csharp
-var auth = new BearerTokenAuthenticationProvider(
-    cancellationToken => ValueTask.FromResult("<access-token>"));
+using var auth = new AuthorizationCodeAuthenticationProvider(
+    new AbacusAuthorizationCodeOptions
+    {
+        ServerUri = new Uri("https://example.abacus:40000"),
+        ClientId = "<client-id>",
+        ClientSecret = "<client-secret>",
+        RedirectUri = new Uri("https://myapp/callback"),
+        Scopes = { "openid", "offline_access" },
+    });
+
+var url = await auth.CreateAuthorizationUrlAsync(state: "xyz");
+// apres redirect :
+await auth.ExchangeCodeAsync(authorizationCode);
 ```
 
-## 4. Creer un `HttpClient` avec `AbacusHttpClientFactory`
+## 4. Creer un `HttpClient`
 
 ```csharp
-using ABACUS.Core;
-
 using var httpClient = AbacusHttpClientFactory.Create(options, auth);
 ```
 
-La factory applique :
+La factory applique BaseAddress (mandant), timeout, User-Agent, Prefer, retries HTTP 429 et l'auth.
 
-- `BaseAddress` depuis `BaseUri`
-- `Timeout`
-- le `User-Agent`
-- les en-tetes definis dans `DefaultHeaders`
-- l'authentification si un provider est fourni
-
-Si tu geres deja un `HttpClient` ailleurs, tu peux aussi reutiliser `AbacusHttpClientFactory.Configure(httpClient, options)`.
-
-## 5. Instancier un module
-
-Chaque module prend un `HttpClient` configure.
+## 5. Appeler un module avec OData
 
 ```csharp
 using ABACUS.AccountsPayable;
 using ABACUS.Core;
 
-var options = new AbacusClientOptions
-{
-    BaseUri = new Uri("https://example.abacus/api/"),
-};
-
-using var auth = new ClientCredentialsAuthenticationProvider(
-    new Uri("https://example.abacus"),
-    clientId: "<client-id>",
-    clientSecret: "<client-secret>");
-
-using var httpClient = AbacusHttpClientFactory.Create(options, auth);
-
 var accountsPayable = new AccountsPayableClient(httpClient);
 
-await accountsPayable.ListSuppliersAsync();
+var page = await accountsPayable.ListSuppliersAsync(
+    ODataQuery.Create().Top(50).Filter("Name eq 'Acme'"));
+
+await foreach (var supplier in accountsPayable.EnumerateSuppliersAsync())
+{
+    // suit @odata.nextLink (max 100 enregistrements par page cote Abacus)
+}
 ```
 
-Sur certains modules, l'API utile se trouve surtout sur la propriete `Raw`, qui expose directement le client genere.
+### Subscriptions (changements)
 
 ```csharp
-using ABACUS.RealEstate;
+using ABACUS.Subscription;
 
-var realEstate = new RealEstateClient(httpClient);
+var subscriptions = new SubscriptionClient(httpClient);
+await subscriptions.SubscribeAsync("acme-sync", ["Subject"]);
+await foreach (var batch in subscriptions.Changes.ConsumeUntilEmptyAsync("acme-sync"))
+{
+    // traiter batch.Changes puis ack automatique si AcknowledgeKey present
+}
+```
 
-// Exemple: appel via le client genere quand aucun wrapper haut niveau n'existe encore.
-// await realEstate.Raw.SomeGeneratedMethodAsync(...);
+Nom de subscription : max 23 caracteres, URL-safe. Max 10 subscriptions par utilisateur ; une subscription non consommee > 3 jours est purgee par Abacus.
+
+### AbaReport
+
+```csharp
+using ABACUS.AbaReport;
+
+// BaseAddress = origine serveur (pas le chemin entity/mandant)
+var reports = new AbaReportClient(httpClient);
+var bytes = await reports.ExportReportAsync("MyReport", format: "txt");
 ```
 
 ## 6. Mapper les champs (user fields inclus)
-
-Les payloads ABACUS sont souvent des objets ouverts : les noms de champs, surtout les user fields, dependent de l'installation. `IAbacusFieldMapper` convertit un modele metier en dictionnaire JSON pret a etre envoye au module.
-
-En code :
 
 ```csharp
 services.AddAbacusFieldMapping(map => map
     .Entity("Supplier")
     .Field("Name", "Name")
-    .Field("VatNumber", "UserFields.UserField1")
-    .Field("City", "Address.City"));
+    .Field("VatNumber", "UserFields.UserField1"));
 
-var mapper = serviceProvider.GetRequiredService<IAbacusFieldMapper>();
 var payload = mapper.ToPayload("Supplier", supplier);
 await accountsPayable.CreateSupplierAsync(payload);
 ```
 
-Sans DI :
+## Quotas Abacus (ordre de grandeur)
 
-```csharp
-var mapping = new AbacusFieldMappingBuilder()
-    .Entity("Supplier")
-    .Field("Name", "Name")
-    .Field("VatNumber", "UserFields.UserField1")
-    .Build();
+Jusqu'a la version 2025 : ~200 req/min, 12k/h, 30k/j. A partir de 2026 : ~400 / 18k / 40k.
+Depassement = HTTP 429 (gere par `AbacusRateLimitHandler`). Une reponse liste au plus 100 lignes.
 
-var mapper = new AbacusFieldMapper(mapping);
-var payload = mapper.ToPayload("Supplier", supplier);
-```
-
-Ou via configuration (`Abacus:FieldMaps`). Si fluent et config sont combines, la config gagne champ par champ :
-
-```json
-{
-  "Abacus": {
-    "FieldMaps": {
-      "Supplier": {
-        "Name": "Name",
-        "VatNumber": "UserFields.UserField1",
-        "City": "Address.City"
-      }
-    }
-  }
-}
-```
-
-```csharp
-services.AddAbacusFieldMapping(configuration);
-```
-
-L'attribut `[AbacusField("UserFields.UserField1")]` sur une propriete sert de defaut ; la map d'entite l'ecrase pour le meme nom logique. Les chemins pointes creent des objets imbriques. Les `null` et les proprietes non mappees sont omis (adapte au `PATCH`).
-
-`FromPayload` reconstruit un modele a partir d'un dictionnaire deja deserialise.
+Details : [resilience.md](resilience.md) (429 vs 5xx, Prefer, `$batch`, journalisation).
 
 ## Limites actuelles du SDK
 
-Le SDK est utilisable, mais il faut integrer avec prudence :
-
-- Tous les modules n'ont pas encore une facade metier riche. Plusieurs exposent surtout `Raw`.
-- Certains wrappers haut niveau utilisent encore des `object` en entree ou ne retournent pas de modeles metier forts.
-- Les clients generes ont encore des noms de methodes tres bruts, issus de la generation OpenAPI.
-- Une partie de la generation actuelle semble contenir des endpoints ou parametres imparfaits. Valide toujours les appels critiques contre ton environnement ABACUS.
-- La documentation de demarrage existe maintenant, mais la publication NuGet et la chaine de regeneration ne sont pas encore entierement finalisees dans ce depot.
-
-## Exemple complet
-
-```csharp
-using ABACUS.AccountsPayable;
-using ABACUS.Core;
-
-var options = new AbacusClientOptions
-{
-    BaseUri = new Uri("https://example.abacus/api/"),
-    UserAgent = "MyCompany.AbacusIntegration/1.0.0",
-    Timeout = TimeSpan.FromSeconds(30),
-};
-
-using var auth = new ClientCredentialsAuthenticationProvider(
-    new Uri("https://example.abacus"),
-    clientId: "<client-id>",
-    clientSecret: "<client-secret>");
-
-using var httpClient = AbacusHttpClientFactory.Create(options, auth);
-var module = new AccountsPayableClient(httpClient);
-
-await module.ListSuppliersAsync();
-```
-
-Pour les details d'un domaine metier, consulte ensuite le `README.md` du module concerne.
+- Plusieurs modules exposent surtout `Raw` ; AP, Finance, CRM, Subscription ont des facades plus riches.
+- Les OpenAPI dans `sources/openapi` restent partiels : reimporte le catalogue API Hub via `scripts/import-openapi.ps1` quand tu as un dump complet.
+- Valide les appels critiques contre ton environnement ABACUS.

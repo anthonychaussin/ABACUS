@@ -8,6 +8,11 @@ namespace ABACUS.Core;
 public sealed class AbacusClientCredentialsOptions
 {
     /// <summary>
+    /// Maximum number of OAuth scopes Abacus accepts in a single token request.
+    /// </summary>
+    public const int MaxScopes = 25;
+
+    /// <summary>
     /// Initializes an empty options object for later configuration.
     /// </summary>
     [SetsRequiredMembers]
@@ -38,6 +43,11 @@ public sealed class AbacusClientCredentialsOptions
     /// Token endpoint. When set, OpenID discovery is skipped.
     /// </summary>
     public Uri? TokenEndpoint { get; set; }
+
+    /// <summary>
+    /// OAuth scopes requested with the token (maximum <see cref="MaxScopes"/>).
+    /// </summary>
+    public IList<string> Scopes { get; set; } = new List<string>();
 
     /// <summary>
     /// How long before expiry a cached access token is renewed.
@@ -84,6 +94,26 @@ public sealed class AbacusClientCredentialsOptions
         if (TimeProvider is null)
         {
             throw new ArgumentException("TimeProvider is required.", nameof(TimeProvider));
+        }
+
+        if (Scopes is null)
+        {
+            throw new ArgumentException("Scopes is required.", nameof(Scopes));
+        }
+
+        if (Scopes.Count > MaxScopes)
+        {
+            throw new ArgumentException(
+                $"Abacus accepts at most {MaxScopes} scopes per token request.",
+                nameof(Scopes));
+        }
+
+        foreach (var scope in Scopes)
+        {
+            if (string.IsNullOrWhiteSpace(scope))
+            {
+                throw new ArgumentException("Scopes cannot contain blank values.", nameof(Scopes));
+            }
         }
     }
 }

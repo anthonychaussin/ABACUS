@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ACTION_PLAN.md
+
+# NSwag clients are regenerated at build time from sources/openapi
+**/Generated/*.g.cs

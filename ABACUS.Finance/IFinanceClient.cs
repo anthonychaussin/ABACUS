@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ABACUS.Core;
 
 namespace ABACUS.Finance;
@@ -8,22 +9,43 @@ namespace ABACUS.Finance;
 public interface IFinanceClient : IAbacusModuleClient
 {
     /// <summary>
-    /// Lists accounts.
+    /// Underlying generated client for advanced or not-yet-wrapped endpoints.
     /// </summary>
-    Task ListAccountsAsync(CancellationToken cancellationToken = default);
+    ABACUS_FinanceClient Raw { get; }
 
     /// <summary>
-    /// Lists general ledger entries.
+    /// Lists accounts (first page).
     /// </summary>
-    Task ListGeneralLedgerEntriesAsync(CancellationToken cancellationToken = default);
+    Task<ODataPage<JsonElement>> ListAccountsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Enumerates all accounts following <c>@odata.nextLink</c>.
+    /// </summary>
+    IAsyncEnumerable<JsonElement> EnumerateAccountsAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Lists general ledger entries (first page).
+    /// </summary>
+    Task<ODataPage<JsonElement>> ListGeneralLedgerEntriesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Enumerates general ledger entries following <c>@odata.nextLink</c>.
+    /// </summary>
+    IAsyncEnumerable<JsonElement> EnumerateGeneralLedgerEntriesAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Creates an account from a JSON-compatible payload.
     /// </summary>
-    Task CreateAccountAsync(object payload, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Underlying generated client for advanced or not-yet-wrapped endpoints.
-    /// </summary>
-    ABACUS_FinanceClient Raw { get; }
+    Task<AbacusResponse<string>> CreateAccountAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
 }

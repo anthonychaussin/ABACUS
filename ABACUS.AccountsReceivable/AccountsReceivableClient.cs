@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ABACUS.Core;
 
 namespace ABACUS.AccountsReceivable;
@@ -26,73 +27,82 @@ public sealed class AccountsReceivableClient : IAccountsReceivableClient
     }
 
     /// <inheritdoc />
-    public Task ListCustomersAsync(CancellationToken cancellationToken = default) =>
-        SendAsync(HttpMethod.Get, "/Customers", cancellationToken);
+    public Task<ODataPage<JsonElement>> ListCustomersAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.GetODataPageAsync<JsonElement>(_httpClient, "/Customers", query, cancellationToken: cancellationToken);
 
     /// <inheritdoc />
-    public Task GetCustomerAsync(int customerId, CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<JsonElement> EnumerateCustomersAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default) =>
+        AbacusHttp.EnumerateODataAsync<JsonElement>(_httpClient, "/Customers", query, cancellationToken: cancellationToken);
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<JsonElement>> GetCustomerAsync(
+        int customerId,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default)
+    {
+        EnsureCustomerId(customerId);
+        var path = $"/Customers(Id={customerId})";
+        if (query is not null)
+        {
+            path = query.ApplyTo(path);
+        }
+
+        return AbacusHttp.SendJsonAsync<JsonElement>(_httpClient, HttpMethod.Get, path, cancellationToken: cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> CreateCustomerAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(payload);
+        return AbacusHttp.SendAsync(_httpClient, HttpMethod.Post, "/Customers", payload, prefer, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> PatchCustomerAsync(
+        int customerId,
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        EnsureCustomerId(customerId);
+        ArgumentNullException.ThrowIfNull(payload);
+        return AbacusHttp.SendAsync(
+            _httpClient,
+            HttpMethod.Patch,
+            $"/Customers(Id={customerId})",
+            payload,
+            prefer,
+            cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public Task<AbacusResponse<string>> DeleteCustomerAsync(
+        int customerId,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        EnsureCustomerId(customerId);
+        return AbacusHttp.SendAsync(
+            _httpClient,
+            HttpMethod.Delete,
+            $"/Customers(Id={customerId})",
+            payload: null,
+            prefer,
+            cancellationToken);
+    }
+
+    private static void EnsureCustomerId(int customerId)
     {
         if (customerId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(customerId), "customerId must be greater than 0.");
         }
-
-        return SendAsync(HttpMethod.Get, $"/Customers(Id={customerId})", cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public Task DeleteCustomerAsync(int customerId, CancellationToken cancellationToken = default)
-    {
-        if (customerId <= 0)
-        {
-            throw new ArgumentOutOfRangeException(nameof(customerId), "customerId must be greater than 0.");
-        }
-
-        return SendAsync(HttpMethod.Delete, $"/Customers(Id={customerId})", cancellationToken);
-    }
-
-    private async Task SendAsync(HttpMethod method, string relativePath, CancellationToken cancellationToken)
-    {
-        using var request = new HttpRequestMessage(method, relativePath);
-
-        try
-        {
-            using var response = await _httpClient
-                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
-                .ConfigureAwait(false);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return;
-            }
-
-            var responseBody = response.Content is null
-                ? string.Empty
-                : await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-
-            throw new AbacusApiException(
-                message: $"The HTTP status code of the response was not expected ({(int)response.StatusCode}).",
-                statusCode: (int)response.StatusCode,
-                responseBody: responseBody,
-                headers: BuildHeaders(response));
-        }
-        catch (Exception ex) when (ex is not AbacusApiException)
-        {
-            throw AbacusExceptionMapper.Map(ex);
-        }
-    }
-
-    private static IReadOnlyDictionary<string, IEnumerable<string>> BuildHeaders(HttpResponseMessage response)
-    {
-        var headers = response.Headers.ToDictionary(header => header.Key, header => header.Value);
-        if (response.Content?.Headers is not null)
-        {
-            foreach (var header in response.Content.Headers)
-            {
-                headers[header.Key] = header.Value;
-            }
-        }
-
-        return headers;
     }
 }

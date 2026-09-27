@@ -2,30 +2,44 @@
 info:
   title: AccountsPayable
   version: 1.0.0
-  description: ''
+  description: Abacus Accounts Payable entity API (partial OpenAPI used for NSwag generation).
 servers:
   - url: http://localhost
 paths:
   /Suppliers:
     get:
-      summary: 1.1 all suppliers
-      description: ''
+      summary: List suppliers
       operationId: get_Suppliers
       tags:
-        - 1. Supplier
+        - Supplier
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataSelect'
+        - $ref: '#/components/parameters/ODataTop'
+        - $ref: '#/components/parameters/ODataOrderBy'
+        - $ref: '#/components/parameters/ODataExpand'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
     post:
-      summary: 1.5 supplier with beneficiary account
-      description: ''
+      summary: Create supplier
       operationId: post_Suppliers
       tags:
-        - 1. Supplier
+        - Supplier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -33,44 +47,49 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /Suppliers(Id={id}):
     get:
-      summary: 1.2 suppliers with navigation
-      description: ''
+      summary: Get supplier
       operationId: get_Suppliers_Id_id
       tags:
-        - 1. Supplier
+        - Supplier
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
+        - $ref: '#/components/parameters/ODataExpand'
+        - $ref: '#/components/parameters/ODataSelect'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
         '400':
           description: Bad Request
         '500':
           description: Server Error
     patch:
-      summary: 1.7 Customize supplier note
-      description: ''
+      summary: Patch supplier
       operationId: patch_Suppliers_Id_id
       tags:
-        - 1. Supplier
+        - Supplier
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -78,19 +97,11 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /Suppliers(Id={id}):
     delete:
-      summary: 1.8 delete supplier
-      description: ''
+      summary: Delete supplier
       operationId: delete_Suppliers_Id_id
       tags:
-        - 1. Supplier
+        - Supplier
       parameters:
         - in: path
           name: id
@@ -106,11 +117,52 @@ paths:
           description: Server Error
   /SupplierInvoices(Id={id}):
     get:
-      summary: 2.1 Supplier invoice
-      description: ''
+      summary: Get supplier invoice
       operationId: get_SupplierInvoices_Id_id
       tags:
-        - 2. Supplier Invoice
+        - SupplierInvoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      summary: Adjust supplier invoice
+      operationId: post_SupplierInvoices_Id_id
+      tags:
+        - SupplierInvoice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    delete:
+      summary: Delete provisional invoice
+      operationId: delete_SupplierInvoices_Id_id
+      tags:
+        - SupplierInvoice
       parameters:
         - in: path
           name: id
@@ -126,62 +178,16 @@ paths:
           description: Server Error
   /SupplierInvoices:
     post:
-      summary: 2.4 invoice with conditions
-      description: ''
+      summary: Create supplier invoice
       operationId: post_SupplierInvoices
       tags:
-        - 2. Supplier Invoice
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
+        - SupplierInvoice
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              properties: {}
-  /SupplierInvoices(Id={id}):
-    post:
-      summary: 2.5 Adjust amount of invoice item 2
-      description: ''
-      operationId: post_SupplierInvoices_Id_id
-      tags:
-        - 2. Supplier Invoice
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-    delete:
-      summary: 2.6 Delete provisional invoice
-      description: ''
-      operationId: delete_SupplierInvoices_Id_id
-      tags:
-        - 2. Supplier Invoice
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -191,11 +197,10 @@ paths:
           description: Server Error
   /SupplierInvoicePositions(Id={id}):
     get:
-      summary: 3.1 positions
-      description: ''
+      summary: Get invoice position
       operationId: get_SupplierInvoicePositions_Id_id
       tags:
-        - 3. Supplier Invoice Position
+        - SupplierInvoicePosition
       parameters:
         - in: path
           name: id
@@ -210,17 +215,22 @@ paths:
         '500':
           description: Server Error
     patch:
-      summary: 3.3 Adjust the amount of a position
-      description: ''
+      summary: Patch invoice position
       operationId: patch_SupplierInvoicePositions_Id_id
       tags:
-        - 3. Supplier Invoice Position
+        - SupplierInvoicePosition
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -228,19 +238,18 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /SupplierInvoicePositions:
     post:
-      summary: 3.2 Add item to an existing invoice
-      description: ''
+      summary: Create invoice position
       operationId: post_SupplierInvoicePositions
       tags:
-        - 3. Supplier Invoice Position
+        - SupplierInvoicePosition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -248,32 +257,37 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /SupplierCurrencies:
     get:
-      summary: 4.1 all supplier currencies
-      description: ''
+      summary: List supplier currencies
       operationId: get_SupplierCurrencies
       tags:
-        - 4. Supplier Currency
+        - SupplierCurrency
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
         '400':
           description: Bad Request
         '500':
           description: Server Error
     post:
-      summary: 4.2 Create supplier currency with minimal data
-      description: ''
+      summary: Create supplier currency
       operationId: post_SupplierCurrencies
       tags:
-        - 4. Supplier Currency
+        - SupplierCurrency
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -281,30 +295,29 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
   /SupplierCurrencies(SupplierId={supplierId},CurrencyId='{currencyId}'):
     patch:
-      summary: 4.3 change supplier currency
-      description: ''
+      summary: Patch supplier currency
       operationId: patch_SupplierCurrencies_SupplierId_supplierId_CurrencyId_currencyId
       tags:
-        - 4. Supplier Currency
+        - SupplierCurrency
       parameters:
         - in: path
-          name: s
+          name: supplierId
           required: true
           schema:
             type: string
         - in: path
-          name: c
+          name: currencyId
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -312,27 +325,19 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-  /SupplierCurrencies(SupplierId={supplierId},CurrencyId='{currencyId}'):
     delete:
-      summary: 4.4 delete supplier currency
-      description: ''
+      summary: Delete supplier currency
       operationId: delete_SupplierCurrencies_SupplierId_supplierId_CurrencyId_currencyId
       tags:
-        - 4. Supplier Currency
+        - SupplierCurrency
       parameters:
         - in: path
-          name: s
+          name: supplierId
           required: true
           schema:
             type: string
         - in: path
-          name: c
+          name: currencyId
           required: true
           schema:
             type: string
@@ -345,11 +350,10 @@ paths:
           description: Server Error
   /SupplierPaymentConditions(Id={id}):
     get:
-      summary: 5.1 conditions
-      description: ''
+      summary: Get payment conditions
       operationId: get_SupplierPaymentConditions_Id_id
       tags:
-        - 5. Supplier Payment Condition
+        - SupplierPaymentCondition
       parameters:
         - in: path
           name: id
@@ -364,37 +368,22 @@ paths:
         '500':
           description: Server Error
     patch:
-      summary: 5.2 change conditions
-      description: ''
+      summary: Patch payment conditions
       operationId: patch_SupplierPaymentConditions_Id_id
       tags:
-        - 5. Supplier Payment Condition
+        - SupplierPaymentCondition
       parameters:
         - in: path
           name: id
           required: true
           schema:
             type: string
-      responses:
-        '200':
-          description: Successful
-        '400':
-          description: Bad Request
-        '500':
-          description: Server Error
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              properties: {}
-  /SupplierPaymentMethods:
-    get:
-      summary: 6.1 all supplier payment methods
-      description: ''
-      operationId: get_SupplierPaymentMethods
-      tags:
-        - 6. Supplier Payment Method
+              additionalProperties: true
       responses:
         '200':
           description: Successful
@@ -402,3 +391,68 @@ paths:
           description: Bad Request
         '500':
           description: Server Error
+  /SupplierPaymentMethods:
+    get:
+      summary: List supplier payment methods
+      operationId: get_SupplierPaymentMethods
+      tags:
+        - SupplierPaymentMethod
+      parameters:
+        - $ref: '#/components/parameters/ODataFilter'
+        - $ref: '#/components/parameters/ODataTop'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+components:
+  parameters:
+    ODataFilter:
+      name: $filter
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataSelect:
+      name: $select
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataTop:
+      name: $top
+      in: query
+      required: false
+      schema:
+        type: integer
+        maximum: 100
+    ODataOrderBy:
+      name: $orderby
+      in: query
+      required: false
+      schema:
+        type: string
+    ODataExpand:
+      name: $expand
+      in: query
+      required: false
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        '@odata.nextLink':
+          type: string
+          nullable: true

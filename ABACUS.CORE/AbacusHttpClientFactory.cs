@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+
 namespace ABACUS.Core;
 
 /// <summary>
@@ -24,7 +26,7 @@ public static class AbacusHttpClientFactory
         ArgumentNullException.ThrowIfNull(options);
         options.Validate();
 
-        client.BaseAddress = options.BaseUri;
+        client.BaseAddress = options.ResolveBaseUri();
         client.Timeout = options.Timeout;
 
         if (!string.IsNullOrWhiteSpace(options.UserAgent))
@@ -37,25 +39,46 @@ public static class AbacusHttpClientFactory
         {
             client.DefaultRequestHeaders.TryAddWithoutValidation(name, value);
         }
+
+        if (!string.IsNullOrWhiteSpace(options.Prefer))
+        {
+            client.DefaultRequestHeaders.Remove("Prefer");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Prefer", options.Prefer);
+        }
     }
 
     /// <summary>
-    /// Creates an HTTP client configured with base URI, headers, timeout and optional authentication.
+    /// Creates an HTTP client configured with base URI, headers, timeout, rate-limit retries and optional authentication.
     /// </summary>
-    public static HttpClient Create(AbacusClientOptions options, IAbacusAuthenticationProvider? authenticationProvider = null)
+    public static HttpClient Create(
+        AbacusClientOptions options,
+        IAbacusAuthenticationProvider? authenticationProvider = null,
+        ILoggerFactory? loggerFactory = null)
     {
         ArgumentNullException.ThrowIfNull(options);
         options.Validate();
 
         HttpMessageHandler handler = new HttpClientHandler();
+        if (options.RateLimitMaxRetries > 0)
+        {
+            handler = new AbacusRateLimitHandler(options.RateLimitMaxRetries, options.RateLimitBaseDelay)
+            {
+                InnerHandler = handler,
+            };
+        }
+
         if (authenticationProvider is not null)
         {
             handler = new AbacusAuthenticationHandler(authenticationProvider) { InnerHandler = handler };
         }
 
+        if (options.EnableRequestLogging && loggerFactory is not null)
+        {
+            handler = new AbacusLoggingHandler(loggerFactory) { InnerHandler = handler };
+        }
+
         var client = new HttpClient(handler);
         Configure(client, options);
-
         return client;
     }
 }

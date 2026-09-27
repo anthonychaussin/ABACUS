@@ -7,6 +7,8 @@ namespace ABACUS.General;
 /// </summary>
 public sealed class GeneralClient : IGeneralClient
 {
+    private readonly HttpClient _httpClient;
+
     /// <inheritdoc />
     public string ModuleName => "General";
 
@@ -19,6 +21,17 @@ public sealed class GeneralClient : IGeneralClient
     public GeneralClient(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
+        _httpClient = httpClient;
         Raw = new ABACUS_GeneralClient(httpClient);
+    }
+
+    /// <inheritdoc />
+    public Task<ODataBatchResponse> PostBatchAsync(
+        ODataBatchRequest batch,
+        string? prefer = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(batch);
+        return AbacusHttp.SendBatchAsync(_httpClient, batch, prefer, cancellationToken: cancellationToken);
     }
 }

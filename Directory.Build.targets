@@ -1,6 +1,6 @@
 <Project>
-  <ItemGroup Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')">
-    <Compile Remove="$(MSBuildProjectDirectory)\Generated\*.g.cs" />
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and '$(MSBuildProjectName)' != 'ABACUS.AbaReport'">
+    <Compile Remove="$(MSBuildProjectDirectory)\Generated\*.g.cs" Condition="Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(MSBuildProjectName)' != 'ABACUS.Core' and '$(MSBuildProjectName)' != 'ABACUS.Tests' and Exists('$(MSBuildThisFileDirectory)sources\openapi\$(MSBuildProjectName).yaml')">
@@ -10,8 +10,8 @@
       <FirstForGenerator>true</FirstForGenerator>
       <ClassName Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">ABACUS_FieldinformationClient_g</ClassName>
       <ClassName Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$([System.String]::Copy('$(MSBuildProjectName)').Replace('.', '_'))Client_g</ClassName>
-      <OutputPath Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\ABACUS.FieldinformationClient.g.cs</OutputPath>
-      <OutputPath Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$(IntermediateOutputPath)Generated\$(MSBuildProjectName)Client.g.cs</OutputPath>
+      <OutputPath Condition="'$(MSBuildProjectName)' == 'ABACUS.FieldInformation'">$(MSBuildProjectDirectory)\obj\$(Configuration)\$(TargetFramework)\Generated\ABACUS.FieldinformationClient.g.cs</OutputPath>
+      <OutputPath Condition="'$(MSBuildProjectName)' != 'ABACUS.FieldInformation'">$(MSBuildProjectDirectory)\obj\$(Configuration)\$(TargetFramework)\Generated\$(MSBuildProjectName)Client.g.cs</OutputPath>
       <Options>/OperationGenerationMode:SingleClientFromOperationId /GenerateOptionalPropertiesAsNullable:true /GenerateNullableReferenceTypes:true /GenerateExceptionClasses:true</Options>
     </OpenApiReference>
   </ItemGroup>

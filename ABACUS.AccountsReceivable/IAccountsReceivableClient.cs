@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ABACUS.Core;
 
 namespace ABACUS.AccountsReceivable;
@@ -13,17 +14,49 @@ public interface IAccountsReceivableClient : IAbacusModuleClient
     ABACUS_AccountsReceivableClient Raw { get; }
 
     /// <summary>
-    /// Lists all customers.
+    /// Lists customers (first page). Prefer <see cref="EnumerateCustomersAsync"/> for full sets.
     /// </summary>
-    Task ListCustomersAsync(CancellationToken cancellationToken = default);
+    Task<ODataPage<JsonElement>> ListCustomersAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Gets a specific customer by identifier.
+    /// Enumerates all customers following <c>@odata.nextLink</c>.
     /// </summary>
-    Task GetCustomerAsync(int customerId, CancellationToken cancellationToken = default);
+    IAsyncEnumerable<JsonElement> EnumerateCustomersAsync(
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Deletes a specific customer by identifier.
+    /// Gets a customer by identifier.
     /// </summary>
-    Task DeleteCustomerAsync(int customerId, CancellationToken cancellationToken = default);
+    Task<AbacusResponse<JsonElement>> GetCustomerAsync(
+        int customerId,
+        ODataQuery? query = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Creates a customer from a JSON-compatible payload.
+    /// </summary>
+    Task<AbacusResponse<string>> CreateCustomerAsync(
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Patches a customer.
+    /// </summary>
+    Task<AbacusResponse<string>> PatchCustomerAsync(
+        int customerId,
+        object payload,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes a customer by identifier.
+    /// </summary>
+    Task<AbacusResponse<string>> DeleteCustomerAsync(
+        int customerId,
+        string? prefer = null,
+        CancellationToken cancellationToken = default);
 }

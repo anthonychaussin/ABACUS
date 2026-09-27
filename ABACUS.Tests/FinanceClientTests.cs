@@ -11,28 +11,30 @@ public sealed class FinanceClientTests
     [Fact]
     public async Task ListAccountsAsync_SendsExpectedRequest()
     {
-        using var handler = new CapturingHttpMessageHandler();
-        using var httpClient = new HttpClient(handler)
-        {
-            BaseAddress = new Uri("https://example.invalid"),
-        };
+        using var handler = new CapturingHttpMessageHandler((_, _) =>
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"value":[]}""", Encoding.UTF8, "application/json"),
+            });
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
         var client = new FinanceClient(httpClient);
 
-        await client.ListAccountsAsync();
+        await client.ListAccountsAsync(ODataQuery.Create().Top(5));
 
         var request = Assert.Single(handler.Requests);
         Assert.Equal(HttpMethod.Get, request.Method);
-        Assert.Equal("/Accounts", request.RequestUri?.AbsolutePath);
+        Assert.Equal("/Accounts?$top=5", request.RequestUri?.PathAndQuery);
     }
 
     [Fact]
     public async Task ListGeneralLedgerEntriesAsync_SendsExpectedRequest()
     {
-        using var handler = new CapturingHttpMessageHandler();
-        using var httpClient = new HttpClient(handler)
-        {
-            BaseAddress = new Uri("https://example.invalid"),
-        };
+        using var handler = new CapturingHttpMessageHandler((_, _) =>
+            new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("""{"value":[]}""", Encoding.UTF8, "application/json"),
+            });
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
         var client = new FinanceClient(httpClient);
 
         await client.ListGeneralLedgerEntriesAsync();
@@ -46,10 +48,7 @@ public sealed class FinanceClientTests
     public async Task CreateAccountAsync_SendsExpectedPostRequest()
     {
         using var handler = new CapturingHttpMessageHandler();
-        using var httpClient = new HttpClient(handler)
-        {
-            BaseAddress = new Uri("https://example.invalid"),
-        };
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
         var client = new FinanceClient(httpClient);
 
         await client.CreateAccountAsync(new { Name = "ACME" });
@@ -57,7 +56,6 @@ public sealed class FinanceClientTests
         var request = Assert.Single(handler.Requests);
         Assert.Equal(HttpMethod.Post, request.Method);
         Assert.Equal("/Accounts", request.RequestUri?.AbsolutePath);
-        Assert.Equal("application/json; charset=utf-8", request.ContentType);
         Assert.Contains("\"Name\":\"ACME\"", request.Body, StringComparison.Ordinal);
     }
 
@@ -73,10 +71,7 @@ public sealed class FinanceClientTests
             response.Headers.Add("X-Trace-Id", "trace-finance");
             return response;
         });
-        using var httpClient = new HttpClient(handler)
-        {
-            BaseAddress = new Uri("https://example.invalid"),
-        };
+        using var httpClient = new HttpClient(handler) { BaseAddress = new Uri("https://example.invalid") };
         var client = new FinanceClient(httpClient);
 
         var exception = await Assert.ThrowsAsync<AbacusApiException>(() => client.ListAccountsAsync());

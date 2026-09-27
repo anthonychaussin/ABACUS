@@ -126,6 +126,23 @@ public sealed class ClientCredentialsAuthenticationTests
     }
 
     [Fact]
+    public async Task ApplyAsync_IncludesScopesInTokenRequest()
+    {
+        using var scope = CreateProvider(
+            new CapturingHttpMessageHandler((request, _) => Respond(request)),
+            tokenEndpoint: new Uri("https://abacus.example/oauth/oauth2/v1/token"),
+            scopes: ["abacus.pad", "openid"]);
+        var handler = scope.Handler;
+
+        using var request = new HttpRequestMessage(HttpMethod.Get, "https://abacus.example/api/suppliers");
+        await scope.Provider.ApplyAsync(request);
+
+        var tokenRequest = Assert.Single(handler.Requests, captured => captured.Method == HttpMethod.Post);
+        Assert.Contains("grant_type=client_credentials", tokenRequest.Body, StringComparison.Ordinal);
+        Assert.Contains("scope=abacus.pad+openid", tokenRequest.Body, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task ApplyAsync_ReusesCachedTokenUntilRefreshWindow()
     {
         var clock = new ManualTimeProvider(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
@@ -211,7 +228,8 @@ public sealed class ClientCredentialsAuthenticationTests
         CapturingHttpMessageHandler handler,
         TimeProvider? clock = null,
         TimeSpan? refreshSkew = null,
-        Uri? tokenEndpoint = null)
+        Uri? tokenEndpoint = null,
+        IEnumerable<string>? scopes = null)
     {
         var httpClient = new HttpClient(handler);
         var provider = new ClientCredentialsAuthenticationProvider(new AbacusClientCredentialsOptions
@@ -222,6 +240,7 @@ public sealed class ClientCredentialsAuthenticationTests
             TokenEndpoint = tokenEndpoint,
             RefreshSkew = refreshSkew ?? TimeSpan.FromSeconds(30),
             TimeProvider = clock ?? TimeProvider.System,
+            Scopes = scopes?.ToList() ?? new List<string>(),
         }, httpClient);
 
         return new ProviderScope(provider, httpClient, handler);
