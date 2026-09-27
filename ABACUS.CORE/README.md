@@ -7,7 +7,7 @@ Il ne porte pas un domaine metier ABACUS en particulier. Son role est de fournir
 ## Ce que ce projet apporte
 
 - la configuration commune du client ABACUS
-- la gestion de l'authentification
+- la gestion de l'authentification (client credentials ou bearer deja obtenu)
 - la construction du client HTTP
 - la gestion standardisee des reponses et des erreurs
 

@@ -21,7 +21,7 @@ Le guide de demarrage couvre :
 
 - la creation de `AbacusClientOptions`
 - l'usage de `AbacusHttpClientFactory`
-- l'authentification via `BearerTokenAuthenticationProvider`
+- l'authentification via Client-ID / Client-Secret, ou un bearer deja obtenu
 - l'instanciation d'un module
 - les limites actuelles du SDK
 

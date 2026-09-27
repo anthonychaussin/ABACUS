@@ -30,18 +30,34 @@ var options = new AbacusClientOptions
 };
 ```
 
-## 3. Ajouter l'authentification Bearer
+## 3. Ajouter l'authentification
 
-`BearerTokenAuthenticationProvider` attend une fonction qui retourne le token a envoyer dans l'en-tete `Authorization: Bearer ...`.
+Le cas courant est un service user ABACUS (Q910 ou Q981) identifie par un Client-ID et un Client-Secret. `ClientCredentialsAuthenticationProvider` decouvre le `token_endpoint` via `/.well-known/openid-configuration`, demande un bearer (`grant_type=client_credentials`) et le reutilise jusqu'a peu avant `expires_in`.
 
 ```csharp
 using ABACUS.Core;
 
+using var auth = new ClientCredentialsAuthenticationProvider(
+    new Uri("https://example.abacus"),
+    clientId: "<client-id>",
+    clientSecret: "<client-secret>");
+```
+
+`ServerUri` est l'origine du serveur ABACUS. Le jeton n'est pas demande sous le chemin `/api/`.
+
+Avec l'injection de dependances, l'origine est deduite de `AbacusClientOptions.BaseUri` :
+
+```csharp
+services.AddAbacusSdk(options);
+services.AddAbacusClientCredentials("<client-id>", "<client-secret>");
+```
+
+Si tu as deja un access token, `BearerTokenAuthenticationProvider` l'envoie tel quel dans `Authorization: Bearer ...`.
+
+```csharp
 var auth = new BearerTokenAuthenticationProvider(
     cancellationToken => ValueTask.FromResult("<access-token>"));
 ```
-
-Si ton token vient d'un service OAuth ou d'un cache interne, remplace simplement la lambda par ton code de recuperation.
 
 ## 4. Creer un `HttpClient` avec `AbacusHttpClientFactory`
 
@@ -74,8 +90,10 @@ var options = new AbacusClientOptions
     BaseUri = new Uri("https://example.abacus/api/"),
 };
 
-var auth = new BearerTokenAuthenticationProvider(
-    cancellationToken => ValueTask.FromResult("<access-token>"));
+using var auth = new ClientCredentialsAuthenticationProvider(
+    new Uri("https://example.abacus"),
+    clientId: "<client-id>",
+    clientSecret: "<client-secret>");
 
 using var httpClient = AbacusHttpClientFactory.Create(options, auth);
 
@@ -118,12 +136,10 @@ var options = new AbacusClientOptions
     Timeout = TimeSpan.FromSeconds(30),
 };
 
-var auth = new BearerTokenAuthenticationProvider(
-    async cancellationToken =>
-    {
-        await Task.Yield();
-        return "<access-token>";
-    });
+using var auth = new ClientCredentialsAuthenticationProvider(
+    new Uri("https://example.abacus"),
+    clientId: "<client-id>",
+    clientSecret: "<client-secret>");
 
 using var httpClient = AbacusHttpClientFactory.Create(options, auth);
 var module = new AccountsPayableClient(httpClient);

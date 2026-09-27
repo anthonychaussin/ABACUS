@@ -89,6 +89,44 @@ public static class AbacusServiceCollectionExtensions
     }
 
     /// <summary>
+    /// Registers a client-credentials provider that obtains a bearer from the ABACUS token endpoint.
+    /// The server origin is the authority of the registered <see cref="AbacusClientOptions.BaseUri"/>.
+    /// </summary>
+    /// <param name="services">Service collection to update.</param>
+    /// <param name="clientId">Service-user client id.</param>
+    /// <param name="clientSecret">Service-user client secret.</param>
+    /// <returns>The same <paramref name="services"/> instance.</returns>
+    public static IServiceCollection AddAbacusClientCredentials(
+        this IServiceCollection services,
+        string clientId,
+        string clientSecret)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentException.ThrowIfNullOrWhiteSpace(clientId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(clientSecret);
+
+        services.AddHttpClient(AbacusHttpClientFactory.TokenHttpClientName);
+        services.AddSingleton<IAbacusAuthenticationProvider>(serviceProvider =>
+        {
+            var options = serviceProvider.GetRequiredService<AbacusClientOptions>();
+            var httpClient = serviceProvider
+                .GetRequiredService<IHttpClientFactory>()
+                .CreateClient(AbacusHttpClientFactory.TokenHttpClientName);
+
+            return new ClientCredentialsAuthenticationProvider(
+                new AbacusClientCredentialsOptions
+                {
+                    ServerUri = new Uri(options.BaseUri.GetLeftPart(UriPartial.Authority)),
+                    ClientId = clientId,
+                    ClientSecret = clientSecret,
+                },
+                httpClient);
+        });
+
+        return services;
+    }
+
+    /// <summary>
     /// Registers a concrete ABACUS module client that exposes an <see cref="IAbacusModuleClient"/>.
     /// </summary>
     /// <typeparam name="TClient">Concrete module client type.</typeparam>

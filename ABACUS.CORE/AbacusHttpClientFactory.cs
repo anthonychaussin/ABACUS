@@ -11,6 +11,11 @@ public static class AbacusHttpClientFactory
     public const string HttpClientName = "ABACUS.SDK";
 
     /// <summary>
+    /// Logical name used for the unauthenticated client that requests OAuth tokens.
+    /// </summary>
+    public const string TokenHttpClientName = "ABACUS.SDK.Token";
+
+    /// <summary>
     /// Applies ABACUS SDK HTTP configuration to an existing client instance.
     /// </summary>
     public static void Configure(HttpClient client, AbacusClientOptions options)
