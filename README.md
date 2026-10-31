@@ -50,4 +50,16 @@ Voir [docs/getting-started.md](docs/getting-started.md).
 
 ## Etat actuel
 
-Le depot compile et fournit une base exploitable, mais la couche SDK reste partielle sur plusieurs modules. Lis le guide de demarrage avant d'integrer un module en production.
+Les facades metier et les specifications OpenAPI embarquees restent partielles sur plusieurs modules.
+Pour les endpoints du catalogue 2024, 2025 ou 2026 qui ne disposent pas encore d'une methode
+dediee, utilise `AbacusEntityClient`. Il fournit les operations OData de lecture, creation,
+modification et suppression sans attendre une nouvelle version du SDK :
+
+```csharp
+var entities = new AbacusEntityClient(httpClient);
+var issues = await entities.ListAsync<JsonElement>(
+    "ServiceObjectIssues",
+    new ODataQuery().Select("Id", "IssueNumber").Top(100));
+```
+
+Lis le guide de demarrage avant d'integrer un module en production.
